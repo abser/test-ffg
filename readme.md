@@ -1,5 +1,4 @@
-
-Gravity - Fitness First
+# Gravity - Fitness First #
 
 Pre-requirements: 1. Database 'sprim_dhs' 2. coffescript
 
