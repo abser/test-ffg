@@ -6,10 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link type="image/x-icon" href="{{asset('images/favicon.ico');}}" rel="icon">
         <title>@yield('title', 'Gravity')</title>
-        {{ HTML::style('/min/?g=common_css') }} 
+        {{ HTML::style('/assets/css/app.min.css') }} 
         @yield('css')
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        {{ HTML::script('/min/?g=common_js_head') }}
+        {{ HTML::script('/assets/js/header.js') }}
 
     </head>
     <body class="antialiased">

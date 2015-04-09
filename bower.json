@@ -1,0 +1,14 @@
+{
+  "name": "Gravity",
+  "version": "0.0.0",
+  "authors": [
+    "Sprim <vijay.hegde@sprim.com>"
+  ],
+  "description": "Gravity a brand of Fitness First",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "foundation": "~5.4.7",
+    "compass-mixins": "Igosuki/compass-mixins"    
+  }
+}

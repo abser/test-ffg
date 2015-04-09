@@ -6,10 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="{{asset('images/favicon.ico')}}" type="image/x-icon">
         <title>Gravity</title>
+        {{ HTML::style('/assets/css/app.min.css') }} 
         @yield('css')
-        {{ HTML::style('/min/?g=common_css') }} 
-        {{ HTML::script('/min/?g=common_js_head') }}
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        {{ HTML::script('/assets/js/header.js') }}
 
     </head>
     <body class="antialiased">
@@ -25,7 +24,7 @@
                         <div class="row" style="padding: 1em; margin-bottom: 2em; text-align: center; 
                              background-color: #004582">
                             <div class="small-12 columns">
-                                <img src="{{asset('images/dove-med-logo.png')}}" alt="Gravity LOGO" />
+                                <img src="{{asset('assets/images/logo.jpg')}}" alt="Gravity LOGO" />
                              
                             </div>
                         </div>
@@ -63,7 +62,7 @@
 
 
         </div>        
-        {{ HTML::script('/min/?g=login_js') }} 
+        {{ HTML::script('/assets/js/footer.js') }}
     </body>
 </html>
 

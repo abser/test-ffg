@@ -2,7 +2,7 @@
     <footer id="footer">
       Gravity &copy; <?php echo date('Y') ?>. All Rights Reserved.
     </footer>
-        {{ HTML::script('/min/?g=common_js_footer') }} 
+    {{ HTML::script('/assets/js/footer.js') }}
     
     @yield('js')
 @show
