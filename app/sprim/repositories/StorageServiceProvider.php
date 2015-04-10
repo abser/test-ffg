@@ -18,5 +18,16 @@ class StorageServiceProvider extends ServiceProvider
         }
         
     }
+    
+    /*
+    public function provides()
+    {
+    	// $models = ['User', 'UserGroup'];
+       	
+    	return [
+    			"Sprim\Repositories\Contracts\UserInterface",
+    			"Sprim\Repositories\Contracts\UserGroupInterface",
+    	];
+    } */
 
 }

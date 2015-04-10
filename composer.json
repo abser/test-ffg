@@ -8,6 +8,7 @@
 		"laravel/framework": "4.2.*",
 		"laravelbook/ardent": "2.*",
 		"codeception/codeception": "*",
+		"league/factory-muffin": "2.*",
 		"aws/aws-sdk-php-laravel": "1.*",
 		"cartalyst/sentry": "2.1.*",
 		"way/generators": "3"
