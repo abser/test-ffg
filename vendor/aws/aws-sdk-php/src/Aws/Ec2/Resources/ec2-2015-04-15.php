@@ -15,7 +15,7 @@
  */
 
 return array (
-    'apiVersion' => '2014-10-01',
+    'apiVersion' => '2015-04-15',
     'endpointPrefix' => 'ec2',
     'serviceFullName' => 'Amazon Elastic Compute Cloud',
     'serviceAbbreviation' => 'Amazon EC2',
@@ -90,7 +90,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -118,7 +118,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -146,7 +146,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'NetworkInterfaceId' => array(
                     'required' => true,
@@ -188,7 +188,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -237,7 +237,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -271,7 +271,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -305,7 +305,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -349,7 +349,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -383,7 +383,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -422,7 +422,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -461,7 +461,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -495,7 +495,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -578,6 +578,18 @@ return array (
                                     ),
                                 ),
                             ),
+                            'PrefixListIds' => array(
+                                'type' => 'array',
+                                'items' => array(
+                                    'name' => 'PrefixListId',
+                                    'type' => 'object',
+                                    'properties' => array(
+                                        'PrefixListId' => array(
+                                            'type' => 'string',
+                                        ),
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                 ),
@@ -598,7 +610,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -684,6 +696,18 @@ return array (
                                     ),
                                 ),
                             ),
+                            'PrefixListIds' => array(
+                                'type' => 'array',
+                                'items' => array(
+                                    'name' => 'PrefixListId',
+                                    'type' => 'object',
+                                    'properties' => array(
+                                        'PrefixListId' => array(
+                                            'type' => 'string',
+                                        ),
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                 ),
@@ -704,7 +728,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -760,7 +784,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -789,7 +813,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -822,10 +846,42 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'ExportTaskId' => array(
                     'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+            ),
+        ),
+        'CancelImportTask' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'CancelImportTaskResult',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'CancelImportTask',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2015-04-15',
+                ),
+                'DryRun' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
+                'ImportTaskId' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'CancelReason' => array(
                     'type' => 'string',
                     'location' => 'aws.query',
                 ),
@@ -846,7 +902,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'ReservedInstancesListingId' => array(
                     'required' => true,
@@ -870,7 +926,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -904,7 +960,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -938,7 +994,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -985,7 +1041,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1031,7 +1087,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1071,7 +1127,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1118,7 +1174,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1206,7 +1262,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'Description' => array(
                     'type' => 'string',
@@ -1257,7 +1313,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1281,7 +1337,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1310,7 +1366,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1339,7 +1395,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1419,7 +1475,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'SubnetId' => array(
                     'required' => true,
@@ -1487,7 +1543,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1521,7 +1577,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'ReservedInstancesId' => array(
                     'required' => true,
@@ -1564,7 +1620,7 @@ return array (
             'httpMethod' => 'POST',
             'uri' => '/',
             'class' => 'Aws\\Common\\Command\\QueryCommand',
-            'responseClass' => 'EmptyOutput',
+            'responseClass' => 'CreateRouteResult',
             'responseType' => 'model',
             'parameters' => array(
                 'Action' => array(
@@ -1575,7 +1631,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1608,6 +1664,10 @@ return array (
                     'type' => 'string',
                     'location' => 'aws.query',
                 ),
+                'ClientToken' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
             ),
         ),
         'CreateRouteTable' => array(
@@ -1625,7 +1685,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1654,7 +1714,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1693,7 +1753,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1726,7 +1786,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1759,7 +1819,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1797,7 +1857,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1849,7 +1909,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1903,7 +1963,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1916,6 +1976,57 @@ return array (
                     'location' => 'aws.query',
                 ),
                 'InstanceTenancy' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+            ),
+        ),
+        'CreateVpcEndpoint' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'CreateVpcEndpointResult',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'CreateVpcEndpoint',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2015-04-15',
+                ),
+                'DryRun' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
+                'VpcId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'ServiceName' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'PolicyDocument' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'RouteTableIds' => array(
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'RouteTableId',
+                    'items' => array(
+                        'name' => 'RouteTableId',
+                        'type' => 'string',
+                    ),
+                ),
+                'ClientToken' => array(
                     'type' => 'string',
                     'location' => 'aws.query',
                 ),
@@ -1936,7 +2047,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -1972,7 +2083,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2021,7 +2132,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'VpnConnectionId' => array(
                     'required' => true,
@@ -2050,7 +2161,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2083,7 +2194,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2112,7 +2223,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2141,7 +2252,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2170,7 +2281,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2199,7 +2310,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2228,7 +2339,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2268,7 +2379,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2297,7 +2408,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2326,7 +2437,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2360,7 +2471,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2389,7 +2500,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2421,7 +2532,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2450,7 +2561,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2474,7 +2585,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2503,7 +2614,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2554,7 +2665,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2583,7 +2694,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2594,6 +2705,40 @@ return array (
                     'required' => true,
                     'type' => 'string',
                     'location' => 'aws.query',
+                ),
+            ),
+        ),
+        'DeleteVpcEndpoints' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'DeleteVpcEndpointsResult',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'DeleteVpcEndpoints',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2015-04-15',
+                ),
+                'DryRun' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
+                'VpcEndpointIds' => array(
+                    'required' => true,
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'VpcEndpointId',
+                    'items' => array(
+                        'name' => 'VpcEndpointId',
+                        'type' => 'string',
+                    ),
                 ),
             ),
         ),
@@ -2612,7 +2757,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2641,7 +2786,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2670,7 +2815,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'VpnConnectionId' => array(
                     'required' => true,
@@ -2699,7 +2844,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2728,7 +2873,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2757,7 +2902,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2790,7 +2935,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2854,7 +2999,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2909,7 +3054,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -2964,7 +3109,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3027,7 +3172,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3082,7 +3227,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3137,7 +3282,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3192,7 +3337,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'ExportTaskIds' => array(
                     'type' => 'array',
@@ -3220,7 +3365,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3254,7 +3399,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3312,6 +3457,130 @@ return array (
                 ),
             ),
         ),
+        'DescribeImportImageTasks' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'DescribeImportImageTasksResult',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'DescribeImportImageTasks',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2015-04-15',
+                ),
+                'DryRun' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
+                'ImportTaskIds' => array(
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'ImportTaskId',
+                    'items' => array(
+                        'name' => 'ImportTaskId',
+                        'type' => 'string',
+                    ),
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'MaxResults' => array(
+                    'type' => 'numeric',
+                    'location' => 'aws.query',
+                ),
+                'Filters' => array(
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'items' => array(
+                        'name' => 'Filter',
+                        'type' => 'object',
+                        'properties' => array(
+                            'Name' => array(
+                                'type' => 'string',
+                            ),
+                            'Values' => array(
+                                'type' => 'array',
+                                'sentAs' => 'Value',
+                                'items' => array(
+                                    'name' => 'Value',
+                                    'type' => 'string',
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        'DescribeImportSnapshotTasks' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'DescribeImportSnapshotTasksResult',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'DescribeImportSnapshotTasks',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2015-04-15',
+                ),
+                'DryRun' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
+                'ImportTaskIds' => array(
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'ImportTaskId',
+                    'items' => array(
+                        'name' => 'ImportTaskId',
+                        'type' => 'string',
+                    ),
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'MaxResults' => array(
+                    'type' => 'numeric',
+                    'location' => 'aws.query',
+                ),
+                'Filters' => array(
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'items' => array(
+                        'name' => 'Filter',
+                        'type' => 'object',
+                        'properties' => array(
+                            'Name' => array(
+                                'type' => 'string',
+                            ),
+                            'Values' => array(
+                                'type' => 'array',
+                                'sentAs' => 'Value',
+                                'items' => array(
+                                    'name' => 'Value',
+                                    'type' => 'string',
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
         'DescribeInstanceAttribute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -3327,7 +3596,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3361,7 +3630,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3429,7 +3698,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3492,7 +3761,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3547,7 +3816,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3587,6 +3856,69 @@ return array (
                 ),
             ),
         ),
+        'DescribeMovingAddresses' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'DescribeMovingAddressesResult',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'DescribeMovingAddresses',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2015-04-15',
+                ),
+                'DryRun' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
+                'PublicIps' => array(
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'PublicIp',
+                    'items' => array(
+                        'name' => 'PublicIp',
+                        'type' => 'string',
+                    ),
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'Filters' => array(
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'Filter',
+                    'items' => array(
+                        'name' => 'Filter',
+                        'type' => 'object',
+                        'properties' => array(
+                            'Name' => array(
+                                'type' => 'string',
+                            ),
+                            'Values' => array(
+                                'type' => 'array',
+                                'sentAs' => 'Value',
+                                'items' => array(
+                                    'name' => 'Value',
+                                    'type' => 'string',
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                'MaxResults' => array(
+                    'type' => 'numeric',
+                    'location' => 'aws.query',
+                ),
+            ),
+        ),
         'DescribeNetworkAcls' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -3602,7 +3934,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3657,7 +3989,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3690,7 +4022,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3745,7 +4077,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3785,6 +4117,69 @@ return array (
                 ),
             ),
         ),
+        'DescribePrefixLists' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'DescribePrefixListsResult',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'DescribePrefixLists',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2015-04-15',
+                ),
+                'DryRun' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
+                'PrefixListIds' => array(
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'PrefixListId',
+                    'items' => array(
+                        'name' => 'PrefixListId',
+                        'type' => 'string',
+                    ),
+                ),
+                'Filters' => array(
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'Filter',
+                    'items' => array(
+                        'name' => 'Filter',
+                        'type' => 'object',
+                        'properties' => array(
+                            'Name' => array(
+                                'type' => 'string',
+                            ),
+                            'Values' => array(
+                                'type' => 'array',
+                                'sentAs' => 'Value',
+                                'items' => array(
+                                    'name' => 'Value',
+                                    'type' => 'string',
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                'MaxResults' => array(
+                    'type' => 'numeric',
+                    'location' => 'aws.query',
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+            ),
+        ),
         'DescribeRegions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -3800,7 +4195,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3855,7 +4250,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -3914,7 +4309,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'ReservedInstancesId' => array(
                     'type' => 'string',
@@ -3962,7 +4357,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'ReservedInstancesModificationIds' => array(
                     'type' => 'array',
@@ -4016,7 +4411,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4116,7 +4511,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4171,7 +4566,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4235,7 +4630,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4269,7 +4664,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4350,7 +4745,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4374,7 +4769,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4429,7 +4824,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4523,7 +4918,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4578,7 +4973,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4632,7 +5027,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4665,7 +5060,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4728,7 +5123,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4791,7 +5186,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4824,7 +5219,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4864,6 +5259,101 @@ return array (
                 ),
             ),
         ),
+        'DescribeVpcEndpointServices' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'DescribeVpcEndpointServicesResult',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'DescribeVpcEndpointServices',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2015-04-15',
+                ),
+                'DryRun' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
+                'MaxResults' => array(
+                    'type' => 'numeric',
+                    'location' => 'aws.query',
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+            ),
+        ),
+        'DescribeVpcEndpoints' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'DescribeVpcEndpointsResult',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'DescribeVpcEndpoints',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2015-04-15',
+                ),
+                'DryRun' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
+                'VpcEndpointIds' => array(
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'VpcEndpointId',
+                    'items' => array(
+                        'name' => 'VpcEndpointId',
+                        'type' => 'string',
+                    ),
+                ),
+                'Filters' => array(
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'Filter',
+                    'items' => array(
+                        'name' => 'Filter',
+                        'type' => 'object',
+                        'properties' => array(
+                            'Name' => array(
+                                'type' => 'string',
+                            ),
+                            'Values' => array(
+                                'type' => 'array',
+                                'sentAs' => 'Value',
+                                'items' => array(
+                                    'name' => 'Value',
+                                    'type' => 'string',
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                'MaxResults' => array(
+                    'type' => 'numeric',
+                    'location' => 'aws.query',
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+            ),
+        ),
         'DescribeVpcPeeringConnections' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -4879,7 +5369,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4934,7 +5424,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -4989,7 +5479,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5044,7 +5534,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5099,7 +5589,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5133,7 +5623,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5167,7 +5657,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5201,7 +5691,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5243,7 +5733,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5277,7 +5767,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'RouteTableId' => array(
                     'required' => true,
@@ -5306,7 +5796,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5335,7 +5825,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5367,7 +5857,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5396,7 +5886,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'RouteTableId' => array(
                     'required' => true,
@@ -5425,7 +5915,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5454,7 +5944,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5483,7 +5973,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5512,7 +6002,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5521,6 +6011,123 @@ return array (
                 ),
                 'InstanceId' => array(
                     'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+            ),
+        ),
+        'ImportImage' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'ImportImageResult',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'ImportImage',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2015-04-15',
+                ),
+                'DryRun' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
+                'Description' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'DiskContainers' => array(
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'DiskContainer',
+                    'items' => array(
+                        'name' => 'DiskContainer',
+                        'type' => 'object',
+                        'properties' => array(
+                            'Description' => array(
+                                'type' => 'string',
+                            ),
+                            'Format' => array(
+                                'type' => 'string',
+                            ),
+                            'Url' => array(
+                                'type' => 'string',
+                            ),
+                            'UserBucket' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'S3Bucket' => array(
+                                        'type' => 'string',
+                                    ),
+                                    'S3Key' => array(
+                                        'type' => 'string',
+                                    ),
+                                ),
+                            ),
+                            'DeviceName' => array(
+                                'type' => 'string',
+                            ),
+                            'SnapshotId' => array(
+                                'type' => 'string',
+                            ),
+                        ),
+                    ),
+                ),
+                'LicenseType' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'Hypervisor' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'Architecture' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'Platform' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'ClientData' => array(
+                    'type' => 'object',
+                    'location' => 'aws.query',
+                    'properties' => array(
+                        'UploadStart' => array(
+                            'type' => array(
+                                'object',
+                                'string',
+                                'integer',
+                            ),
+                            'format' => 'date-time',
+                        ),
+                        'UploadEnd' => array(
+                            'type' => array(
+                                'object',
+                                'string',
+                                'integer',
+                            ),
+                            'format' => 'date-time',
+                        ),
+                        'UploadSize' => array(
+                            'type' => 'numeric',
+                        ),
+                        'Comment' => array(
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+                'ClientToken' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'RoleName' => array(
                     'type' => 'string',
                     'location' => 'aws.query',
                 ),
@@ -5541,7 +6148,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5680,7 +6287,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5702,6 +6309,96 @@ return array (
                 ),
             ),
         ),
+        'ImportSnapshot' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'ImportSnapshotResult',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'ImportSnapshot',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2015-04-15',
+                ),
+                'DryRun' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
+                'Description' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'DiskContainer' => array(
+                    'type' => 'object',
+                    'location' => 'aws.query',
+                    'properties' => array(
+                        'Description' => array(
+                            'type' => 'string',
+                        ),
+                        'Format' => array(
+                            'type' => 'string',
+                        ),
+                        'Url' => array(
+                            'type' => 'string',
+                        ),
+                        'UserBucket' => array(
+                            'type' => 'object',
+                            'properties' => array(
+                                'S3Bucket' => array(
+                                    'type' => 'string',
+                                ),
+                                'S3Key' => array(
+                                    'type' => 'string',
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                'ClientData' => array(
+                    'type' => 'object',
+                    'location' => 'aws.query',
+                    'properties' => array(
+                        'UploadStart' => array(
+                            'type' => array(
+                                'object',
+                                'string',
+                                'integer',
+                            ),
+                            'format' => 'date-time',
+                        ),
+                        'UploadEnd' => array(
+                            'type' => array(
+                                'object',
+                                'string',
+                                'integer',
+                            ),
+                            'format' => 'date-time',
+                        ),
+                        'UploadSize' => array(
+                            'type' => 'numeric',
+                        ),
+                        'Comment' => array(
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+                'ClientToken' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'RoleName' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+            ),
+        ),
         'ImportVolume' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -5717,7 +6414,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5780,7 +6477,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -5893,7 +6590,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6055,7 +6752,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6125,7 +6822,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'ClientToken' => array(
                     'type' => 'string',
@@ -6182,7 +6879,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6273,7 +6970,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'SubnetId' => array(
                     'required' => true,
@@ -6307,7 +7004,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6346,7 +7043,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'VpcId' => array(
                     'required' => true,
@@ -6375,6 +7072,62 @@ return array (
                 ),
             ),
         ),
+        'ModifyVpcEndpoint' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'ModifyVpcEndpointResult',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'ModifyVpcEndpoint',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2015-04-15',
+                ),
+                'DryRun' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
+                'VpcEndpointId' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'ResetPolicy' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
+                'PolicyDocument' => array(
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+                'AddRouteTableIds' => array(
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'AddRouteTableId',
+                    'items' => array(
+                        'name' => 'AddRouteTableId',
+                        'type' => 'string',
+                    ),
+                ),
+                'RemoveRouteTableIds' => array(
+                    'type' => 'array',
+                    'location' => 'aws.query',
+                    'sentAs' => 'RemoveRouteTableId',
+                    'items' => array(
+                        'name' => 'RemoveRouteTableId',
+                        'type' => 'string',
+                    ),
+                ),
+            ),
+        ),
         'MonitorInstances' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -6390,7 +7143,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6409,6 +7162,35 @@ return array (
                 ),
             ),
         ),
+        'MoveAddressToVpc' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'MoveAddressToVpcResult',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'MoveAddressToVpc',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2015-04-15',
+                ),
+                'DryRun' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
+                'PublicIp' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+            ),
+        ),
         'PurchaseReservedInstancesOffering' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
@@ -6424,7 +7206,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6470,7 +7252,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6504,7 +7286,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6610,7 +7392,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6639,7 +7421,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6671,7 +7453,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6705,7 +7487,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6785,7 +7567,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6835,7 +7617,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6869,7 +7651,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -6940,7 +7722,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7190,7 +7972,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7224,7 +8006,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7258,7 +8040,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7291,7 +8073,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7304,6 +8086,35 @@ return array (
                     'location' => 'aws.query',
                 ),
                 'Attribute' => array(
+                    'required' => true,
+                    'type' => 'string',
+                    'location' => 'aws.query',
+                ),
+            ),
+        ),
+        'RestoreAddressToClassic' => array(
+            'httpMethod' => 'POST',
+            'uri' => '/',
+            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'responseClass' => 'RestoreAddressToClassicResult',
+            'responseType' => 'model',
+            'parameters' => array(
+                'Action' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => 'RestoreAddressToClassic',
+                ),
+                'Version' => array(
+                    'static' => true,
+                    'location' => 'aws.query',
+                    'default' => '2015-04-15',
+                ),
+                'DryRun' => array(
+                    'type' => 'boolean',
+                    'format' => 'boolean-string',
+                    'location' => 'aws.query',
+                ),
+                'PublicIp' => array(
                     'required' => true,
                     'type' => 'string',
                     'location' => 'aws.query',
@@ -7325,7 +8136,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7408,6 +8219,18 @@ return array (
                                     ),
                                 ),
                             ),
+                            'PrefixListIds' => array(
+                                'type' => 'array',
+                                'items' => array(
+                                    'name' => 'PrefixListId',
+                                    'type' => 'object',
+                                    'properties' => array(
+                                        'PrefixListId' => array(
+                                            'type' => 'string',
+                                        ),
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                 ),
@@ -7428,7 +8251,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7514,6 +8337,18 @@ return array (
                                     ),
                                 ),
                             ),
+                            'PrefixListIds' => array(
+                                'type' => 'array',
+                                'items' => array(
+                                    'name' => 'PrefixListId',
+                                    'type' => 'object',
+                                    'properties' => array(
+                                        'PrefixListId' => array(
+                                            'type' => 'string',
+                                        ),
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                 ),
@@ -7534,7 +8369,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7786,7 +8621,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'InstanceIds' => array(
                     'required' => true,
@@ -7824,7 +8659,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7863,7 +8698,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -7897,7 +8732,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'NetworkInterfaceId' => array(
                     'required' => true,
@@ -7931,7 +8766,7 @@ return array (
                 'Version' => array(
                     'static' => true,
                     'location' => 'aws.query',
-                    'default' => '2014-10-01',
+                    'default' => '2015-04-15',
                 ),
                 'DryRun' => array(
                     'type' => 'boolean',
@@ -8327,6 +9162,27 @@ return array (
                             ),
                         ),
                     ),
+                ),
+            ),
+        ),
+        'CancelImportTaskResult' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'ImportTaskId' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'importTaskId',
+                ),
+                'State' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'state',
+                ),
+                'PreviousState' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'previousState',
                 ),
             ),
         ),
@@ -9213,6 +10069,22 @@ return array (
                 ),
             ),
         ),
+        'CreateRouteResult' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'Return' => array(
+                    'type' => 'boolean',
+                    'location' => 'xml',
+                    'sentAs' => 'return',
+                ),
+                'ClientToken' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'clientToken',
+                ),
+            ),
+        ),
         'CreateRouteTableResult' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -9241,6 +10113,10 @@ return array (
                                     'DestinationCidrBlock' => array(
                                         'type' => 'string',
                                         'sentAs' => 'destinationCidrBlock',
+                                    ),
+                                    'DestinationPrefixListId' => array(
+                                        'type' => 'string',
+                                        'sentAs' => 'destinationPrefixListId',
                                     ),
                                     'GatewayId' => array(
                                         'type' => 'string',
@@ -9685,6 +10561,57 @@ return array (
                 ),
             ),
         ),
+        'CreateVpcEndpointResult' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'VpcEndpoint' => array(
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'sentAs' => 'vpcEndpoint',
+                    'properties' => array(
+                        'VpcEndpointId' => array(
+                            'type' => 'string',
+                            'sentAs' => 'vpcEndpointId',
+                        ),
+                        'VpcId' => array(
+                            'type' => 'string',
+                            'sentAs' => 'vpcId',
+                        ),
+                        'ServiceName' => array(
+                            'type' => 'string',
+                            'sentAs' => 'serviceName',
+                        ),
+                        'State' => array(
+                            'type' => 'string',
+                            'sentAs' => 'state',
+                        ),
+                        'PolicyDocument' => array(
+                            'type' => 'string',
+                            'sentAs' => 'policyDocument',
+                        ),
+                        'RouteTableIds' => array(
+                            'type' => 'array',
+                            'sentAs' => 'routeTableIdSet',
+                            'items' => array(
+                                'name' => 'item',
+                                'type' => 'string',
+                                'sentAs' => 'item',
+                            ),
+                        ),
+                        'CreationTimestamp' => array(
+                            'type' => 'string',
+                            'sentAs' => 'creationTimestamp',
+                        ),
+                    ),
+                ),
+                'ClientToken' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'clientToken',
+                ),
+            ),
+        ),
         'CreateVpcPeeringConnectionResult' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -9954,6 +10881,42 @@ return array (
                                     'Value' => array(
                                         'type' => 'string',
                                         'sentAs' => 'value',
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        'DeleteVpcEndpointsResult' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'Unsuccessful' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'sentAs' => 'unsuccessful',
+                    'items' => array(
+                        'name' => 'item',
+                        'type' => 'object',
+                        'sentAs' => 'item',
+                        'properties' => array(
+                            'ResourceId' => array(
+                                'type' => 'string',
+                                'sentAs' => 'resourceId',
+                            ),
+                            'Error' => array(
+                                'type' => 'object',
+                                'sentAs' => 'error',
+                                'properties' => array(
+                                    'Code' => array(
+                                        'type' => 'string',
+                                        'sentAs' => 'code',
+                                    ),
+                                    'Message' => array(
+                                        'type' => 'string',
+                                        'sentAs' => 'message',
                                     ),
                                 ),
                             ),
@@ -10992,6 +11955,213 @@ return array (
                 ),
             ),
         ),
+        'DescribeImportImageTasksResult' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'ImportImageTasks' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'sentAs' => 'importImageTaskSet',
+                    'items' => array(
+                        'name' => 'item',
+                        'type' => 'object',
+                        'sentAs' => 'item',
+                        'properties' => array(
+                            'ImportTaskId' => array(
+                                'type' => 'string',
+                                'sentAs' => 'importTaskId',
+                            ),
+                            'Architecture' => array(
+                                'type' => 'string',
+                                'sentAs' => 'architecture',
+                            ),
+                            'LicenseType' => array(
+                                'type' => 'string',
+                                'sentAs' => 'licenseType',
+                            ),
+                            'Platform' => array(
+                                'type' => 'string',
+                                'sentAs' => 'platform',
+                            ),
+                            'Hypervisor' => array(
+                                'type' => 'string',
+                                'sentAs' => 'hypervisor',
+                            ),
+                            'Description' => array(
+                                'type' => 'string',
+                                'sentAs' => 'description',
+                            ),
+                            'SnapshotDetails' => array(
+                                'type' => 'array',
+                                'sentAs' => 'snapshotDetailSet',
+                                'items' => array(
+                                    'name' => 'item',
+                                    'type' => 'object',
+                                    'sentAs' => 'item',
+                                    'properties' => array(
+                                        'DiskImageSize' => array(
+                                            'type' => 'numeric',
+                                            'sentAs' => 'diskImageSize',
+                                        ),
+                                        'Description' => array(
+                                            'type' => 'string',
+                                            'sentAs' => 'description',
+                                        ),
+                                        'Format' => array(
+                                            'type' => 'string',
+                                            'sentAs' => 'format',
+                                        ),
+                                        'Url' => array(
+                                            'type' => 'string',
+                                            'sentAs' => 'url',
+                                        ),
+                                        'UserBucket' => array(
+                                            'type' => 'object',
+                                            'sentAs' => 'userBucket',
+                                            'properties' => array(
+                                                'S3Bucket' => array(
+                                                    'type' => 'string',
+                                                    'sentAs' => 's3Bucket',
+                                                ),
+                                                'S3Key' => array(
+                                                    'type' => 'string',
+                                                    'sentAs' => 's3Key',
+                                                ),
+                                            ),
+                                        ),
+                                        'DeviceName' => array(
+                                            'type' => 'string',
+                                            'sentAs' => 'deviceName',
+                                        ),
+                                        'SnapshotId' => array(
+                                            'type' => 'string',
+                                            'sentAs' => 'snapshotId',
+                                        ),
+                                        'Progress' => array(
+                                            'type' => 'string',
+                                            'sentAs' => 'progress',
+                                        ),
+                                        'StatusMessage' => array(
+                                            'type' => 'string',
+                                            'sentAs' => 'statusMessage',
+                                        ),
+                                        'Status' => array(
+                                            'type' => 'string',
+                                            'sentAs' => 'status',
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            'ImageId' => array(
+                                'type' => 'string',
+                                'sentAs' => 'imageId',
+                            ),
+                            'Progress' => array(
+                                'type' => 'string',
+                                'sentAs' => 'progress',
+                            ),
+                            'StatusMessage' => array(
+                                'type' => 'string',
+                                'sentAs' => 'statusMessage',
+                            ),
+                            'Status' => array(
+                                'type' => 'string',
+                                'sentAs' => 'status',
+                            ),
+                        ),
+                    ),
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'nextToken',
+                ),
+            ),
+        ),
+        'DescribeImportSnapshotTasksResult' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'ImportSnapshotTasks' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'sentAs' => 'importSnapshotTaskSet',
+                    'items' => array(
+                        'name' => 'item',
+                        'type' => 'object',
+                        'sentAs' => 'item',
+                        'properties' => array(
+                            'ImportTaskId' => array(
+                                'type' => 'string',
+                                'sentAs' => 'importTaskId',
+                            ),
+                            'SnapshotTaskDetail' => array(
+                                'type' => 'object',
+                                'sentAs' => 'snapshotTaskDetail',
+                                'properties' => array(
+                                    'DiskImageSize' => array(
+                                        'type' => 'numeric',
+                                        'sentAs' => 'diskImageSize',
+                                    ),
+                                    'Description' => array(
+                                        'type' => 'string',
+                                        'sentAs' => 'description',
+                                    ),
+                                    'Format' => array(
+                                        'type' => 'string',
+                                        'sentAs' => 'format',
+                                    ),
+                                    'Url' => array(
+                                        'type' => 'string',
+                                        'sentAs' => 'url',
+                                    ),
+                                    'UserBucket' => array(
+                                        'type' => 'object',
+                                        'sentAs' => 'userBucket',
+                                        'properties' => array(
+                                            'S3Bucket' => array(
+                                                'type' => 'string',
+                                                'sentAs' => 's3Bucket',
+                                            ),
+                                            'S3Key' => array(
+                                                'type' => 'string',
+                                                'sentAs' => 's3Key',
+                                            ),
+                                        ),
+                                    ),
+                                    'SnapshotId' => array(
+                                        'type' => 'string',
+                                        'sentAs' => 'snapshotId',
+                                    ),
+                                    'Progress' => array(
+                                        'type' => 'string',
+                                        'sentAs' => 'progress',
+                                    ),
+                                    'StatusMessage' => array(
+                                        'type' => 'string',
+                                        'sentAs' => 'statusMessage',
+                                    ),
+                                    'Status' => array(
+                                        'type' => 'string',
+                                        'sentAs' => 'status',
+                                    ),
+                                ),
+                            ),
+                            'Description' => array(
+                                'type' => 'string',
+                                'sentAs' => 'description',
+                            ),
+                        ),
+                    ),
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'nextToken',
+                ),
+            ),
+        ),
         'InstanceAttribute' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -11907,6 +13077,37 @@ return array (
                 ),
             ),
         ),
+        'DescribeMovingAddressesResult' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'MovingAddressStatuses' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'sentAs' => 'movingAddressStatusSet',
+                    'items' => array(
+                        'name' => 'item',
+                        'type' => 'object',
+                        'sentAs' => 'item',
+                        'properties' => array(
+                            'PublicIp' => array(
+                                'type' => 'string',
+                                'sentAs' => 'publicIp',
+                            ),
+                            'MoveStatus' => array(
+                                'type' => 'string',
+                                'sentAs' => 'moveStatus',
+                            ),
+                        ),
+                    ),
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'nextToken',
+                ),
+            ),
+        ),
         'DescribeNetworkAclsResult' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -12370,6 +13571,46 @@ return array (
                             ),
                         ),
                     ),
+                ),
+            ),
+        ),
+        'DescribePrefixListsResult' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'PrefixLists' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'sentAs' => 'prefixListSet',
+                    'items' => array(
+                        'name' => 'item',
+                        'type' => 'object',
+                        'sentAs' => 'item',
+                        'properties' => array(
+                            'PrefixListId' => array(
+                                'type' => 'string',
+                                'sentAs' => 'prefixListId',
+                            ),
+                            'PrefixListName' => array(
+                                'type' => 'string',
+                                'sentAs' => 'prefixListName',
+                            ),
+                            'Cidrs' => array(
+                                'type' => 'array',
+                                'sentAs' => 'cidrSet',
+                                'items' => array(
+                                    'name' => 'item',
+                                    'type' => 'string',
+                                    'sentAs' => 'item',
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'nextToken',
                 ),
             ),
         ),
@@ -12863,6 +14104,10 @@ return array (
                                             'type' => 'string',
                                             'sentAs' => 'destinationCidrBlock',
                                         ),
+                                        'DestinationPrefixListId' => array(
+                                            'type' => 'string',
+                                            'sentAs' => 'destinationPrefixListId',
+                                        ),
                                         'GatewayId' => array(
                                             'type' => 'string',
                                             'sentAs' => 'gatewayId',
@@ -13047,6 +14292,21 @@ return array (
                                                 ),
                                             ),
                                         ),
+                                        'PrefixListIds' => array(
+                                            'type' => 'array',
+                                            'sentAs' => 'prefixListIds',
+                                            'items' => array(
+                                                'name' => 'item',
+                                                'type' => 'object',
+                                                'sentAs' => 'item',
+                                                'properties' => array(
+                                                    'PrefixListId' => array(
+                                                        'type' => 'string',
+                                                        'sentAs' => 'prefixListId',
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
                                     ),
                                 ),
                             ),
@@ -13104,6 +14364,21 @@ return array (
                                                     'CidrIp' => array(
                                                         'type' => 'string',
                                                         'sentAs' => 'cidrIp',
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                        'PrefixListIds' => array(
+                                            'type' => 'array',
+                                            'sentAs' => 'prefixListIds',
+                                            'items' => array(
+                                                'name' => 'item',
+                                                'type' => 'object',
+                                                'sentAs' => 'item',
+                                                'properties' => array(
+                                                    'PrefixListId' => array(
+                                                        'type' => 'string',
+                                                        'sentAs' => 'prefixListId',
                                                     ),
                                                 ),
                                             ),
@@ -14159,6 +15434,83 @@ return array (
                 ),
             ),
         ),
+        'DescribeVpcEndpointServicesResult' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'ServiceNames' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'sentAs' => 'serviceNameSet',
+                    'items' => array(
+                        'name' => 'item',
+                        'type' => 'string',
+                        'sentAs' => 'item',
+                    ),
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'nextToken',
+                ),
+            ),
+        ),
+        'DescribeVpcEndpointsResult' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'VpcEndpoints' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'sentAs' => 'vpcEndpointSet',
+                    'items' => array(
+                        'name' => 'item',
+                        'type' => 'object',
+                        'sentAs' => 'item',
+                        'properties' => array(
+                            'VpcEndpointId' => array(
+                                'type' => 'string',
+                                'sentAs' => 'vpcEndpointId',
+                            ),
+                            'VpcId' => array(
+                                'type' => 'string',
+                                'sentAs' => 'vpcId',
+                            ),
+                            'ServiceName' => array(
+                                'type' => 'string',
+                                'sentAs' => 'serviceName',
+                            ),
+                            'State' => array(
+                                'type' => 'string',
+                                'sentAs' => 'state',
+                            ),
+                            'PolicyDocument' => array(
+                                'type' => 'string',
+                                'sentAs' => 'policyDocument',
+                            ),
+                            'RouteTableIds' => array(
+                                'type' => 'array',
+                                'sentAs' => 'routeTableIdSet',
+                                'items' => array(
+                                    'name' => 'item',
+                                    'type' => 'string',
+                                    'sentAs' => 'item',
+                                ),
+                            ),
+                            'CreationTimestamp' => array(
+                                'type' => 'string',
+                                'sentAs' => 'creationTimestamp',
+                            ),
+                        ),
+                    ),
+                ),
+                'NextToken' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'nextToken',
+                ),
+            ),
+        ),
         'DescribeVpcPeeringConnectionsResult' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -14587,6 +15939,124 @@ return array (
                 ),
             ),
         ),
+        'ImportImageResult' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'ImportTaskId' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'importTaskId',
+                ),
+                'Architecture' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'architecture',
+                ),
+                'LicenseType' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'licenseType',
+                ),
+                'Platform' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'platform',
+                ),
+                'Hypervisor' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'hypervisor',
+                ),
+                'Description' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'description',
+                ),
+                'SnapshotDetails' => array(
+                    'type' => 'array',
+                    'location' => 'xml',
+                    'sentAs' => 'snapshotDetailSet',
+                    'items' => array(
+                        'name' => 'item',
+                        'type' => 'object',
+                        'sentAs' => 'item',
+                        'properties' => array(
+                            'DiskImageSize' => array(
+                                'type' => 'numeric',
+                                'sentAs' => 'diskImageSize',
+                            ),
+                            'Description' => array(
+                                'type' => 'string',
+                                'sentAs' => 'description',
+                            ),
+                            'Format' => array(
+                                'type' => 'string',
+                                'sentAs' => 'format',
+                            ),
+                            'Url' => array(
+                                'type' => 'string',
+                                'sentAs' => 'url',
+                            ),
+                            'UserBucket' => array(
+                                'type' => 'object',
+                                'sentAs' => 'userBucket',
+                                'properties' => array(
+                                    'S3Bucket' => array(
+                                        'type' => 'string',
+                                        'sentAs' => 's3Bucket',
+                                    ),
+                                    'S3Key' => array(
+                                        'type' => 'string',
+                                        'sentAs' => 's3Key',
+                                    ),
+                                ),
+                            ),
+                            'DeviceName' => array(
+                                'type' => 'string',
+                                'sentAs' => 'deviceName',
+                            ),
+                            'SnapshotId' => array(
+                                'type' => 'string',
+                                'sentAs' => 'snapshotId',
+                            ),
+                            'Progress' => array(
+                                'type' => 'string',
+                                'sentAs' => 'progress',
+                            ),
+                            'StatusMessage' => array(
+                                'type' => 'string',
+                                'sentAs' => 'statusMessage',
+                            ),
+                            'Status' => array(
+                                'type' => 'string',
+                                'sentAs' => 'status',
+                            ),
+                        ),
+                    ),
+                ),
+                'ImageId' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'imageId',
+                ),
+                'Progress' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'progress',
+                ),
+                'StatusMessage' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'statusMessage',
+                ),
+                'Status' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'status',
+                ),
+            ),
+        ),
         'ImportInstanceResult' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -14790,6 +16260,75 @@ return array (
                 ),
             ),
         ),
+        'ImportSnapshotResult' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'ImportTaskId' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'importTaskId',
+                ),
+                'SnapshotTaskDetail' => array(
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'sentAs' => 'snapshotTaskDetail',
+                    'properties' => array(
+                        'DiskImageSize' => array(
+                            'type' => 'numeric',
+                            'sentAs' => 'diskImageSize',
+                        ),
+                        'Description' => array(
+                            'type' => 'string',
+                            'sentAs' => 'description',
+                        ),
+                        'Format' => array(
+                            'type' => 'string',
+                            'sentAs' => 'format',
+                        ),
+                        'Url' => array(
+                            'type' => 'string',
+                            'sentAs' => 'url',
+                        ),
+                        'UserBucket' => array(
+                            'type' => 'object',
+                            'sentAs' => 'userBucket',
+                            'properties' => array(
+                                'S3Bucket' => array(
+                                    'type' => 'string',
+                                    'sentAs' => 's3Bucket',
+                                ),
+                                'S3Key' => array(
+                                    'type' => 'string',
+                                    'sentAs' => 's3Key',
+                                ),
+                            ),
+                        ),
+                        'SnapshotId' => array(
+                            'type' => 'string',
+                            'sentAs' => 'snapshotId',
+                        ),
+                        'Progress' => array(
+                            'type' => 'string',
+                            'sentAs' => 'progress',
+                        ),
+                        'StatusMessage' => array(
+                            'type' => 'string',
+                            'sentAs' => 'statusMessage',
+                        ),
+                        'Status' => array(
+                            'type' => 'string',
+                            'sentAs' => 'status',
+                        ),
+                    ),
+                ),
+                'Description' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'description',
+                ),
+            ),
+        ),
         'ImportVolumeResult' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -14988,6 +16527,17 @@ return array (
                 ),
             ),
         ),
+        'ModifyVpcEndpointResult' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'Return' => array(
+                    'type' => 'boolean',
+                    'location' => 'xml',
+                    'sentAs' => 'return',
+                ),
+            ),
+        ),
         'MonitorInstancesResult' => array(
             'type' => 'object',
             'additionalProperties' => true,
@@ -15017,6 +16567,22 @@ return array (
                             ),
                         ),
                     ),
+                ),
+            ),
+        ),
+        'MoveAddressToVpcResult' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'AllocationId' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'allocationId',
+                ),
+                'Status' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'status',
                 ),
             ),
         ),
@@ -15406,6 +16972,22 @@ return array (
                             ),
                         ),
                     ),
+                ),
+            ),
+        ),
+        'RestoreAddressToClassicResult' => array(
+            'type' => 'object',
+            'additionalProperties' => true,
+            'properties' => array(
+                'Status' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'status',
+                ),
+                'PublicIp' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                    'sentAs' => 'publicIp',
                 ),
             ),
         ),
@@ -16142,6 +17724,11 @@ return array (
             'limit_key' => 'MaxResults',
             'result_key' => 'ReservedInstancesOfferings',
         ),
+        'DescribeReservedInstancesModifications' => array(
+            'input_token' => 'NextToken',
+            'output_token' => 'NextToken',
+            'result_key' => 'ReservedInstancesModifications',
+        ),
         'DescribeRouteTables' => array(
             'result_key' => 'RouteTables',
         ),
@@ -16151,7 +17738,6 @@ return array (
         'DescribeSnapshots' => array(
             'input_token' => 'NextToken',
             'output_token' => 'NextToken',
-            'limit_key' => 'MaxResults',
             'result_key' => 'Snapshots',
         ),
         'DescribeSpotInstanceRequests' => array(
