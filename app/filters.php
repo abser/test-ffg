@@ -54,18 +54,6 @@ Route::filter('auth.basic', function()
 	return Auth::basic();
 });
 
-Route::filter('sentry', function () {
-	if (!Sentry::check()) {
-		return Redirect::guest('login');
-	}
-});
-
-Route::filter('sprim', function () {
-	if (!Session::get('user.is_sprim_admin')) {
-		return Redirect::route('index');
-	}
-});
-	
 /*
 |--------------------------------------------------------------------------
 | Guest Filter

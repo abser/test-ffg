@@ -14,6 +14,5 @@ return array(
 	*/
 
 	'debug' => true,
-	'url'	=> 'http://gravity.local'
 
 );
