@@ -37,10 +37,10 @@ $env = $app->detectEnvironment(function()
         case 'gravity.local':
           $ret = 'local';
           break;
-        case 'gravity-uat.sprim-health.com':
+        case 'uat.gravity.sprim-health.com':
           $ret = 'uat';
           break;
-        case 'gravity-dev.sprim-health.com':
+        case 'dev.gravity.sprim-health.com':
           $ret = 'dev';
           break;
     }
