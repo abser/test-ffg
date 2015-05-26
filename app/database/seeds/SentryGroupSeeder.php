@@ -16,12 +16,20 @@ class SentryGroupSeeder extends Seeder {
 	        'permissions' => []]);
 		
 		Sentry::getGroupProvider()->create([
-			'name'        => 'ghcp',
+			'name'        => 'admin',
+			'permissions' => []]);
+		
+		Sentry::getGroupProvider()->create([
+			'name'        => 'wellness_team',
 			'permissions' => []]);
 		
 		Sentry::getGroupProvider()->create([
 			'name'        => 'member',
 			'permissions' => []]);
+		
+		Sentry::getGroupProvider()->create([
+				'name'        => 'pa',
+				'permissions' => []]);
 		
 	}
 }

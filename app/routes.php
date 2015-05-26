@@ -62,4 +62,16 @@ Route::group(array("before" => "sentry"), function()
 		"as"   => "auth.change-password",
 		"uses" => "AuthController@changePasswordAction"
 	));
+	
+	// Route::group(array("before" => "admin_user"), function()
+	// {
+	
+	Route::resource('club', 'ClubController');
+	// Route::resource('club', 'ClubController', array('only' => array('index', 'show')));
+	
+	
+	Route::resource('service', 'ServiceController');
+	// });
+	
+	
 });

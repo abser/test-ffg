@@ -11,17 +11,24 @@ class SentryUserGroupSeeder extends Seeder {
 	{
 		DB::table('users_groups')->delete();
 
-		$userUser   = Sentry::getUserProvider()->findByLogin('user@sprim.com');
-		$adminUser  = Sentry::getUserProvider()->findByLogin('admin@sprim.com');
-        $testUser   = Sentry::getUserProvider()->findByLogin('test@sprim.com');
-
-		$userGroup = Sentry::getGroupProvider()->findByName('member');
-		$adminGroup = Sentry::getGroupProvider()->findByName('sprim');
+		$sprimUser	= Sentry::getUserProvider()->findByLogin('sprim@sprim.com');
+		$adminUser	= Sentry::getUserProvider()->findByLogin('admin@sprim.com');
+		$ghcpUser   = Sentry::getUserProvider()->findByLogin('ghcp@sprim.com');
+		$memberUser	= Sentry::getUserProvider()->findByLogin('member@sprim.com');
+        $paUser		= Sentry::getUserProvider()->findByLogin('pa@sprim.com');
+			
+        $sprimGroup			= Sentry::getGroupProvider()->findByName('sprim');			
+		$adminGroup			= Sentry::getGroupProvider()->findByName('admin');
+		$wellnessTeamGroup	= Sentry::getGroupProvider()->findByName('wellness_team');
+		$memberGroup		= Sentry::getGroupProvider()->findByName('member');
+		$paGroup			= Sentry::getGroupProvider()->findByName('pa');
 
 	    // Assign the groups to the users
-	    $userUser->addGroup($userGroup);
-	    $adminUser->addGroup($adminGroup);
-        $testUser->addGroup($adminGroup);
+		$sprimUser->addGroup($sprimGroup);
+		$adminUser->addGroup($adminGroup);
+		$ghcpUser->addGroup($wellnessTeamGroup);
+	    $memberUser->addGroup($memberGroup);	    
+        $paUser->addGroup($paGroup);
 	}
 
 }

@@ -9,7 +9,7 @@ class StorageServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $models = ['User', 'UserGroup'];
+        $models = ['User', 'UserGroup', 'Address', 'Country', 'Region', 'Club', 'ClubUser', 'ServiceCategory', 'Service', 'ServicePrice'];
         
         foreach($models as $model)
         {
