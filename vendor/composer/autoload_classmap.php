@@ -508,6 +508,8 @@ return array(
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
     'SessionNotCreatedException' => $vendorDir . '/facebook/webdriver/lib/WebDriverExceptions.php',
     'Sprim\\Composers\\ComposerServiceProvider' => $baseDir . '/app/sprim/composers/ComposerServiceProvider.php',
+    'Sprim\\Composers\\CountryAllList' => $baseDir . '/app/sprim/composers/CountryAllList.php',
+    'Sprim\\Composers\\RegionList' => $baseDir . '/app/sprim/composers/RegionList.php',
     'Sprim\\Model\\Address' => $baseDir . '/app/models/Address.php',
     'Sprim\\Model\\Club' => $baseDir . '/app/models/Club.php',
     'Sprim\\Model\\ClubUser' => $baseDir . '/app/models/ClubUser.php',

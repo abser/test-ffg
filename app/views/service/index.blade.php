@@ -5,7 +5,8 @@
 <div class="small-8 columns">
 	<table>
 	<thead>
-		<th>Club Name</th>		
+		<th>Service Name</th>
+		<th>Service Type</th>
 		<th>Action</th>
 	</thead>
 	<tbody>
@@ -15,7 +16,7 @@
 	</table>
 </div>
 <div class="small-4 columns">
-	@include('clubs._form')
+	@include('service._form')
 </div>
 </div>
 

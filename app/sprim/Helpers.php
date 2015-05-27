@@ -27,24 +27,23 @@ class Helpers {
          return (trim($user_name))? ucwords($user_name) : $user->email;
     }
     
-    public static function paginatorParams($_sort = '', $_dir = 'desc')
+	public static function paginatorParams($def_sort = 'id', $def_dir = 'desc')
     {
-        $dir        = Input::get('dir', $_dir);
-        $sort       = Input::get('sort', $_sort);
-        
-        $column     = Input::get('column', 'all');
-        $term       = Input::get('term');
+        $page       = Input::get('page', 1);
+        $dir        = Input::get('dir', $def_dir);
+        $sort       = Input::get('sort', $def_sort);
+        $s_field    = Input::get('s_field', 'all');
+        $s_term     = Input::get('s_term');
         $limit      = Input::get('limit', 10);
+        
         $rev_dir    = ($dir == 'asc')? 'desc' : 'asc';
+        $append_url = ['dir'=>$rev_dir, 's_field' => $s_field, 's_term' => $s_term];
         
-        $append_url = ['dir'=>$rev_dir, 'column' => $column, 'term' => $term, 'sort' => $sort, 'limit' => $limit];
+        $append_arr =  compact('dir', 'sort', 's_field', 's_term', 'limit');
         
-        $append_arr =  compact('dir', 'sort', 'column', 'term', 'limit');
-        
-        return compact('dir', 'sort', 'column', 'term', 'limit', 'append_url', 'append_arr');
+        return compact('page', 'dir', 'sort', 's_field', 's_term', 'limit', 'append_url', 'append_arr');
     }
-
-    
+      
     public static function inputText($name, $label, $attr = [], $tooltip = null)
     {
         $input = Form::text($name, Input::old($name), $attr);
@@ -74,5 +73,32 @@ class Helpers {
             </div>
         </div>
 EOT;
+    }
+
+    public static function dateTz($column)
+    {
+    	if (!\Session::get('timezone')) {
+    		return $column;
+    	}
+    
+    	$timezone = \Session::get('timezone');
+    
+    	$dtz        = new \DateTimeZone($timezone);
+    	$user_time  = new \DateTime('now', $dtz);
+    
+    	$offset = $dtz->getOffset( $user_time );
+    
+    	$time    = gmdate("H:i", abs($offset));
+    
+    	if ($offset < 0) {
+    		$time = '-' . $time;
+    	} else {
+    		$time = '+' . $time;
+    	}
+    
+    	$timezone_offset =  $time;
+    
+    	return 'CONVERT_TZ('.$column.', "+00:00", "'.$timezone_offset.'")';
+    
     }
 }

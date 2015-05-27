@@ -12,14 +12,15 @@ class HomeController extends BaseController {
 	{
         $data['role']   = 'user';
         
-		return View::make('site.landing', compact('data'));
+		// return View::make('site.landing', compact('data'));
+		return View::make('admin.dashboard', compact('data'));
 	}
     
     public function admin()
 	{
         $data['role']   = 'admin';
         
-		return View::make('site.landing', compact('data'));
+		return View::make('admin.dashboard', compact('data'));
 	}
 	    
 }

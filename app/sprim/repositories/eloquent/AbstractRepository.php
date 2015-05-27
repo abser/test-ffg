@@ -4,10 +4,28 @@ namespace Sprim\Repositories\Eloquent;
 
 abstract class AbstractRepository
 {
+	protected $country_list         = null;
+    protected $mysql_dt_format      = null;
+    protected $tbl_country          = 'addresses';
 
-    public function __construct()
+	public function __construct()
     {
+        if(!\Session::get('user.is_admin')){
+            $countries = ['""'];
+            
+            if(\Session::get('user.countries')){
+                $countries = [];
+                foreach(\Session::get('user.countries') as $val){
+                    $countries[] = '"'.$val.'"';
+                }
+            }
+            
+            $this->country_list = implode(', ', $countries);
+        }
         
+        $this->mysql_dt_format    = \Config::get('sprim.date_format.mysql');
+        $this->file_type        = \Config::get('sprim.file_types');
+        $this->contact_type     = \Config::get('sprim.contact_types');
     }
     
     public function create($data)
@@ -76,6 +94,39 @@ abstract class AbstractRepository
     public function getFirstOrCreate($data)
     {
         return $this->model->firstOrCreate($data);
+    }
+    
+    public function paginate($arr)
+    {
+    	extract($arr);
+    	$result                     = new \StdClass;
+    	$result->page               = $page;
+    	$result->limit              = $limit;
+    	$result->totalItems         = 0;
+    	$result->items              = array();
+    
+    	$query = $this->filteredModel(trim($s_term), $s_field);
+    	$order = $this->sqlField($sort);
+    
+    	$result->totalItems         = count($query->get());
+    	$result->items              = $query->skip($limit * ($page - 1))->take($limit)->orderBy($order, $dir)->get();
+    
+    	return $result;
+    }
+    
+    public function simlplePaginate($limit, $filter = null)
+    {
+    	if (is_array($filter)){
+    		return $this->model->where($filter['field'], $filter['operator'], $filter['value'])->paginate($limit);
+    	}
+    
+    	return $this->model->paginate($limit);
+    
+    }
+    
+    public function sqlField($field)
+    {
+    	return (array_key_exists($field, $this->fields)? $this->fields[$field] : $field);
     }
     
     protected function keepOldData($model)

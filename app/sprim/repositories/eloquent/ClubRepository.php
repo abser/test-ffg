@@ -9,6 +9,10 @@ use Sprim\Model\Club;
 class ClubRepository extends AbstractRepository implements ClubInterface {
 
     protected $model;
+    
+    protected $fields = [
+    		'name'      => 'clubs.name'
+    ];
 
     public function __construct(Club $model, Address $address) {
         
@@ -17,4 +21,60 @@ class ClubRepository extends AbstractRepository implements ClubInterface {
 
         parent::__construct();
     }
+
+    
+    public function filteredModel($s_term = null, $s_field = 'all', $country = null, $filter = null)
+    {
+    	// \DB::connection()->disableQueryLog();
+    	// \DB::connection('mysql_sprim_dhs')->disableQueryLog();
+    
+    	$model = \DB::table('clubs')
+    		->select(\DB::raw('clubs.id, clubs.name, 
+    				DATE_FORMAT('.\Helpers::dateTz('clubs.created_at').', "'.$this->mysql_dt_format.'") AS created_date,
+    				clubs.created_at
+    		'))
+    		->leftJoin('addresses', 'clubs.address_id', '=', 'addresses.id');    
+    	return $this->whereClause($model, $s_term, $s_field, $country, $filter);
+    }  
+    
+    private function whereClause($model, $s_term = null, $s_field = 'all', $country = null, $filter = null)
+    {    	
+    	if ($s_term){
+    		if ($s_field != 'all'){
+    			$s_field = $this->sqlField($s_field);
+       
+    			if ($s_field == 'created_at'){
+    				$model->where(\DB::raw('DATE_FORMAT('.\Helpers::dateTz('clubs.created_at').', "'.$this->mysql_dt_format.'")'),
+    						'like', '%'.$s_term.'%');
+    			} else {
+    				$model->where($s_field, 'like', '%'.$s_term.'%');
+    			}
+    
+    		} else {
+    			$model->where(\DB::raw("clubs.name"), 'like', '%'.$s_term.'%');
+    			 
+    			foreach ($this->fields as $field)
+    			{    
+    				$model->orWhere($field, 'like', '%'.$s_term.'%');
+    			}
+    			$model->orWhere(\DB::raw('DATE_FORMAT('.\Helpers::dateTz('clubs.created_at').', "'.$this->mysql_dt_format.'")'),
+    					'like', '%'.$s_term.'%');
+    		}
+    	}
+    
+    	return $model;
+    }
+     
+    public function fields($obj, $input = array())
+    {
+    	$obj->name              = \Helpers::keyInput('name', $input);
+    	$obj->description       = \Helpers::keyInput('description', $input);
+    	 
+    	$address_id             = ($obj->address_id)? $obj->address_id : null;
+    	 
+    	$obj->address_id        = $this->address->_save(\Helpers::keyInput('address', $input), $address_id);
+    	 
+    	return $obj;
+    }
+
 }

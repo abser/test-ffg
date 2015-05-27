@@ -5,8 +5,16 @@ use Sprim\Repositories\Contracts\ClubInterface as Club;
 class ClubController extends \BaseController {
 
 	public function __construct(Club $club) {
-	
-		$this->model = $club;
+		
+		$this->model	= $club;
+		$this->club		= $club;
+		
+		parent::__construct();
+		$this->owner_table = Config::get('sprim.tables.club');
+		$this->sort      = 'name';
+		$this->dir       = 'asc';
+		
+		$this->route_prefix = 'club';
 	}
 	
 	
@@ -17,9 +25,11 @@ class ClubController extends \BaseController {
 	 */
 	public function index()
 	{
-		$data['clubs'] = $this->model->all();
+		// $data['clubs'] = $this->model->all();
+		$data = $this->getList();
+		$data['route']   = 'club.index';
 		
-		return View::make("clubs.index", compact('data'));
+		return View::make("club.index", compact('data'));
 	}
 
 
@@ -29,8 +39,8 @@ class ClubController extends \BaseController {
 	 * @return Response
 	 */
 	public function create()
-	{
-		//
+	{				
+		return View::make("club.create");
 	}
 
 
@@ -41,7 +51,18 @@ class ClubController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$input              = Input::all();
+		$model              = $this->model->newInstance();
+		$model->created_by  = Session::get('user.id');
+		$club               = $this->model->fields($model, $input);
+		
+		dd($club);
+		 
+		/* if (!$club->save()){
+			return Redirect::to('clubs/create')->withErrors($club->errors())->withInput();
+		} else {		
+			return Redirect::to('clubs');
+		} */
 	}
 
 
@@ -92,5 +113,20 @@ class ClubController extends \BaseController {
 		//
 	}
 
+	
+	protected function getList()
+	{
+		$pageParams         = Helpers::paginatorParams($this->sort, $this->dir);
+		$data               = $pageParams;
+		$data['r_prefix']   = 'club';
+		$data['s_fields']   = array('all' => 'All',
+				'name'    => 'Club Name');
+	
+		$obj                = $this->model->paginate($pageParams);
+		$data['model']      = Paginator::make($obj->items, $obj->totalItems, $pageParams['limit']);
+	
+		$data['controller']     = 'club';		
+		return $data;
+	}
 
 }

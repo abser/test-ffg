@@ -61,6 +61,15 @@ Class Utils
 
         return array_filter(array_map('filterArray', $array));
     }
+
+    public static function checkRoute($route)
+    {
+    	if(!is_object(Route::getCurrentRoute()) || !$route){
+    		return false;
+    	}
+    
+    	return ($route == Route::getCurrentRoute()->getName());
+    }
 }
 
 function filterArray($array)

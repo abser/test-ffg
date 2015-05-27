@@ -19,7 +19,7 @@ class ServiceController extends \BaseController {
 	{		
 		$data['services'] = $this->model->all();
 		
-		return View::make("services.index", compact('data'));
+		return View::make("service.index", compact('data'));
 	}
 
 

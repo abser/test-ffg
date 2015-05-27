@@ -18,7 +18,11 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
+    	$this->app->view->composer(['common.country'] ,
+    			'Sprim\Composers\CountryAllList');
+    	
+    	/* $this->app->view->composer(['common.country'] ,
+    			'Sprim\Composers\RegionList'); */
     }
 
 }

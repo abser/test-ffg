@@ -19,8 +19,8 @@ class Clubs extends Migration {
 			$table->text		('description')		->nullable();
 			$table->enum		('status', array('0', '1'))->default(0);
 		
-			$table->integer		('created_by')				->unsigned();
-			$table->integer		('updated_by')				->unsigned()->nullable();
+			$table->integer		('created_by')		->unsigned();
+			$table->integer		('updated_by')		->unsigned()->nullable();
 			$table->timestamps	();
 			$table->softDeletes();
 		

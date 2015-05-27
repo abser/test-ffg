@@ -1,33 +1,31 @@
-<nav class="top-bar">
-  <ul class="title-area">
-    <!-- Title Area -->
-    <li class="name">
-      <h1><a href="#">Gravity</a></h1>
-    </li>
-    <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-  </ul>
-
-  <section class="top-bar-section">
-    <!-- Left Nav Section -->
-    <ul class="left">
-      <li class="divider"></li>     
-      <li class="has-dropdown"><a href="#">Admin</a>
-
-        <ul class="dropdown">
-          <li><a href="#">Clubs</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Rooms</a></li>
-          <li><a href="#">Members</a></li>            
-        </ul>
-      </li>
-      <li class="divider"></li>
-    </ul>
-
-    <!-- Right Nav Section -->
-    <!-- <ul class="right">
-      <li class="divider hide-for-small"></li>
-      <li class="has-dropdown"><a href="#">Main Item 4</a></li>      
-    </ul> -->
-  </section>
-</nav>
+<div class="navbar navbar-inverse">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="javascript:void(0)">Gravity</a>
+    </div>
+    <div class="navbar-collapse collapse navbar-inverse-collapse">
+        <ul class="nav navbar-nav">
+        	<li><a href="javascript:void(0)">Dashboard</a></li>       
+            <li class="active dropdown">
+                <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Gravity Setup <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{URL::route('club.index')}}">Club</a></li>
+                    <li><a href="{{URL::route('service.index')}}">Service</a></li>
+                    <li><a href="">Room</a></li> 
+                    <li><a href="">Wellness Team</a></li>
+                    <li><a href="">Users</a></li>
+                </ul>
+            </li>
+            <li><a href="">Member</a></li>
+            <li><a href="">Group</a></li>
+            <li><a href="">Appointment</a></li>
+            <li><a href="">Event</a></li>
+            <li><a href="">Message</a></li>
+            <li><a href="">News Feed</a></li>
+        </ul>       
+    </div>
+</div>
