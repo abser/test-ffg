@@ -52,19 +52,19 @@ class AuthController extends Controller
 
     private function sessionSet()
     {
-        if (Session::has('user'))
+        /* if (Session::has('user'))
         {
             return true;
-        }
+        } */
         
-        $admin      = Sentry::findGroupByName('sprim');
-        $regional   = Sentry::findGroupByName('regional manager');
+        // $admin      = Sentry::findGroupByName('sprim');
+        // $regional   = Sentry::findGroupByName('regional manager');
         $user       = Sentry::getUser();
         
         $user_model = $this->user->find($user->id);
         
         Session::put('user.id', $user->id);
-        Session::put('user.is_admin', $user->inGroup($admin));
+        /* Session::put('user.is_admin', $user->inGroup($admin));
         Session::put('user.is_regional_manager', $user->inGroup($regional));
         
         if (count($user_model->profile)){
@@ -77,13 +77,8 @@ class AuthController extends Controller
                             getAllowedCountries($user_model->profile->address->country->code), $countries);
                 }
                 Session::put('user.countries', array_unique($countries));
-            }
-            
-            if(count($user_model->profile->agent)){
-                Session::put('user.agent.id', $user_model->profile->agent->id);
-            }
-            
-        }
+            }            
+        } */
         
         return true;
     }

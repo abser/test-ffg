@@ -56,13 +56,16 @@ class ClubController extends \BaseController {
 		$model->created_by  = Session::get('user.id');
 		$club               = $this->model->fields($model, $input);
 		
-		dd($club);
-		 
-		/* if (!$club->save()){
-			return Redirect::to('clubs/create')->withErrors($club->errors())->withInput();
+		$club->status		= 0;
+		$club->created_by 	= \Session::get('user.id');		
+		// dd(Sentry::getUser());
+		// dd(Session::all());
+		
+		if (!$club->save()){
+			return Redirect::to('club/create')->withErrors($club->errors())->withInput();
 		} else {		
-			return Redirect::to('clubs');
-		} */
+			return Redirect::to('club');
+		}
 	}
 
 
@@ -86,7 +89,13 @@ class ClubController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$data['club']	= $this->club->getById($id, array('address'));
+		
+		if(!$data['club']){
+			return Response::view('errors.404', array(), 404);
+		}
+		
+		return View::make('club.edit', compact('data'));
 	}
 
 
@@ -98,7 +107,15 @@ class ClubController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$input  = Input::all();		
+		$club   = $this->club->fields($this->club->find($id), $input);
+		$club->updated_by 	= \Session::get('user.id');
+		
+		if (!$club->save()){
+			return Redirect::to('club/create')->withErrors($club->errors())->withInput();
+		} else {
+			return Redirect::to('club');
+		}
 	}
 
 
@@ -110,17 +127,55 @@ class ClubController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		try {
+			$this->club->deleteById($id);
+		} catch (Exception $e) {
+			$msg = 'Error: Unable to delete.';
+			Session::flash('error', $msg);
+			return Redirect::back();
+		}
+		
+		Session::flash('message', 'Successfully deleted the HCP profile!');
+		return Redirect::to('club');
 	}
 
+	
+	public function activateAction($id)
+	{
+		$club				= $this->club->find($id);
+		$club->status		= 1;
+		$club->updated_by 	= \Session::get('user.id');
+		
+		if (!$club->save()){
+			return Redirect::to('club')->withErrors($club->errors())->withInput();
+		} else {
+			
+			Session::flash('message', 'Successfully Activated the Club');
+			return Redirect::to('club');
+		}
+	}
+	
+	public function deactivateAction($id)
+	{
+		$club   			= $this->club->find($id);
+		$club->status		= 0;
+		$club->updated_by 	= \Session::get('user.id');
+		
+		if (!$club->save()){
+			return Redirect::to('club')->withErrors($club->errors())->withInput();
+		} else {
+			
+			Session::flash('message', 'Successfully De-Activated the Club');
+			return Redirect::to('club');
+		}
+	}
 	
 	protected function getList()
 	{
 		$pageParams         = Helpers::paginatorParams($this->sort, $this->dir);
 		$data               = $pageParams;
 		$data['r_prefix']   = 'club';
-		$data['s_fields']   = array('all' => 'All',
-				'name'    => 'Club Name');
+		$data['s_fields']   = array('all' => 'All', 'name' => 'Club Name', 'country' => 'Country');
 	
 		$obj                = $this->model->paginate($pageParams);
 		$data['model']      = Paginator::make($obj->items, $obj->totalItems, $pageParams['limit']);

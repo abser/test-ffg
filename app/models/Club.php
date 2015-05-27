@@ -6,7 +6,16 @@ use LaravelBook\Ardent\Ardent;
 
 class Club extends Ardent {
 	
-    protected $fillable = array('name', 'address_id', 'description', 'status');
+	public $timestamps  = true;
+    // protected $fillable = array('name', 'address_id', 'description', 'status');
+	// use SoftDeletingTrait;
+		
+	protected $dates = ['deleted_at'];
+	
+	protected function getDateFormat()
+	{
+		return \Config::get('sprim.date_format.mysql');
+	}
 
 	public static $rules = array(
 		'name'			=> 'required|min:3|max:100',
@@ -16,5 +25,10 @@ class Club extends Ardent {
     
     public function clubusers() {
     	return $this->hasMany('Sprim\Model\ClubUser');
+    }
+    
+	public function address() 
+    {
+        return $this->belongsTo('Sprim\Model\Address');
     }
 }

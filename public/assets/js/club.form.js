@@ -1,5 +1,4 @@
-(function() {
-  jQuery(document).ready(function($) {
+$(document).ready(function($) {
     var append_email, getRegions;    
     getRegions = function(country) {
       return $.get(url_api_regions + "/" + country, function(data) {
@@ -14,12 +13,10 @@
         });
       });
     };
-    if ($("#country").val() !== "") {
+    if ($("#country").val() !== "") {    	
       getRegions($("#country").val());
     }
     $("#country").change(function() {
       getRegions($(this).val());
     });
   });
-
-}).call(this);

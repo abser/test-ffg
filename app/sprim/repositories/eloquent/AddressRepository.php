@@ -30,9 +30,7 @@ class AddressRepository extends AbstractRepository implements AddressInterface {
         
         $region_id              = null;
         $country_code           = null;
-        
-        dd($input);
-        
+                      
         if (array_key_exists('country_code', $input)){
             $country_code           = \Helpers::keyInput('country_code', $input);
         } else if (array_key_exists('country_name', $input)){
@@ -45,22 +43,22 @@ class AddressRepository extends AbstractRepository implements AddressInterface {
             $region_id         = $this->region->getRegionId($input['region_name'], $country_code);
         }
 
+        $address->address1      = \Helpers::keyInput('address1', $input);
+        $address->address2      = \Helpers::keyInput('address2', $input);
         $address->street        = \Helpers::keyInput('street', $input);
         $address->city          = \Helpers::keyInput('city', $input);
         $address->postal_code   = \Helpers::keyInput('postal_code', $input);
         $address->region_id     = $region_id;
         $address->country_code  = $country_code;
 
-        if(!$this->allow_null){
+        /* if(!$this->allow_null){
         	$address = $this->keepOldData($address);
-        }
+        } */
         
-        dd($address);
-
-        /* if($address->save()){
+        if($address->save()){
             
             return $address->id;
-        } */
+        }
 
     }
     
