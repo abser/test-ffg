@@ -53,11 +53,9 @@ class ClubController extends \BaseController {
 	{
 		$input              = Input::all();
 		$model              = $this->model->newInstance();
-		$model->created_by  = Session::get('user.id');
-		$model              = $this->model->fields($model, $input);
-		
 		$model->status		= 0;
-		$model->created_by 	= \Session::get('user.id');		
+		$model->created_by  = Session::get('user.id');
+		$model              = $this->model->fields($model, $input);			
 		// dd(Sentry::getUser());
 		// dd(Session::all());
 		
