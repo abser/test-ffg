@@ -23,7 +23,8 @@ class Services extends Migration {
 			$table->float		('cancellation_notice_period')	->nullable();
 			$table->tinyInteger	('ghcp_appointment')		->default(0);
 			$table->tinyInteger	('only_ghcp')				->default(0);
-				
+			$table->enum		('status', array('0', '1'))	->default(0);
+			
 			$table->integer		('created_by')				->unsigned();
 			$table->integer		('updated_by')				->unsigned()->nullable();
 			$table->timestamps	();

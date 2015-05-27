@@ -1,22 +1,58 @@
 @extends("layouts.admin")
 @section("content")
 
-<div class="row">
-<div class="small-8 columns">
-	<table>
+<div class="row-fluid">
+<div class="col-md-6 col-xs-12">
+
+<h3>Services ({{ $data['model']->getTotal() }})</h3>
+<div><a href="{{ URL::route($data['r_prefix'].'.create') }}" class="btn btn-default btn-raised">Add New Service</a></div>
+
+<div>
+	<table class="table table-hover">
 	<thead>
-		<th>Service Name</th>
-		<th>Service Type</th>
-		<th>Action</th>
+		<tr>
+			<th>{{link_to_route($data['route'], 'ID', array_merge($data['append_url'], ['sort' => 'id']))}}</th>
+			<th>{{link_to_route($data['route'], 'Service Name', array_merge($data['append_url'], ['sort' => 'name']))}}</th>
+			<th>{{link_to_route($data['route'], 'Service Category', array_merge($data['append_url'], ['sort' => 'service_category']))}}</th>			
+		    <th>Action</th>
+		</tr>
 	</thead>
 	<tbody>
-	
-	
+		@foreach($data['model'] as $key => $row)
+		<tr>
+			<td>{{ $row->id}}</td>
+			<td>
+				<strong>
+					<a href="{{ URL::route('club.edit', $row->id) }}">
+						<span class="{{(Input::get('sort' ) == 'name')? 'sprim-sort' : '' }}">{{ucfirst($row->name)}}</span>
+					</a>
+				</strong>
+			</td>
+			<td>
+				
+			</td>
+			<td>
+				<ul class="list-inline">
+					<li><a href="{{ URL::route('club.edit', $row->id) }}"><i class="fi-pencil">Edit</i></a></li>
+					<li>@if($row->status == 1)
+							<a href="{{ URL::to('service/deactivate/'. $row->id) }}"><i>Deactivate</i></a>
+						@else
+							<a href="{{ URL::to('service/activate/'. $row->id) }}"><i>Activate</i></a>
+						@endif
+					</li>
+				</ul>
+			</td>
+		</tr>
+		@endforeach	
 	</tbody>
-	</table>
+</table>
 </div>
-<div class="small-4 columns">
-	@include('service._form')
+	
+</div>	
+<div class="col-md-6 col-xs-12">
+
+	
+
 </div>
 </div>
 

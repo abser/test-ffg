@@ -1,7 +1,22 @@
 <?php
 
+use Sprim\Repositories\Contracts\RoomInterface as Room;
+
 class RoomController extends \BaseController {
 
+	public function __construct(Room $room) {
+	
+		$this->model	= $room;
+		$this->room		= $room;
+	
+		parent::__construct();
+		$this->owner_table = Config::get('sprim.tables.club');
+		$this->sort      = 'name';
+		$this->dir       = 'asc';
+	
+		$this->route_prefix = 'room';
+	}
+	
 	/**
 	 * Display a listing of the resource.
 	 *

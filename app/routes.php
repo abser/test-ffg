@@ -66,12 +66,30 @@ Route::group(array("before" => "sentry"), function()
 	// Route::group(array("before" => "admin_user"), function()
 	// {
 	
+	Route::group(array('prefix' => 'club'), function()
+	{
+		Route::any("/activate/{id}", array(
+			"as"   => "club.activate",
+			"uses" => "ClubController@activateAction"
+		))->where(['id'=>'[\d+]+']);
+	
+		Route::any("/deactivate/{id}", array(
+			"as"   => "club.deactivate",
+			"uses" => "ClubController@deactivateAction"
+		))->where(['id'=>'[\d+]+']);	
+	});
 	Route::resource('club', 'ClubController');
 	// Route::resource('club', 'ClubController', array('only' => array('index', 'show')));
 	
+	Route::resource('room', 'RoomController');
 	
 	Route::resource('service', 'ServiceController');
 	// });
 	
 	
+});
+
+Route::get('api/regions/{country_code}', function($country_code){
+	$region = App::make('Sprim\Repositories\Contracts\RegionInterface');
+	return $region->getListByCountry($country_code);
 });

@@ -18,8 +18,8 @@ return array(
     
     'tables' => [
         'club'			=> '1',
-		'room'			=> '2',
-        'service'		=> '3'       
+    	'service'		=> '2',
+		'room'			=> '3'              
     ],
     
     'file_types' => [

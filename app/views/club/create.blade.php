@@ -19,5 +19,10 @@
 @stop
 
 @section('js')
+<script type="text/javascript">
+    var region_id = {{ $data['club']->address->region_id or 0 }};
+    var url_api_regions = "{{ url('api/regions/')}}";    
+</script>
+
 {{ HTML::script('/assets/js/club.form.js') }}
 @stop

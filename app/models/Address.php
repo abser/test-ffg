@@ -6,8 +6,15 @@ use LaravelBook\Ardent\Ardent;
 
 class Address extends Ardent {
     
-    public $timestamps  = false;
+    public $timestamps  = true;
     protected $table    = 'addresses';
+    
+    protected $dates = ['deleted_at'];
+    
+    protected function getDateFormat()
+    {
+    	return \Config::get('sprim.date_format.mysql');
+    }
 
     public static $rules = array(
     );
