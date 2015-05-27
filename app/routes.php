@@ -81,6 +81,7 @@ Route::group(array("before" => "sentry"), function()
 	Route::resource('club', 'ClubController');
 	// Route::resource('club', 'ClubController', array('only' => array('index', 'show')));
 	
+	Route::resource('room', 'RoomController');
 	
 	Route::resource('service', 'ServiceController');
 	// });

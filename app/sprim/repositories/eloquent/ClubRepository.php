@@ -16,8 +16,8 @@ class ClubRepository extends AbstractRepository implements ClubInterface {
 
     public function __construct(Club $model, Address $address) {
         
-        $this->model = $model;
-        $this->address = $address;
+        $this->model	= $model;
+        $this->address	= $address;
 
         parent::__construct();
     }
@@ -94,4 +94,14 @@ class ClubRepository extends AbstractRepository implements ClubInterface {
     	return $obj;
     }
 
+    public function getSelectList()
+    {
+    	$init	= array('' => '');
+    	
+    	$obj	= $this->model->orderBy('name')->lists('name', 'id');
+    	
+    	$options= array_map(function($name) { return ucwords($name); }, $obj);
+    	
+    	return array_merge($init,$options);
+    }
 }

@@ -54,15 +54,15 @@ class ClubController extends \BaseController {
 		$input              = Input::all();
 		$model              = $this->model->newInstance();
 		$model->created_by  = Session::get('user.id');
-		$club               = $this->model->fields($model, $input);
+		$model              = $this->model->fields($model, $input);
 		
-		$club->status		= 0;
-		$club->created_by 	= \Session::get('user.id');		
+		$model->status		= 0;
+		$model->created_by 	= \Session::get('user.id');		
 		// dd(Sentry::getUser());
 		// dd(Session::all());
 		
-		if (!$club->save()){
-			return Redirect::to('club/create')->withErrors($club->errors())->withInput();
+		if (!$model->save()){
+			return Redirect::to('club/create')->withErrors($model->errors())->withInput();
 		} else {		
 			return Redirect::to('club');
 		}
@@ -89,7 +89,7 @@ class ClubController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$data['club']	= $this->club->getById($id, array('address'));
+		$data['club']	= $this->model->getById($id, array('address'));
 		
 		if(!$data['club']){
 			return Response::view('errors.404', array(), 404);
@@ -108,11 +108,11 @@ class ClubController extends \BaseController {
 	public function update($id)
 	{
 		$input  = Input::all();		
-		$club   = $this->club->fields($this->club->find($id), $input);
-		$club->updated_by 	= \Session::get('user.id');
+		$model  = $this->model->fields($this->model->find($id), $input);
+		$model->updated_by 	= \Session::get('user.id');
 		
-		if (!$club->save()){
-			return Redirect::to('club/create')->withErrors($club->errors())->withInput();
+		if (!$model->save()){
+			return Redirect::to('club/create')->withErrors($model->errors())->withInput();
 		} else {
 			return Redirect::to('club');
 		}
@@ -128,7 +128,7 @@ class ClubController extends \BaseController {
 	public function destroy($id)
 	{
 		try {
-			$this->club->deleteById($id);
+			$this->model->deleteById($id);
 		} catch (Exception $e) {
 			$msg = 'Error: Unable to delete.';
 			Session::flash('error', $msg);
@@ -142,12 +142,12 @@ class ClubController extends \BaseController {
 	
 	public function activateAction($id)
 	{
-		$club				= $this->club->find($id);
-		$club->status		= 1;
-		$club->updated_by 	= \Session::get('user.id');
+		$model				= $this->model->find($id);
+		$model->status		= 1;
+		$model->updated_by 	= \Session::get('user.id');
 		
-		if (!$club->save()){
-			return Redirect::to('club')->withErrors($club->errors())->withInput();
+		if (!$model->save()){
+			return Redirect::to('club')->withErrors($model->errors())->withInput();
 		} else {
 			
 			Session::flash('message', 'Successfully Activated the Club');
@@ -157,12 +157,12 @@ class ClubController extends \BaseController {
 	
 	public function deactivateAction($id)
 	{
-		$club   			= $this->club->find($id);
-		$club->status		= 0;
-		$club->updated_by 	= \Session::get('user.id');
+		$model   			= $this->model->find($id);
+		$model->status		= 0;
+		$model->updated_by 	= \Session::get('user.id');
 		
-		if (!$club->save()){
-			return Redirect::to('club')->withErrors($club->errors())->withInput();
+		if (!$model->save()){
+			return Redirect::to('club')->withErrors($model->errors())->withInput();
 		} else {
 			
 			Session::flash('message', 'Successfully De-Activated the Club');

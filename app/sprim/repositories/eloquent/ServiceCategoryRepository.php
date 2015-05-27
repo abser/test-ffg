@@ -17,4 +17,14 @@ class ServiceCategoryRepository extends AbstractRepository implements ServiceCat
         parent::__construct();
     }
 
+    public function getSelectList()
+    {
+    	$init	= array('' => '');
+    	 
+    	$obj	= $this->model->orderBy('name')->lists('name', 'id');
+    	 
+    	$options= array_map(function($name) { return ucwords($name); }, $obj);
+    	 
+    	return array_merge($init,$options);
+    }
 }
