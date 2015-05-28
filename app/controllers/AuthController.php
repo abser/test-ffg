@@ -79,7 +79,7 @@ class AuthController extends Controller
                 Session::put('user.countries', array_unique($countries));
             }            
         } */
-        Session::save();
+        // Session::save();
         
         return true;
     }
