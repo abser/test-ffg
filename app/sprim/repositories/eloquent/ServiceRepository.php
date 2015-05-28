@@ -33,12 +33,16 @@ class ServiceRepository extends AbstractRepository implements ServiceInterface {
     	$model = \DB::table('services')
     	->select(\DB::raw('services.id, services.name, services.service_category_id, services.service_sub_category_id, services.description, services.status, 
     				service_categories.name AS service_category,
+    				ssc.name AS service_sub_category,
     				DATE_FORMAT('.\Helpers::dateTz('services.created_at').', "'.$this->mysql_dt_format.'") AS created_date,
     				services.created_at
     		'))
     	->leftJoin('service_categories', 'services.service_category_id', '=', 'service_categories.id')
-    	// ->leftJoin(\DB::raw('service_categories ssc ON services.service_sub_category_id = service_categories.id'))
-    	;
+    	->leftJoin(
+    			\DB::raw('(SELECT id, name FROM service_categories) ssc'),
+    			function( $query ){
+    				$query->on( 'services.service_sub_category_id', '=', \DB::raw('ssc.id') );
+    			});
     	 
     	return $this->whereClause($model, $s_term, $s_field, $country, $filter);
     }

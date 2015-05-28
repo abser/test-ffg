@@ -28,7 +28,7 @@
 <div class="form-group">
 	{{ Form::label('service_sub_category_id', 'Service Sub-Category', array('class' => 'col-lg-3 control-label')) }}
 	<div class="col-lg-9">
-		{{ Form::select('service_sub_category_id', $categories, Input::old('service_sub_category_id'), array('id' => 'service_sub_category_id', 'class'=>'form-control')); }}
+		{{ Form::select('service_sub_category_id', $sub_categories, Input::old('service_sub_category_id'), array('id' => 'service_sub_category_id', 'class'=>'form-control')); }}
 		@if ($errors->has('service_sub_category_id')) <p class="alert alert-danger">{{ $errors->first('service_sub_category_id') }}</p> @endif
 		<div id="add_service_sub_category"><a href="#">Add New Sub-Category</a></div>		
     	<div class="row" id="add_service_sub_category_box" style="display: none">
