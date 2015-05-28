@@ -50,9 +50,12 @@ class RoomController extends \BaseController {
 	public function create()
 	{
 		$data['clubs']		= $this->club->getSelectList();
-		$data['categories']	= $this->service_category->getSelectList(0);
-		$data['sub_categories']	= $this->service_category->getSelectList(1);
-		
+		$data['categories']	= $this->service_category->getSelectList(0, false);
+		$data['sub_categories']	= $this->service_category->all(); //getSelectList(1, false);
+		$data['sub_categories']	= $this->service_category->all();
+		$data['services']	= $this->service->all();		
+		$data['rooms']		= $this->model->getSelectList();
+				
 		return View::make("room.create", compact('data'));
 	}
 
@@ -64,7 +67,18 @@ class RoomController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$input              = Input::all();
+		$model              = $this->model->newInstance();
+		$model              = $this->model->fields($model, $input);
+		
+		$model->status		= 0;
+		$model->created_by 	= \Session::get('user.id');
+		
+		if (!$model->save()){
+			return Redirect::to('room/create')->withErrors($model->errors())->withInput();
+		} else {
+			return Redirect::to('room');
+		}
 	}
 
 
@@ -88,7 +102,19 @@ class RoomController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$data['room']			= $this->model->getById($id);
+		$data['clubs']			= $this->club->getSelectList();
+		$data['categories']		= $this->service_category->getSelectList(0, false);
+		$data['sub_categories']	= $this->service_category->all(); //getSelectList(1, false);
+		$data['sub_categories']	= $this->service_category->all();
+		$data['services']		= $this->service->all();		
+		$data['rooms']			= $this->model->getSelectList($data['room']->id);
+		
+		if(!$data['room']){
+			return Response::view('errors.404', array(), 404);
+		}
+		
+		return View::make('room.edit', compact('data'));
 	}
 
 
@@ -100,7 +126,15 @@ class RoomController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$input  = Input::all();
+		$model  = $this->model->fields($this->model->find($id), $input);
+		$model->updated_by 	= \Session::get('user.id');
+		
+		if (!$model->save()){
+			return Redirect::to('room/create')->withErrors($model->errors())->withInput();
+		} else {
+			return Redirect::to('room');
+		}
 	}
 
 
@@ -123,11 +157,11 @@ class RoomController extends \BaseController {
 		$model->updated_by 	= \Session::get('user.id');
 	
 		if (!$model->save()){
-			return Redirect::to('service')->withErrors($model->errors())->withInput();
+			return Redirect::to('room')->withErrors($model->errors())->withInput();
 		} else {
 	
 			Session::flash('message', 'Successfully Activated the Service');
-			return Redirect::to('service');
+			return Redirect::to('room');
 		}
 	}
 	
@@ -139,11 +173,11 @@ class RoomController extends \BaseController {
 		$model->updated_by 	= \Session::get('user.id');
 	
 		if (!$model->save()){
-			return Redirect::to('service')->withErrors($model->errors())->withInput();
+			return Redirect::to('room')->withErrors($model->errors())->withInput();
 		} else {
 	
 			Session::flash('message', 'Successfully De-Activated the Service');
-			return Redirect::to('service');
+			return Redirect::to('room');
 		}
 	}
 	

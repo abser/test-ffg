@@ -31,7 +31,7 @@ class RoomRepository extends AbstractRepository implements RoomInterface {
     	// \DB::connection('mysql_sprim_dhs')->disableQueryLog();
     
     	$model = \DB::table('rooms')
-    		->select(\DB::raw('rooms.id, rooms.name,
+    		->select(\DB::raw('rooms.id, rooms.club_id, rooms.name, rooms.room_number, rooms.capacity, rooms.is_conjunct, rooms.status,
     				 
     				DATE_FORMAT('.\Helpers::dateTz('rooms.created_at').', "'.$this->mysql_dt_format.'") AS created_date,
     				rooms.created_at
@@ -78,14 +78,30 @@ class RoomRepository extends AbstractRepository implements RoomInterface {
      
     public function fields($obj, $input = array())
     {
-    	$obj->name              = \Helpers::keyInput('name', $input);
-    	$obj->description       = \Helpers::keyInput('description', $input);
-    	 
-    	$address_id             = ($obj->address_id)? $obj->address_id : null;
-    	 
-    	$obj->address_id        = $this->address->_save(\Helpers::keyInput('address', $input), $address_id);
+    	$obj->club_id           = \Helpers::keyInput('club_id', $input);
+    	$obj->name		        = \Helpers::keyInput('name', $input);
+    	$obj->room_number       = \Helpers::keyInput('room_number', $input);
+    	$obj->capacity	        = \Helpers::keyInput('capacity', $input);
+    	
+    	if (array_key_exists('is_conjunct', $input)){
+    		$obj->is_conjunct			= \Helpers::keyInput('is_conjunct', $input);
+    	}
+
+    	// $room_service        = $this->room_service->_save(\Helpers::keyInput('service', $input), $address_id);
     	 
     	return $obj;
     }
    
+    
+    public function getSelectList($except = null)
+    {
+    	$init	= array();
+    	
+    	$obj	= ($except)?$this->model->where('id', '!=', $except)->orderBy('name')->lists('name', 'id'):$this->model->orderBy('name')->lists('name', 'id');
+    	 
+    	$options= array_map(function($name) { return ucwords($name); }, $obj);
+    	
+    	return array_replace($init,$options);
+    }
+    
 }

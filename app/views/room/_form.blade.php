@@ -9,7 +9,7 @@
 <div class="form-group">	
 	{{ Form::label('name', 'Room Name', array('class' => 'col-lg-3 control-label')) }}
     <div class="col-lg-9">
-    	{{ Form::text('name', Input::old('name'), ['class'=>'form-control', 'placeholder'=>'service name', 'required'=>'required']) }}
+    	{{ Form::text('name', Input::old('name'), ['class'=>'form-control', 'placeholder'=>'room name', 'required'=>'required']) }}
     	@if ($errors->has('name')) <p class="alert alert-danger">{{ $errors->first('name') }}</p> @endif
     </div>
 </div>
@@ -22,8 +22,36 @@
 </div>
 <div class="form-group">	
 	{{ Form::label('service', 'Service Selection', array('class' => 'col-lg-3 control-label')) }}
-    <div class="col-lg-9">  
-    	{{ Form::text('service', Input::old('service'), ['class'=>'form-control', 'placeholder'=>'service']) }}  	
+    <div class="col-lg-9"> 
+    	<div> 
+    	<ul class="tree">
+    	@foreach($data['categories']  as $key => $value)
+    		<li>{{ Form::checkbox('service[category][]', $key) }} &nbsp; {{ $value }}
+    			<ul>
+    			@foreach($data['services']  as $service)
+    				@if(!$service->service_sub_category_id  && $key == $service->service_category_id)
+    					<li>{{ Form::checkbox('service[id][]', $service->id) }} &nbsp; {{ $service->name }}</li>
+    				@endif  
+    			@endforeach
+    			
+    			@foreach($data['sub_categories']  as $sub_category)
+    				@if($sub_category->parent_id == $key)
+    					<li>{{ Form::checkbox('service[sub_category][]', $sub_category->id) }} &nbsp; {{ $sub_category->name }}
+    					<ul>
+    					@foreach($data['services']  as $service)
+    						@if($sub_category->id == $service->service_sub_category_id)
+    							<li>{{ Form::checkbox('service[id][]', $service->id) }} &nbsp; {{ $service->name }}</li>
+    						@endif  
+    					@endforeach    									
+    					</li>
+    				@endif
+    			@endforeach
+    			</ul>
+    		</li>
+    	@endforeach
+    	</ul>
+    	</div>
+    	<div id="directoryTree_container"></div>    		
     	@if ($errors->has('room_number')) <p class="alert alert-danger">{{ $errors->first('room_number') }}</p> @endif
     </div>
 </div>
@@ -46,7 +74,7 @@
     <div class="col-lg-9">
     	<p style="background-color: grey;">This room is conjunct with below selected rooms, This room will be booked with selected rooms, This room can has overlapping booking if only any of the selected room is available</p>
     	<div>
-    		{{ Form::select('conjunct[]', $clubs, Input::old('conjunct[]'), array('id' => 'conjunct', 'class'=>'form-control', 'multiple'=>'multiple')); }}
+    		{{ Form::select('conjunct[]', $rooms, Input::old('conjunct[]'), array('id' => 'conjunct', 'class'=>'form-control', 'multiple'=>'multiple')); }}
     		@if ($errors->has('conjunct[]')) <p class="alert alert-danger">{{ $errors->first('conjunct[]') }}</p> @endif
     	</div>
     </div>

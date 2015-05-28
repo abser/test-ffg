@@ -2,14 +2,14 @@
 
 namespace Sprim\Repositories\Eloquent;
 
-use Sprim\Repositories\Contracts\RoomServiceInterface;
-use Sprim\Model\RoomService;
+use Sprim\Repositories\Contracts\RoomConjunctInterface;
+use Sprim\Model\RoomConjunct;
 
-class RoomServiceRepository extends AbstractRepository implements RoomServiceInterface {
+class RoomConjunctRepository extends AbstractRepository implements RoomConjunctInterface {
 
     protected $model;
   
-    public function __construct(RoomService $model) {
+    public function __construct(RoomConjunct $model) {
         
         $this->model	= $model;
 
