@@ -9,7 +9,7 @@
 
 <div>
 	<table class="table table-hover">
-	<thead>
+	<thead style="background-color: grey;">
 		<tr>
 			<th>{{link_to_route($data['route'], 'ID', array_merge($data['append_url'], ['sort' => 'id']))}}</th>
 			<th>{{link_to_route($data['route'], 'Name', array_merge($data['append_url'], ['sort' => 'name']))}}</th>

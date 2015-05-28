@@ -53,14 +53,15 @@ class ServiceCategoryRepository extends AbstractRepository implements ServiceCat
     
     }
     
-    public function getSelectList()
+    public function getSelectList($_level = 0)
     {
-    	$init	= array('' => '');
+    	$init	= ($_level == 0)?array('' => 'Select Category'):array(''=>'Select Sub-Category');
     	 
-    	$obj	= $this->model->orderBy('name')->lists('name', 'id');
+    	$obj	= $this->model->where('parent_id', '=', $_level)->orderBy('name')->lists('name', 'id');
     	 
     	$options= array_map(function($name) { return ucwords($name); }, $obj);
     	 
-    	return array_merge($init,$options);
+    	// return array_merge($init,$options);
+    	return array_replace($init,$options);
     }
 }
