@@ -1,6 +1,6 @@
 <?php
 
-$date_format = ['label' => 'dd-mm-yy', 'php' => 'd-m-y', 'mysql' => '%d-%m-%y', 'php_output' => 'd M Y',
+$date_format = ['label' => 'dd-mm-yy', 'php' => 'd-m-y', 'mysql' => 'Y-m-d H:i:s', 'php_output' => 'd M Y',
     'regex' => "/^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-[0-9]{2}$/"];
 
 return array(

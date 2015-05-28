@@ -6,7 +6,7 @@ use LaravelBook\Ardent\Ardent;
 
 class Address extends Ardent {
     
-    public $timestamps  = true;
+    public $timestamps  = false;
     protected $table    = 'addresses';
     
     protected $dates = ['deleted_at'];
