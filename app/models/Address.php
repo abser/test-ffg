@@ -3,18 +3,19 @@
 namespace Sprim\Model;
 
 use LaravelBook\Ardent\Ardent;
+use Carbon\Carbon;
 
 class Address extends Ardent {
     
-    public $timestamps  = true;
+    public $timestamps  = false;
     protected $table    = 'addresses';
     
     protected $dates = ['deleted_at'];
     
-    protected function getDateFormat()
+    /* protected function getDateFormat()
     {
     	return \Config::get('sprim.date_format.mysql');
-    }
+    } */
 
     public static $rules = array(
     );

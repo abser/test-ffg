@@ -19,4 +19,4 @@ $(document).ready(function($) {
     $("#country").change(function() {
       getRegions($(this).val());
     });
-  });
+});

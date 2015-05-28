@@ -23,17 +23,19 @@
 			<td>{{ $row->id}}</td>
 			<td>
 				<strong>
-					<a href="{{ URL::route('club.edit', $row->id) }}">
+					<a href="{{ URL::route('service.edit', $row->id) }}">
 						<span class="{{(Input::get('sort' ) == 'name')? 'sprim-sort' : '' }}">{{ucfirst($row->name)}}</span>
 					</a>
 				</strong>
 			</td>
 			<td>
-				
+				@if( property_exists($row, 'service_category'))
+					<span class="{{(Input::get('sort' ) == 'service_category')? 'sprim-sort' : '' }}">{{ ucfirst($row->service_category) }}</span>
+				@endif
 			</td>
 			<td>
 				<ul class="list-inline">
-					<li><a href="{{ URL::route('club.edit', $row->id) }}"><i class="fi-pencil">Edit</i></a></li>
+					<li><a href="{{ URL::route('service.edit', $row->id) }}"><i class="fi-pencil">Edit</i></a></li>
 					<li>@if($row->status == 1)
 							<a href="{{ URL::to('service/deactivate/'. $row->id) }}"><i>Deactivate</i></a>
 						@else
