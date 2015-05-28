@@ -52,10 +52,10 @@ class AuthController extends Controller
 
     private function sessionSet()
     {
-        /* if (Session::has('user'))
+        if (Session::has('user'))
         {
             return true;
-        } */
+        }
         
         // $admin      = Sentry::findGroupByName('sprim');
         // $regional   = Sentry::findGroupByName('regional manager');
@@ -63,7 +63,7 @@ class AuthController extends Controller
         
         $user_model = $this->user->find($user->id);
         
-        Session::put('user.id', $user->id);
+        \Session::put('user.id', $user->id);
         /* Session::put('user.is_admin', $user->inGroup($admin));
         Session::put('user.is_regional_manager', $user->inGroup($regional));
         
@@ -79,6 +79,7 @@ class AuthController extends Controller
                 Session::put('user.countries', array_unique($countries));
             }            
         } */
+        // Session::save();
         
         return true;
     }

@@ -52,10 +52,10 @@ class ClubController extends \BaseController {
 	public function store()
 	{
 		$input              = Input::all();
-		$model              = $this->model->newInstance();
+		$model              = $this->model->newInstance();		
+		$model              = $this->model->fields($model, $input);	
 		$model->status		= 0;
-		$model->created_by  = Session::get('user.id');
-		$model              = $this->model->fields($model, $input);			
+		$model->created_by  = \Session::get('user.id');
 		// dd(Sentry::getUser());
 		// dd(Session::all());
 		

@@ -26,6 +26,7 @@
             <li><a href="">Event</a></li>
             <li><a href="">Message</a></li>
             <li><a href="">News Feed</a></li>
+            <li>{{ \Session::get('user.id') }}
         </ul>       
     </div>
 </div>
