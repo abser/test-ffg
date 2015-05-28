@@ -16,8 +16,8 @@ class Services extends Migration {
 			$table->increments	('id');
 			$table->integer		('club_id')					->unsigned();
 			$table->string		('name', 100);
-			$table->integer		('service_category_id')		->unsigned();
-			$table->integer		('service_sub_category_id')	->unsigned();
+			$table->integer		('service_category_id')		->unsigned()->nullable();
+			$table->integer		('service_sub_category_id')	->unsigned()->nullable();
 			$table->text		('description')				->nullable();
 			$table->text		('cancellation_notes')		->nullable();
 			$table->float		('cancellation_notice_period')	->nullable();

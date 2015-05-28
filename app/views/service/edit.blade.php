@@ -9,11 +9,15 @@
     </div>
     <div class="panel-body">
     	{{ Form::model($data['service'], array('route' => array('service.update', $data['service']->id), 'method' => 'PUT', 'data-abide', 'class'=>'form-horizontal', 'id' => 'serviceForm')) }}
-			@include('service._form')
+			@include('service._form', $data)
 		{{ Form::close() }}
     </div>
 </div>
 
 </div>
 </div>	
+@stop
+
+@section('js')
+{{ HTML::script('/assets/js/service.form.js') }}
 @stop

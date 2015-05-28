@@ -83,6 +83,18 @@ Route::group(array("before" => "sentry"), function()
 	
 	Route::resource('room', 'RoomController');
 	
+	Route::group(array('prefix' => 'service'), function()
+	{
+		Route::any("/activate/{id}", array(
+				"as"   => "service.activate",
+				"uses" => "ServiceController@activateAction"
+		))->where(['id'=>'[\d+]+']);
+	
+		Route::any("/deactivate/{id}", array(
+				"as"   => "service.deactivate",
+				"uses" => "ServiceController@deactivateAction"
+		))->where(['id'=>'[\d+]+']);
+	});
 	Route::resource('service', 'ServiceController');
 	// });
 	

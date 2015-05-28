@@ -3,6 +3,7 @@
 namespace Sprim\Model;
 
 use LaravelBook\Ardent\Ardent;
+use Carbon\Carbon;
 
 class Region extends Ardent {
 

@@ -96,12 +96,14 @@ class ClubRepository extends AbstractRepository implements ClubInterface {
 
     public function getSelectList()
     {
-    	$init	= array('' => '');
+    	$init	= array('' => 'Select Club');
     	
     	$obj	= $this->model->orderBy('name')->lists('name', 'id');
     	
     	$options= array_map(function($name) { return ucwords($name); }, $obj);
     	
-    	return array_merge($init,$options);
+    	// return array_merge($init,$options);
+    	// return ($init + $options);
+    	return array_replace($init,$options);
     }
 }

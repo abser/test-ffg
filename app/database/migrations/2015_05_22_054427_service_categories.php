@@ -25,7 +25,7 @@ class ServiceCategories extends Migration {
 			// $table->nullableTimestamps();
 			$table->softDeletes();
 				
-			$table->foreign('parent_id')->references('id')->on('service_categories');
+			// $table->foreign('parent_id')->references('id')->on('service_categories');
 				
 			$table->unique('name');
 		});

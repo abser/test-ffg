@@ -31,11 +31,14 @@ class ServiceRepository extends AbstractRepository implements ServiceInterface {
     	// \DB::connection('mysql_sprim_dhs')->disableQueryLog();
     
     	$model = \DB::table('services')
-    	->select(\DB::raw('services.id, services.name, services.description, services.status,
-    	
+    	->select(\DB::raw('services.id, services.name, services.service_category_id, services.service_sub_category_id, services.description, services.status, 
+    				service_categories.name AS service_category,
     				DATE_FORMAT('.\Helpers::dateTz('services.created_at').', "'.$this->mysql_dt_format.'") AS created_date,
     				services.created_at
-    		'));
+    		'))
+    	->leftJoin('service_categories', 'services.service_category_id', '=', 'service_categories.id')
+    	// ->leftJoin(\DB::raw('service_categories ssc ON services.service_sub_category_id = service_categories.id'))
+    	;
     	 
     	return $this->whereClause($model, $s_term, $s_field, $country, $filter);
     }
@@ -79,13 +82,23 @@ class ServiceRepository extends AbstractRepository implements ServiceInterface {
     	$obj->description       = \Helpers::keyInput('description', $input);
     	$obj->cancellation_notes= \Helpers::keyInput('cancellation_notes', $input);
     	$obj->cancellation_notice_period	= \Helpers::keyInput('cancellation_notice_period', $input);
-    	$obj->ghcp_appointment	= \Helpers::keyInput('ghcp_appointment', $input);
-    	$obj->only_ghcp			= \Helpers::keyInput('only_ghcp', $input);
-    
+    	
+    	if (array_key_exists('ghcp_appointment', $input)){
+    		$obj->ghcp_appointment	= \Helpers::keyInput('ghcp_appointment', $input);
+    	}
+    	if (array_key_exists('only_ghcp', $input)){
+    		$obj->only_ghcp			= \Helpers::keyInput('only_ghcp', $input);
+    	}
+    	    	
+    	$obj->service_category_id  = \Helpers::keyInput('service_category_id', $input);
+    	$obj->service_sub_category_id  = \Helpers::keyInput('service_sub_category_id', $input);
+    	
     	$service_category_id	= ($obj->service_category_id)? $obj->service_category_id : null;
+    	$service_sub_category_id	= ($obj->service_sub_category_id)? $obj->service_sub_category_id : null;
     
-    	$obj->service_category_id	= $this->service_category->_save(\Helpers::keyInput('service_category', $input), $service_category_id);
-    
+    	$obj->service_category_id	= $this->service_category->_save($input, $service_category_id);
+    	$obj->service_sub_category_id	= $this->service_category->_saveSubCategory($input, $obj->service_category_id, $service_sub_category_id);
+    	    
     	return $obj;
     }
     
