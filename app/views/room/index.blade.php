@@ -14,7 +14,7 @@
 			<th>{{link_to_route($data['route'], 'ID', array_merge($data['append_url'], ['sort' => 'id']))}}</th>
 			<th>{{link_to_route($data['route'], 'Room Name', array_merge($data['append_url'], ['sort' => 'name']))}}</th>
 			<th>{{link_to_route($data['route'], 'Room Number', array_merge($data['append_url'], ['sort' => 'room_number']))}}</th>
-			<th>{{link_to_route($data['route'], 'Service', array_merge($data['append_url'], ['sort' => 'service_category']))}}</th>			
+			<th>{{link_to_route($data['route'], 'Service', array_merge($data['append_url'], ['sort' => 'name']))}}</th>			
 		    <th>Action</th>
 		</tr>
 	</thead>
@@ -42,11 +42,11 @@
 			</td>
 			<td>
 				<ul class="list-inline">
-					<li><a href="{{ URL::route('service.edit', $row->id) }}"><i class="fi-pencil">Edit</i></a></li>
+					<li><a href="{{ URL::route('room.edit', $row->id) }}"><i class="fi-pencil">Edit</i></a></li>
 					<li>@if($row->status == 1)
-							<a href="{{ URL::to('service/deactivate/'. $row->id) }}"><i>Deactivate</i></a>
+							<a href="{{ URL::to('room/deactivate/'. $row->id) }}"><i>Deactivate</i></a>
 						@else
-							<a href="{{ URL::to('service/activate/'. $row->id) }}"><i>Activate</i></a>
+							<a href="{{ URL::to('room/activate/'. $row->id) }}"><i>Activate</i></a>
 						@endif
 					</li>
 				</ul>

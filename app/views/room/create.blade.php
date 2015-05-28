@@ -1,6 +1,7 @@
 @extends("layouts.admin")
 @section('css')
 {{ HTML::style('/assets/css/bootstrap-multiselect.css') }}
+{{ HTML::style('/assets/css/directoryTree.css') }}
 @stop
 
 @section("content")
@@ -24,5 +25,6 @@
 
 @section('js')
 {{ HTML::script('/assets/js/bootstrap-multiselect.js') }}
+{{ HTML::script('/assets/js/directoryTree.js') }}
 {{ HTML::script('/assets/js/room.form.js') }}
 @stop
