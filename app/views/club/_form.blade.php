@@ -52,7 +52,7 @@
     	@if ($errors->has('description')) <p class="alert alert-danger">{{ $errors->first('description') }}</p> @endif
     </div>
 </div>
-<div class="form-group">
+<div class="form-group" style="padding-top: 1em;">
 	<div class="col-lg-2"></div>
     <div class="col-lg-10">
     	<button type="submit" class="btn btn-default">Save Club</button>

@@ -24,10 +24,10 @@
 	{{ Form::label('service', 'Service Selection', array('class' => 'col-lg-3 control-label')) }}
     <div class="col-lg-9"> 
     	<div> 
-    	<ul class="tree">
+    	<ul class="tree" style="list-style: none;">
     	@foreach($data['categories']  as $key => $value)
     		<li>{{ Form::checkbox('service[category][]', $key) }} &nbsp; {{ $value }}
-    			<ul>
+    			<ul style="list-style: none;">
     			@foreach($data['services']  as $service)
     				@if(!$service->service_sub_category_id  && $key == $service->service_category_id)
     					<li>{{ Form::checkbox('service[id][]', $service->id) }} &nbsp; {{ $service->name }}</li>
@@ -37,7 +37,7 @@
     			@foreach($data['sub_categories']  as $sub_category)
     				@if($sub_category->parent_id == $key)
     					<li>{{ Form::checkbox('service[sub_category][]', $sub_category->id) }} &nbsp; {{ $sub_category->name }}
-    					<ul>
+    					<ul style="list-style: none;">
     					@foreach($data['services']  as $service)
     						@if($sub_category->id == $service->service_sub_category_id)
     							<li>{{ Form::checkbox('service[id][]', $service->id) }} &nbsp; {{ $service->name }}</li>
@@ -80,7 +80,7 @@
     </div>
 </div>
 
-<div class="form-group">
+<div class="form-group" style="padding-top: 1em;">
 	<div class="col-lg-3"></div>
     <div class="col-lg-9">
     	<button type="submit" class="btn btn-default">Save Room</button>
