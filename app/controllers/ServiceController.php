@@ -121,6 +121,9 @@ class ServiceController extends \BaseController {
 		if (!$model->save()){
 			return Redirect::to('service/create')->withErrors($model->errors())->withInput();
 		} else {
+			
+			$this->model->saveRelations($model, $input);
+			
 			return Redirect::to('service');
 		}
 	}

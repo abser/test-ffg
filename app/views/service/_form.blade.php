@@ -38,7 +38,7 @@
 	</div>
 </div>
 <div class="form-group">	
-	{{ Form::label('duration', 'Service Duration', array('class' => 'col-lg-3 control-label')) }}
+	{{ Form::label('price', 'Service Duration', array('class' => 'col-lg-3 control-label')) }}
     <div class="col-lg-9">    	
     	<table class="table">
     	<thead><tr style="background-color: grey;">
@@ -47,16 +47,16 @@
     		<th>&nbsp;</th>
     		<th>Price</th>
     		<th>&nbsp;</th>
-    		<th><i class="fa fa-plus-circle fa-lg"></i></th>
+    		<th id="add_price_icon"><i class="fa fa-plus-circle fa-lg"></i></th>
     		</tr>
     	</thead>
-    	<tbody>
+    	<tbody id="price_table_body">
     		<tr><td>&nbsp;</td>
-    			<td>{{ Form::text('duration[]', Input::old('duration[]'), ['class'=>'form-control inline', 'placeholder'=>'mins']) }}</td>
+    			<td>{{ Form::text('price[0][]', Input::old('price[0][]'), ['class'=>'form-control inline', 'placeholder'=>'mins']) }}</td>
     			<td>&nbsp;</td>
-    			<td>{{ Form::text('price[]', Input::old('price[]'), ['class'=>'form-control', 'placeholder'=>'$']) }}</td> 
+    			<td>{{ Form::text('price[0][]', Input::old('price[][]'), ['class'=>'form-control', 'placeholder'=>'$']) }}</td> 
     			<th>&nbsp;</th>  
-    			<td><i class="fa fa-minus-circle fa-lg"></i></td> 		
+    			<td><!-- <i class="fa fa-minus-circle fa-lg"></i> --></td> 		
     		</tr>
     	</tbody>
     	</table>

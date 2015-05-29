@@ -17,4 +17,20 @@ class ServicePriceRepository extends AbstractRepository implements ServicePriceI
         parent::__construct();
     }
 
+    public function _save($input, $_service_id)
+    {
+    	$this->model->where('service_id', '=', $_service_id)->delete();
+    	    	    
+    	foreach ($input as $row){  		
+    
+    		$model				= $this->model->newInstance();
+    		$model->service_id	= $_service_id;
+    		$model->duration	= $row[0];
+    		$model->price		= $row[1];
+    		$model->created_by	= \Session::get('user.id');
+    
+	    	// $model->save();    		
+    	}
+    	 
+    }
 }
