@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Address' => $baseDir . '/app/database/migrations/2015_05_20_063300_address.php',
     'Addresses' => $baseDir . '/app/database/migrations/2015_05_22_054243_addresses.php',
     'AlterUser' => $baseDir . '/app/database/migrations/2015_05_29_095851_alterUser.php',
     'AuthController' => $baseDir . '/app/controllers/AuthController.php',
@@ -455,7 +454,7 @@ return array(
     'PHP_Token_WHITESPACE' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_XOR_EQUAL' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
-    'PaUsers' => $baseDir . '/app/database/migrations/2015_05_08_052242_pa_users.php',
+    'PaUsers' => $baseDir . '/app/database/migrations/2015_05_29_052242_pa_users.php',
     'ProfileContacts' => $baseDir . '/app/database/migrations/2015_05_28_060619_profile_contacts.php',
     'RemoteExecuteMethod' => $vendorDir . '/facebook/webdriver/lib/remote/RemoteExecuteMethod.php',
     'RemoteKeyboard' => $vendorDir . '/facebook/webdriver/lib/remote/RemoteKeyboard.php',

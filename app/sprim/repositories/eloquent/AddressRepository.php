@@ -50,6 +50,7 @@ class AddressRepository extends AbstractRepository implements AddressInterface {
         $address->postal_code   = \Helpers::keyInput('postal_code', $input);
         $address->region_id     = $region_id;
         $address->country_code  = $country_code;
+        $address->created_by	= \Session::get('user.id');
 
         /* if(!$this->allow_null){
         	$address = $this->keepOldData($address);

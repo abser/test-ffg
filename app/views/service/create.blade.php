@@ -17,3 +17,7 @@
 </div>
 </div>	
 @stop
+
+@section('js')
+{{ HTML::script('/assets/js/service.form.js') }}
+@stop

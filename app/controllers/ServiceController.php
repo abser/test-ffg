@@ -43,8 +43,9 @@ class ServiceController extends \BaseController {
 	 */
 	public function create()
 	{
-		$data['clubs']		=	$this->club->getSelectList();
-		$data['categories']	=	$this->service_category->getSelectList();
+		$data['clubs']		= $this->club->getSelectList();
+		$data['categories']	= $this->service_category->getSelectList();
+		
 		return View::make("service.create", compact('data'));
 	}
 
@@ -56,9 +57,8 @@ class ServiceController extends \BaseController {
 	 */
 	public function store()
 	{
-		$input              = Input::all();
-		$model              = $this->model->newInstance();
-		$model->created_by  = Session::get('user.id');
+		$input              = Input::all();		
+		$model              = $this->model->newInstance();		
 		$model              = $this->model->fields($model, $input);
 		
 		$model->status		= 0;
@@ -92,7 +92,9 @@ class ServiceController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$data['service']	= $this->model->getById($id, array('address'));
+		$data['service']	= $this->model->getById($id, array('service_categories'));
+		$data['clubs']		= $this->club->getSelectList();
+		$data['categories']	= $this->service_category->getSelectList();
 		
 		if(!$data['service']){
 			return Response::view('errors.404', array(), 404);

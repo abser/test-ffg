@@ -3,10 +3,11 @@
 namespace Sprim\Model;
 
 use LaravelBook\Ardent\Ardent;
+use Carbon\Carbon;
 
 class ServiceCategory extends Ardent {
 	
-    protected $fillable = array('name', 'parent_id');
+    // protected $fillable = array('name', 'parent_id');
 
 	public static $rules = array(
 		'name'		=> 'required|min:3|max:100',

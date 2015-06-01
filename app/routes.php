@@ -40,47 +40,63 @@ Route::group(array("before" => "guest"), function() {
     ));
 });
 
-Route::group(array("before" => "sentry"), function() {
-    Route::get("/feedback", array(
-        "as" => "feedback",
-        "uses" => "FeedbackController@formAction"
-    ));
+Route::group(array("before" => "sentry"), function()
+{
+	Route::get("/feedback", array(
+		"as"   => "feedback",
+		"uses" => "FeedbackController@formAction"
+	));
 
-    Route::post("/feedback", array(
-        "as" => "feedback",
-        "uses" => "FeedbackController@submitAction"
-    ));
+	Route::post("/feedback", array(
+		"as"   => "feedback",
+		"uses" => "FeedbackController@submitAction"
+	));
 
-    Route::any("/logout", array(
-        "as" => "auth.logout",
-        "uses" => "AuthController@logoutAction"
-    ));
+	Route::any("/logout", array(
+		"as"   => "auth.logout",
+		"uses" => "AuthController@logoutAction"
+	));
 
-    Route::any("/change-password", array(
-        "as" => "auth.change-password",
-        "uses" => "AuthController@changePasswordAction"
-    ));
+	Route::any("/change-password", array(
+		"as"   => "auth.change-password",
+		"uses" => "AuthController@changePasswordAction"
+	));
+	
+	// Route::group(array("before" => "admin_user"), function()
+	// {
+	
+	Route::group(array('prefix' => 'club'), function()
+	{
+		Route::any("/activate/{id}", array(
+			"as"   => "club.activate",
+			"uses" => "ClubController@activateAction"
+		))->where(['id'=>'[\d+]+']);
+	
+		Route::any("/deactivate/{id}", array(
+			"as"   => "club.deactivate",
+			"uses" => "ClubController@deactivateAction"
+		))->where(['id'=>'[\d+]+']);	
+	});
+	Route::resource('club', 'ClubController');
+	// Route::resource('club', 'ClubController', array('only' => array('index', 'show')));
+	
+	Route::resource('room', 'RoomController');
+	
+	Route::group(array('prefix' => 'service'), function()
+	{
+		Route::any("/activate/{id}", array(
+				"as"   => "service.activate",
+				"uses" => "ServiceController@activateAction"
+		))->where(['id'=>'[\d+]+']);
+	
+		Route::any("/deactivate/{id}", array(
+				"as"   => "service.deactivate",
+				"uses" => "ServiceController@deactivateAction"
+		))->where(['id'=>'[\d+]+']);
+	});
+	Route::resource('service', 'ServiceController');
+	// });
 
-    // Route::group(array("before" => "admin_user"), function()
-    // {
-
-    Route::group(array('prefix' => 'club'), function() {
-        Route::any("/activate/{id}", array(
-            "as" => "club.activate",
-            "uses" => "ClubController@activateAction"
-        ))->where(['id' => '[\d+]+']);
-
-        Route::any("/deactivate/{id}", array(
-            "as" => "club.deactivate",
-            "uses" => "ClubController@deactivateAction"
-        ))->where(['id' => '[\d+]+']);
-    });
-    Route::resource('club', 'ClubController');
-    // Route::resource('club', 'ClubController', array('only' => array('index', 'show')));
-
-    Route::resource('room', 'RoomController');
-
-    Route::resource('service', 'ServiceController');
 
     Route::group(array('prefix' => 'member'), function() {
         Route::any("/activate/{id}", array(

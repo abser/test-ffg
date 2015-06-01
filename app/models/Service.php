@@ -3,11 +3,12 @@
 namespace Sprim\Model;
 
 use LaravelBook\Ardent\Ardent;
+use Carbon\Carbon;
 
 class Service extends Ardent {
 	
-    protected $fillable = array('club_id', 'name', 'service_category_id', 'service_sub_category_id', 
-    		'description', 'cancellation_notes', 'cancellation_notice_period', 'ghcp_appointment', 'only_ghcp');
+    /* protected $fillable = array('club_id', 'name', 'service_category_id', 'service_sub_category_id', 
+    		'description', 'cancellation_notes', 'cancellation_notice_period', 'ghcp_appointment', 'only_ghcp'); */
 
 	public static $rules = array(
 		'club_id'		=> 'required|integer',
@@ -18,7 +19,7 @@ class Service extends Ardent {
 		'only_ghcp'			=> 'integer'
 	);  
     
-    public function serviceCategories() {
+    public function service_categories() {
     	return $this->belongsTo('Sprim\Model\ServiceCategory');
     }
 }
