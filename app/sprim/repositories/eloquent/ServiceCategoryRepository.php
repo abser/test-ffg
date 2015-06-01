@@ -20,13 +20,13 @@ class ServiceCategoryRepository extends AbstractRepository implements ServiceCat
     public function _save($input, $_service_category_id = null)
     {
     	if ($_service_category_id){
-    		$service_category = $this->find($_service_category_id);
+    		$service_category = $this->find($_service_category_id);    		
     	} else {
     		$service_category		= new $this->model;
-    		$service_category->name	= \Helpers::keyInput('service_category', $input);
-    		$service_category->parent_id	= 0;
+    		$service_category->name	= \Helpers::keyInput('service_category', $input);    		
     		$service_category->created_by 	= \Session::get('user.id');
     	}
+    	$service_category->parent_id	= 0;
     	  
     	if($service_category->save()){
     
@@ -38,13 +38,13 @@ class ServiceCategoryRepository extends AbstractRepository implements ServiceCat
     public function _saveSubCategory($input, $_service_category_id, $_sub_category_id = null)
     {
     	if ($_sub_category_id){
-    		$service_category = $this->find($_sub_category_id);
+    		$service_category = $this->find($_sub_category_id);    		
     	} else {
     		$service_category		= new $this->model;
-    		$service_category->name	= \Helpers::keyInput('service_sub_category', $input);
-    		$service_category->parent_id	= $_service_category_id;
+    		$service_category->name	= \Helpers::keyInput('service_sub_category', $input);    		
     		$service_category->created_by 	= \Session::get('user.id');
     	}
+    	$service_category->parent_id	= $_service_category_id;
     	 
     	if($service_category->save()){
     
@@ -53,14 +53,19 @@ class ServiceCategoryRepository extends AbstractRepository implements ServiceCat
     
     }
     
-    public function getSelectList()
+    public function getSelectList($_level = 0, $with_select = true)
     {
-    	$init	= array('' => '');
+    	if ($with_select) {
+    		$init	= ($_level == 0)?array('' => 'Select Category'):array(''=>'Select Sub-Category');
+    	} else {
+    		$init = array();
+    	}
     	 
-    	$obj	= $this->model->orderBy('name')->lists('name', 'id');
+    	$obj	= $this->model->where('parent_id', '=', $_level)->orderBy('name')->lists('name', 'id');
     	 
     	$options= array_map(function($name) { return ucwords($name); }, $obj);
     	 
-    	return array_merge($init,$options);
+    	// return array_merge($init,$options);
+    	return array_replace($init,$options);
     }
 }

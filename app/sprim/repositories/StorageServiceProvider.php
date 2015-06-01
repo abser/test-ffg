@@ -9,8 +9,9 @@ class StorageServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $models = ['User', 'UserGroup', 'Address', 'Country', 'Region', 'Club', 'ClubUser', 'ServiceCategory', 'Service', 'ServicePrice','Member', 'UserProfile','ProfileContacts','PaUsers','MemberMail'];
-        
+        $models = ['User', 'UserGroup', 'Address', 'Country', 'Region', 'Club', 'ClubUser', 'ServiceCategory', 'Service', 'ServicePrice',
+            'Member', 'UserProfile','ProfileContacts','PaUsers','MemberMail','Room', 'RoomService', 'RoomConjunct'];
+
         foreach($models as $model)
         {
             $this->app->bind(

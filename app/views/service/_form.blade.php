@@ -28,7 +28,7 @@
 <div class="form-group">
 	{{ Form::label('service_sub_category_id', 'Service Sub-Category', array('class' => 'col-lg-3 control-label')) }}
 	<div class="col-lg-9">
-		{{ Form::select('service_sub_category_id', $categories, Input::old('service_sub_category_id'), array('id' => 'service_sub_category_id', 'class'=>'form-control')); }}
+		{{ Form::select('service_sub_category_id', $sub_categories, Input::old('service_sub_category_id'), array('id' => 'service_sub_category_id', 'class'=>'form-control')); }}
 		@if ($errors->has('service_sub_category_id')) <p class="alert alert-danger">{{ $errors->first('service_sub_category_id') }}</p> @endif
 		<div id="add_service_sub_category"><a href="#">Add New Sub-Category</a></div>		
     	<div class="row" id="add_service_sub_category_box" style="display: none">
@@ -40,12 +40,23 @@
 <div class="form-group">	
 	{{ Form::label('duration', 'Service Duration', array('class' => 'col-lg-3 control-label')) }}
     <div class="col-lg-9">
+    	<!-- <div class="row" style="background-color: grey;">
+    		<div class="col-lg-4">Duration</div>
+    		<div class="col-lg-4">Price</div>
+    		<div class="col-lg-4"><i class="icon-large icon-plus-sign"></i></div>
+    	</div> -->    	
     	<table class="table">
-    	<thead><tr style="background-color: grey;"><th>Duration</th><th>Price</th><th><i class="icon-large icon-plus-sign"></i></th></tr></thead>
+    	<thead><tr style="background-color: grey;">
+    		<th>Duration</th>
+    		<th>Price</th>
+    		<th><i class="fa fa-plus-circle fa-lg"></i></th>
+    		</tr>
+    	</thead>
     	<tbody>
     		<tr>
-    			<td>{{ Form::text('duration[]', Input::old('duration[]'), ['class'=>'form-control']) }}</td>
-    			<td>{{ Form::text('price[]', Input::old('price[]'), ['class'=>'form-control']) }}</td>    		
+    			<td>{{ Form::text('duration[]', Input::old('duration[]'), ['class'=>'form-control inline']) }} <span class="inline">mins</span></td>
+    			<td>$ {{ Form::text('price[]', Input::old('price[]'), ['class'=>'form-control']) }}</td>   
+    			<td><i class="fa fa-minus-circle fa-lg"></i></td> 		
     		</tr>
     	</tbody>
     	</table>

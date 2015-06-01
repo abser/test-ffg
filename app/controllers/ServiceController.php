@@ -44,7 +44,8 @@ class ServiceController extends \BaseController {
 	public function create()
 	{
 		$data['clubs']		= $this->club->getSelectList();
-		$data['categories']	= $this->service_category->getSelectList();
+		$data['categories']	= $this->service_category->getSelectList(0);
+		$data['sub_categories']	= $this->service_category->getSelectList(1);
 		
 		return View::make("service.create", compact('data'));
 	}
@@ -92,9 +93,10 @@ class ServiceController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$data['service']	= $this->model->getById($id, array('service_categories'));
+		$data['service']	= $this->model->getById($id, array('service_category'));
 		$data['clubs']		= $this->club->getSelectList();
-		$data['categories']	= $this->service_category->getSelectList();
+		$data['categories']	= $this->service_category->getSelectList(0);
+		$data['sub_categories']	= $this->service_category->getSelectList(1);
 		
 		if(!$data['service']){
 			return Response::view('errors.404', array(), 404);
@@ -160,6 +162,7 @@ class ServiceController extends \BaseController {
 		}
 	}
 	
+	
 	public function deactivateAction($id)
 	{
 		$model   			= $this->model->find($id);
@@ -175,7 +178,6 @@ class ServiceController extends \BaseController {
 		}
 	}
 	
-
 
 	protected function getList()
 	{

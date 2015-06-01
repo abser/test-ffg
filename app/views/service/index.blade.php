@@ -9,7 +9,7 @@
 
 <div>
 	<table class="table table-hover">
-	<thead>
+	<thead style="background-color: grey;">
 		<tr>
 			<th>{{link_to_route($data['route'], 'ID', array_merge($data['append_url'], ['sort' => 'id']))}}</th>
 			<th>{{link_to_route($data['route'], 'Service Name', array_merge($data['append_url'], ['sort' => 'name']))}}</th>
@@ -30,7 +30,12 @@
 			</td>
 			<td>
 				@if( property_exists($row, 'service_category'))
-					<span class="{{(Input::get('sort' ) == 'service_category')? 'sprim-sort' : '' }}">{{ ucfirst($row->service_category) }}</span>
+					<span class="{{(Input::get('sort' ) == 'service_category')? 'sprim-sort' : '' }}">
+						{{ ucfirst($row->service_category) }} 
+						@if (property_exists($row, 'service_sub_category') && $row->service_sub_category)
+							-> {{ ucfirst($row->service_sub_category) }} 
+						@endif
+					</span>
 				@endif
 			</td>
 			<td>

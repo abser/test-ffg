@@ -16,6 +16,8 @@ class ServiceCategories extends Migration {
 			$table->increments	('id');
 			$table->string		('name', 100);
 			$table->integer		('parent_id')	->unsigned()->nullable();
+			$table->integer		('lft')			->unsigned()->nullable();
+			$table->integer		('rgt')			->unsigned()->nullable();
 				
 			$table->integer		('created_by')	->unsigned();
 			$table->integer		('updated_by')	->unsigned()->nullable();
