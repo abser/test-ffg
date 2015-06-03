@@ -27,6 +27,9 @@ class ClubController extends \BaseController {
 	{
 		// $data['clubs'] = $this->model->all();
 		$data = $this->getList();
+                echo '<pre>';
+               // print_r($data);
+                echo '</pre>';
 		$data['route']   = 'club.index';
 		
 		return View::make("club.index", compact('data'));

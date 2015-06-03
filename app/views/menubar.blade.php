@@ -9,7 +9,7 @@
     </div>
     <div class="navbar-collapse collapse navbar-inverse-collapse">
         <ul class="nav navbar-nav">
-        	<li><a href="javascript:void(0)">Dashboard</a></li>       
+            <li><a href="javascript:void(0)">Dashboard</a></li>       
             <li class="active dropdown">
                 <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Gravity Setup <b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -20,7 +20,7 @@
                     <li><a href="">Users</a></li>
                 </ul>
             </li>
-            <li><a href="">Member</a></li>
+            <li><a href="{{URL::route('member.index')}}">Member</a></li>
             <li><a href="">Group</a></li>
             <li><a href="">Appointment</a></li>
             <li><a href="">Event</a></li>
