@@ -1,0 +1,40 @@
+{
+    "name": "bca/laravel-inspect",
+    "description": "Instant support for PHP Code Sniffer, PHP CS Fixer, and PHP MD in the Artisan CLI",
+    "keywords": [
+        "inspector",
+        "artisan",
+        "laravel"
+    ],
+    "authors": [
+        {
+            "name": "Brodkin CyberArts",
+            "email": "info@brodkinca.com"
+        }
+    ],
+    "support": {
+        "email": "oss@brodkinca.com",
+        "issues": "https://github.com/brodkinca/BCA-Laravel-Inspect/issues",
+        "source": "https://github.com/brodkinca/BCA-Laravel-Inspect",
+        "forum": "https://brodkinca.zendesk.com/forums/21904381-OSS-Laravel-Inspect-Package"
+    },
+    "license": "MIT",
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "~4.0",
+        "symfony/console": "~2.2",
+        "squizlabs/php_codesniffer": "~1.4",
+        "phpmd/phpmd": "~1.5"
+    },
+    "require-dev": {
+        "bca/architect": "~1.1"
+    },
+    "autoload": {
+        "psr-0": {
+            "BCA\\LaravelInspect": "src/",
+            "BCA\\LaravelInspect\\Tests": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

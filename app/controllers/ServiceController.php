@@ -28,9 +28,9 @@ class ServiceController extends \BaseController {
 	 * @return Response
 	 */
 	public function index()
-	{		
-		$data = $this->getList();
-		$data['route']   = 'service.index';
+	{
+		$data			= $this->getList();
+		$data['route']  = 'service.index';
 		
 		return View::make("service.index", compact('data'));
 	}
@@ -58,8 +58,8 @@ class ServiceController extends \BaseController {
 	 */
 	public function store()
 	{
-		$input              = Input::all();		
-		$model              = $this->model->newInstance();		
+		$input              = Input::all();
+		$model              = $this->model->newInstance();
 		$model              = $this->model->fields($model, $input);
 		
 		$model->status		= 0;

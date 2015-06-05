@@ -9,9 +9,14 @@ use Sprim\Repositories\Contracts\ServiceCategoryInterface as ServiceCategory;
 
 class RoomController extends \BaseController {
 
-	public function __construct(Room $room, RoomService $room_service, RoomConjunct $room_conjunct, Club $club,
-			Service $service, ServiceCategory $service_category) {
-	
+	public function __construct(
+		Room $room,
+		RoomService $room_service,
+		RoomConjunct $room_conjunct,
+		Club $club,
+		Service $service,
+		ServiceCategory $service_category
+	) {
 		$this->model			= $room;
 		$this->room				= $room;
 		$this->room_service		= $room_service;
@@ -53,7 +58,7 @@ class RoomController extends \BaseController {
 		$data['categories']	= $this->service_category->getSelectList(0, false);
 		$data['sub_categories']	= $this->service_category->all(); //getSelectList(1, false);
 		$data['sub_categories']	= $this->service_category->all();
-		$data['services']	= $this->service->all();		
+		$data['services']	= $this->service->all();
 		$data['rooms']		= $this->model->getSelectList();
 				
 		$data['room_services']	= $this->room_service->getManyBy('room_id', null);
@@ -113,7 +118,7 @@ class RoomController extends \BaseController {
 		$data['categories']		= $this->service_category->getSelectList(0, false);
 		$data['sub_categories']	= $this->service_category->all(); //getSelectList(1, false);
 		$data['sub_categories']	= $this->service_category->all();
-		$data['services']		= $this->service->all();		
+		$data['services']		= $this->service->all();
 		$data['rooms']			= $this->model->getSelectList($id);
 		$data['room_services']	= $this->room_service->getManyBy('room_id', $id);
 		$data['room_conjuncts']	= $this->room_conjunct->getManyBy('room_id', $id);
