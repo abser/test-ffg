@@ -3,6 +3,7 @@
 use Sprim\Repositories\Eloquent\AbstractRepository;
 use Sprim\Repositories\Contracts\ServiceInterface;
 use Sprim\Repositories\Contracts\ServiceCategoryInterface as ServiceCategory;
+use Sprim\Repositories\Contracts\ServicePriceInterface as ServicePrice;
 
 use Sprim\Model\Service;
 use Carbon\Carbon;
@@ -16,10 +17,11 @@ class ServiceRepository extends AbstractRepository implements ServiceInterface {
     		'service_category_id'	=> 'service_category_id'
     ];
 
-    public function __construct(Service $model, ServiceCategory $service_category) {   	
+    public function __construct(Service $model, ServiceCategory $service_category, ServicePrice $service_price) {   	
     	
         $this->model			= $model;
         $this->service_category	= $service_category;
+        $this->service_price	= $service_price;
 
         parent::__construct();
     }
@@ -106,4 +108,12 @@ class ServiceRepository extends AbstractRepository implements ServiceInterface {
     	return $obj;
     }
     
+    public function saveRelations($service, $input)
+    {
+    	if (!$service) return false;
+    	   	    
+    	if (array_key_exists('price', $input)){
+    		$this->service_price->_save($input['price'], $service->id);
+    	}
+    }
 }

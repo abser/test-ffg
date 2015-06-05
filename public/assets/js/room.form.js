@@ -1,14 +1,12 @@
-$(document).ready(function($) {
+$(document).ready(function($) {	
 	
-	
-	
-	// $('#conjunct_box').toggle(!$('#is_conjunct').is(':checked'));
     $('#is_conjunct').click(function() {
-    	$('#conjunct_box').toggle();
-    	$('#conjunct').multiselect();
-    	return false;
+    	$('#conjunct_box').toggle(false);
+    	$('#room_conjuncts').multiselect();
+    	// return false;
     });   
-    
+    $('#conjunct_box').toggle(!$('#is_conjunct').is(':checked'));
+       
     $('input[type="checkbox"]').change(function (e) {
         var checked = $(this).prop("checked"),
             container = $(this).parent(),

@@ -107,6 +107,20 @@ Route::group(array("before" => "sentry"), function()
 		))->where(['id'=>'[\d+]+']);
 	});
 	Route::resource('service', 'ServiceController');
+	
+	Route::group(array('prefix' => 'wellness-team'), function()
+	{
+		Route::any("/activate/{id}", array(
+			"as"   => "wellness-team.activate",
+			"uses" => "WellnessTeamController@activateAction"
+		))->where(['id'=>'[\d+]+']);
+	
+		Route::any("/deactivate/{id}", array(
+			"as"   => "wellness-team.deactivate",
+			"uses" => "WellnessTeamController@deactivateAction"
+		))->where(['id'=>'[\d+]+']);
+	});
+	Route::resource('wellness-team', 'WellnessTeamController');
 	// });
 
 

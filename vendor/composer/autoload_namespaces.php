@@ -30,6 +30,7 @@ return array(
     'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
     'Predis' => array($vendorDir . '/predis/predis/lib'),
     'Patchwork' => array($vendorDir . '/patchwork/utf8/class'),
+    'PHP_' => array($vendorDir . '/pdepend/pdepend/src/main/php'),
     'PHPParser' => array($vendorDir . '/nikic/php-parser/lib'),
     'Normalizer' => array($vendorDir . '/patchwork/utf8/class'),
     'Net' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
@@ -49,6 +50,8 @@ return array(
     'Cartalyst\\Sentry' => array($vendorDir . '/cartalyst/sentry/src'),
     'Carbon' => array($vendorDir . '/nesbot/carbon/src'),
     'Boris' => array($vendorDir . '/d11wtq/boris/lib'),
+    'BCA\\LaravelInspect\\Tests' => array($vendorDir . '/bca/laravel-inspect/tests'),
+    'BCA\\LaravelInspect' => array($vendorDir . '/bca/laravel-inspect/src'),
     'Aws\\Laravel' => array($vendorDir . '/aws/aws-sdk-php-laravel/src'),
     'Aws' => array($vendorDir . '/aws/aws-sdk-php/src'),
 );
