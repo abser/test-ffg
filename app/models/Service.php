@@ -19,7 +19,15 @@ class Service extends Ardent {
 		'only_ghcp'			=> 'integer'
 	);  
     
+	public function club() {
+		return $this->belongsTo('Sprim\Model\Club');
+	}
+	
     public function service_category() {
     	return $this->belongsTo('Sprim\Model\ServiceCategory', 'service_category_id');
+    }
+    
+    public function service_prices() {
+    	return $this->hasMany('Sprim\Model\ServicePrice');
     }
 }

@@ -2,7 +2,7 @@
 @section("content")
 
 <div class="row-fluid">
-<div class="col-md-6 col-xs-12">
+<div class="col-md-12 col-xs-12">
 
 <h3>Wellness Team ({{ $data['model']->getTotal() }})</h3>
 <div style="padding-bottom: .5em;"><a href="{{ URL::route($data['r_prefix'].'.create') }}" class="btn btn-default btn-raised">Add New Expert</a></div>

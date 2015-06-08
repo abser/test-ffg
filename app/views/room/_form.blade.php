@@ -9,14 +9,14 @@
 <div class="form-group">	
 	{{ Form::label('name', 'Room Name', array('class' => 'col-lg-3 control-label')) }}
     <div class="col-lg-9">
-    	{{ Form::text('name', Input::old('name'), ['class'=>'form-control', 'placeholder'=>'room name', 'required'=>'required']) }}
+    	{{ Form::text('name', Input::old('name'), ['class'=>'form-control', 'placeholder'=>'room name', 'required'=>'required', 'size'=>'100', 'maxlength'=>'100']) }}
     	@if ($errors->has('name')) <p class="alert alert-danger">{{ $errors->first('name') }}</p> @endif
     </div>
 </div>
 <div class="form-group">	
 	{{ Form::label('room_number', 'Room Number', array('class' => 'col-lg-3 control-label')) }}
     <div class="col-lg-9">
-    	{{ Form::text('room_number', Input::old('room_number'), ['class'=>'form-control', 'placeholder'=>'room number', 'required'=>'required']) }}
+    	{{ Form::text('room_number', Input::old('room_number'), ['class'=>'form-control', 'placeholder'=>'room number', 'required'=>'required', 'pattern'=>'[0-9]{1,5}', 'size'=>'5', 'maxlength'=>'5']) }}
     	@if ($errors->has('room_number')) <p class="alert alert-danger">{{ $errors->first('room_number') }}</p> @endif
     </div>
 </div>
@@ -30,12 +30,12 @@
     			<ul style="list-style: none;">
     			@foreach($data['services']  as $service)
     				@if(!$service->service_sub_category_id  && $key == $service->service_category_id)
-    					<?php $checked = false;
-    						foreach ($room_services as $_r_service) {
-    							if ($service->id == $_r_service->service_id)
-    								$checked = true;
-    						
-    					}?>
+    					<?php $checked = false; ?>
+    					@foreach($room_services  as $_r_service)
+    						@if($service->id == $_r_service->service_id)
+    							<?php $checked = true; ?>
+    						@endif  
+    					@endforeach
     					<li>{{ Form::checkbox('service[id][]', $service->id, $checked) }} &nbsp; {{ $service->name }}</li>
     				@endif  
     			@endforeach
@@ -46,12 +46,12 @@
     					<ul style="list-style: none;">
     					@foreach($data['services']  as $service)
     						@if($sub_category->id == $service->service_sub_category_id)
-    							<?php $checked = false;
-    						foreach ($room_services as $_r_service) {
-    							if ($service->id == $_r_service->service_id)
-    								$checked = true;
-    						
-    					}?>
+    							<?php $checked = false; ?>
+    							@foreach($room_services  as $_r_service)
+    								@if($service->id == $_r_service->service_id)
+    									<?php $checked = true; ?>
+    								@endif  
+    							@endforeach
     							<li>{{ Form::checkbox('service[id][]', $service->id, $checked) }} &nbsp; {{ $service->name }}</li>
     						@endif  
     					@endforeach    									
@@ -64,13 +64,13 @@
     	</ul>
     	</div>
     	<div id="directoryTree_container"></div>    		
-    	@if ($errors->has('room_number')) <p class="alert alert-danger">{{ $errors->first('room_number') }}</p> @endif
+    	@if ($errors->has('service')) <p class="alert alert-danger">{{ $errors->first('service') }}</p> @endif
     </div>
 </div>
 <div class="form-group">	
 	{{ Form::label('capacity', 'Capacity', array('class' => 'col-lg-3 control-label')) }}
     <div class="col-lg-9">
-    	{{ Form::text('capacity', Input::old('capacity'), ['class'=>'form-control', 'placeholder'=>'capacity', 'required'=>'required']) }}
+    	{{ Form::text('capacity', Input::old('capacity'), ['class'=>'form-control', 'placeholder'=>'capacity', 'required'=>'required', 'pattern'=>'[0-9]{1,5}', 'size'=>'5', 'maxlength'=>'5']) }}
     	@if ($errors->has('capacity')) <p class="alert alert-danger">{{ $errors->first('capacity') }}</p> @endif
     </div>
 </div>

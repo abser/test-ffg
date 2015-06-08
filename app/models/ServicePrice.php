@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 class ServicePrice extends Ardent {
 	
-    protected $fillable = array('service_id', 'duration', 'price');
+    // protected $fillable = array('service_id', 'duration', 'price');
 
 	public static $rules = array(
 		'service_id'	=> 'required|integer',			

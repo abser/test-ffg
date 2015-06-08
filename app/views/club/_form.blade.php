@@ -10,7 +10,7 @@
 <div class="form-group">	
 	{{ Form::label('name', 'Club Name', array('class' => 'col-lg-2 control-label')) }}
     <div class="col-lg-10">
-    	{{ Form::text('name', Input::old('name'), ['class'=>'form-control', 'placeholder'=>'club name', 'required'=>'required']) }}
+    	{{ Form::text('name', Input::old('name'), ['class'=>'form-control', 'placeholder'=>'club name', 'required'=>'required', 'size'=>'100', 'maxlength'=>'100', 'autofocus'=>'autofocus']) }}
     	@if ($errors->has('name')) <p class="alert alert-danger">{{ $errors->first('name') }}</p> @endif
     </div>
 </div>
@@ -20,28 +20,28 @@
     	<div class="row">
     		<div class="col-lg-4">@include("common.country", ['name' => 'address[country_code]', 'class'=>'form-control'])</div>    		
     		<div class="col-lg-4">{{ Form::select('address[region_id]', array('' => ''), null, array('id' => 'region', 'class'=>'form-control')); }}</div>    		
-    		<div class="col-lg-4">{{ Form::text('address[city]', Input::old('address.city'), ['class'=>'form-control', 'placeholder'=>'city']) }}</div> 		
+    		<div class="col-lg-4">{{ Form::text('address[city]', Input::old('address.city'), ['class'=>'form-control', 'placeholder'=>'city', 'size'=>'50']) }}</div> 		
     	</div>    	
     </div>
 </div>
 <div class="form-group">
 	<div class="col-lg-2">&nbsp;</div>
     <div class="col-lg-10">
-    	{{ Form::text('address[address1]', Input::old('address.address1'), ['class'=>'form-control', 'placeholder'=>'address line 1']) }}
+    	{{ Form::text('address[address1]', Input::old('address.address1'), ['class'=>'form-control', 'placeholder'=>'address line 1', 'size'=>'100']) }}
     	@if ($errors->has('address[address1]')) <p class="alert alert-danger">{{ $errors->first('address[address1]') }}</p> @endif
     </div>
 </div>
 <div class="form-group">
 	<div class="col-lg-2">&nbsp;</div>
     <div class="col-lg-10">
-    	{{ Form::text('address[address2]', Input::old('address.address2'), ['class'=>'form-control', 'placeholder'=>'address line 2']) }}
+    	{{ Form::text('address[address2]', Input::old('address.address2'), ['class'=>'form-control', 'placeholder'=>'address line 2', 'size'=>'100']) }}
     	@if ($errors->has('address[address2]')) <p class="alert alert-danger">{{ $errors->first('address[address2]') }}</p> @endif
     </div>
 </div>
 <div class="form-group">
 	<div class="col-lg-2">&nbsp;</div>
     <div class="col-lg-10">
-    	{{ Form::text('address[postal_code]', Input::old('address.postal_code'), ['class'=>'form-control', 'placeholder'=>'postal code']) }}
+    	{{ Form::text('address[postal_code]', Input::old('address.postal_code'), ['class'=>'form-control', 'placeholder'=>'postal code', 'pattern'=>'[0-9]*', 'size'=>'10', 'maxlength'=>'10']) }}
     	@if ($errors->has('address[postal_code]')) <p class="alert alert-danger">{{ $errors->first('address[postal_code]') }}</p> @endif
     </div>
 </div>

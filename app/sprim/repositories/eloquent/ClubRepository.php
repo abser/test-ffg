@@ -98,7 +98,7 @@ class ClubRepository extends AbstractRepository implements ClubInterface {
     {
     	$init	= array('' => 'Select Club');
     	
-    	$obj	= $this->model->orderBy('name')->lists('name', 'id');
+    	$obj	= $this->model->where('status', '=', '1')->orderBy('name')->lists('name', 'id');
     	
     	$options= array_map(function($name) { return ucwords($name); }, $obj);
     	
