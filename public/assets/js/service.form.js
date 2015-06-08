@@ -26,4 +26,27 @@ $(document).ready(function($) {
     $('#price_table_body').on('click', '.fa-minus-circle', (function(){
     	$(this).closest('tr').remove();
     }));
+    
+    
+    var append_email, getServiceSubCategories;    
+    getServiceSubCategories = function(category_id) {
+      return $.get(url_api_services_sub_category + "/" + category_id, function(data) {
+        var model;
+        model = $("#service_sub_category_id");
+        model.empty();
+        model.append("<option value=''></option>");
+        $.each(data, function(index, element) {
+          var selected;
+          selected = (element.id === service_sub_category_id ? "selected = \"selected\"" : "");
+          model.append("<option value='" + element.id + "' " + selected + ">" + element.name + "</option>");
+        });
+      });
+    };
+    if ($("#service_category_id").val() !== "") {    	
+    	getServiceSubCategories($("#service_category_id").val());
+    }
+    $("#service_category_id").change(function() {
+    	getServiceSubCategories($(this).val());
+    });
+    
 });

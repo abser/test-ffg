@@ -56,9 +56,8 @@ class RoomController extends \BaseController {
 	{
 		$data['clubs']		= $this->club->getSelectList();
 		$data['categories']	= $this->service_category->getSelectList(0, false);
-		$data['sub_categories']	= $this->service_category->all(); //getSelectList(1, false);
-		$data['sub_categories']	= $this->service_category->all();
-		$data['services']	= $this->service->all();
+		$data['sub_categories']	= $this->service_category->all(); //getSelectList(1, false);		
+		$data['services']	= $this->service->getManyBy('status', 1);
 		$data['rooms']		= $this->model->getSelectList();
 				
 		$data['room_services']	= $this->room_service->getManyBy('room_id', null);
@@ -117,9 +116,9 @@ class RoomController extends \BaseController {
 		$data['clubs']			= $this->club->getSelectList();
 		$data['categories']		= $this->service_category->getSelectList(0, false);
 		$data['sub_categories']	= $this->service_category->all(); //getSelectList(1, false);
-		$data['sub_categories']	= $this->service_category->all();
-		$data['services']		= $this->service->all();
+		$data['services']		= $this->service->getManyBy('status', 1);
 		$data['rooms']			= $this->model->getSelectList($id);
+		
 		$data['room_services']	= $this->room_service->getManyBy('room_id', $id);
 		$data['room_conjuncts']	= $this->room_conjunct->getManyBy('room_id', $id);
 		
