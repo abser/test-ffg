@@ -5,8 +5,6 @@
 @stop
 
 @section("content")
-<div class="row-fluid">
-<div class="col-md-6 col-xs-12">
 
 <div class="panel">
     <div class="panel-heading">
@@ -19,8 +17,6 @@
     </div>
 </div>
 
-</div>
-</div>	
 @stop
 
 @section('js')

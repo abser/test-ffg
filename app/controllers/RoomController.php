@@ -9,9 +9,14 @@ use Sprim\Repositories\Contracts\ServiceCategoryInterface as ServiceCategory;
 
 class RoomController extends \BaseController {
 
-	public function __construct(Room $room, RoomService $room_service, RoomConjunct $room_conjunct, Club $club,
-			Service $service, ServiceCategory $service_category) {
-	
+	public function __construct(
+		Room $room,
+		RoomService $room_service,
+		RoomConjunct $room_conjunct,
+		Club $club,
+		Service $service,
+		ServiceCategory $service_category
+	) {
 		$this->model			= $room;
 		$this->room				= $room;
 		$this->room_service		= $room_service;
@@ -51,10 +56,12 @@ class RoomController extends \BaseController {
 	{
 		$data['clubs']		= $this->club->getSelectList();
 		$data['categories']	= $this->service_category->getSelectList(0, false);
-		$data['sub_categories']	= $this->service_category->all(); //getSelectList(1, false);
-		$data['sub_categories']	= $this->service_category->all();
-		$data['services']	= $this->service->all();		
+		$data['sub_categories']	= $this->service_category->all(); //getSelectList(1, false);		
+		$data['services']	= $this->service->getManyBy('status', 1);
 		$data['rooms']		= $this->model->getSelectList();
+				
+		$data['room_services']	= $this->room_service->getManyBy('room_id', null);
+		$data['room_conjuncts']	= $this->room_conjunct->getManyBy('room_id', null);
 				
 		return View::make("room.create", compact('data'));
 	}
@@ -73,10 +80,13 @@ class RoomController extends \BaseController {
 		
 		$model->status		= 0;
 		$model->created_by 	= \Session::get('user.id');
-		
+						
 		if (!$model->save()){
 			return Redirect::to('room/create')->withErrors($model->errors())->withInput();
 		} else {
+			
+			$this->model->saveRelations($model, $input);
+			
 			return Redirect::to('room');
 		}
 	}
@@ -106,9 +116,11 @@ class RoomController extends \BaseController {
 		$data['clubs']			= $this->club->getSelectList();
 		$data['categories']		= $this->service_category->getSelectList(0, false);
 		$data['sub_categories']	= $this->service_category->all(); //getSelectList(1, false);
-		$data['sub_categories']	= $this->service_category->all();
-		$data['services']		= $this->service->all();		
-		$data['rooms']			= $this->model->getSelectList($data['room']->id);
+		$data['services']		= $this->service->getManyBy('status', 1);
+		$data['rooms']			= $this->model->getSelectList($id);
+		
+		$data['room_services']	= $this->room_service->getManyBy('room_id', $id);
+		$data['room_conjuncts']	= $this->room_conjunct->getManyBy('room_id', $id);
 		
 		if(!$data['room']){
 			return Response::view('errors.404', array(), 404);
@@ -129,10 +141,13 @@ class RoomController extends \BaseController {
 		$input  = Input::all();
 		$model  = $this->model->fields($this->model->find($id), $input);
 		$model->updated_by 	= \Session::get('user.id');
-		
+				
 		if (!$model->save()){
 			return Redirect::to('room/create')->withErrors($model->errors())->withInput();
 		} else {
+			
+			$this->model->saveRelations($model, $input);
+			
 			return Redirect::to('room');
 		}
 	}

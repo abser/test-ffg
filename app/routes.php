@@ -103,6 +103,19 @@ Route::group(array("before" => "sentry"), function() {
         ))->where(['id' => '[\d+]+']);
     });
     Route::resource('service', 'ServiceController');
+
+    Route::group(array('prefix' => 'wellness-team'), function() {
+        Route::any("/activate/{id}", array(
+            "as" => "wellness-team.activate",
+            "uses" => "WellnessTeamController@activateAction"
+        ))->where(['id' => '[\d+]+']);
+
+        Route::any("/deactivate/{id}", array(
+            "as" => "wellness-team.deactivate",
+            "uses" => "WellnessTeamController@deactivateAction"
+        ))->where(['id' => '[\d+]+']);
+    });
+    Route::resource('wellness-team', 'WellnessTeamController');
     // });
 
 
@@ -126,12 +139,29 @@ Route::group(array("before" => "sentry"), function() {
         Route::any("/messageBroadcast", [
             "as" => "member.messageBroadcast",
             "uses" => "MemberController@messageBroadcast"]);
-         Route::any("/servicelist", [
+        Route::any("/servicelist", [
             "as" => "member.servicelist",
             "uses" => "MemberController@servicelist"]);
     });
     Route::resource('member', 'MemberController');
     // });
+    Route::group(array('prefix' => 'user'), function() {
+        Route::any("/useractivate/{id}/{stat}", array(
+            "as" => "user.useractivate",
+            "uses" => "UserController@activateAction"
+        ))->where(['id' => '[\d+]+']);
+
+        Route::any("/userdeactivate/{id}/{stat}", array(
+            "as" => "user.userdeactivate",
+            "uses" => "UserController@deactivateAction"
+        ))->where(['id' => '[\d+]+']);
+
+        Route::any("/useractive/{id}/{stat}", array(
+            "as" => "user.activ",
+            "uses" => "UserController@activateAction"
+        ))->where(['id' => '[\d+]+']);
+    });
+    Route::resource('user', 'UserController');
 });
 
 Route::get('api/regions/{country_code}', function($country_code) {
@@ -139,20 +169,11 @@ Route::get('api/regions/{country_code}', function($country_code) {
     return $region->getListByCountry($country_code);
 });
 
-Route::group(array('prefix' => 'user'), function() {
-    Route::any("/useractivate/{id}/{stat}", array(
-        "as" => "user.useractivate",
-        "uses" => "UserController@activateAction"
-    ))->where(['id' => '[\d+]+']);
 
-    Route::any("/userdeactivate/{id}/{stat}", array(
-        "as" => "user.userdeactivate",
-        "uses" => "UserController@deactivateAction"
-    ))->where(['id' => '[\d+]+']);
-    
-     Route::any("/useractive/{id}/{stat}", array(
-        "as" => "user.activ",
-        "uses" => "UserController@activateAction"
-    ))->where(['id' => '[\d+]+']);
+
+
+Route::get('api/services_sub_category/{category_id}', function($category_id) {
+    $service_sub_category = App::make('Sprim\Repositories\Contracts\ServiceCategoryInterface');
+    return $service_sub_category->getListByServiceCategory($category_id);
 });
-Route::resource('user', 'UserController');
+

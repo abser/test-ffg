@@ -19,7 +19,7 @@ class MemberController extends \BaseController {
         $this->club = $club;
         parent::__construct();
         $this->owner_table = Config::get('sprim.tables.user');
-        $this->sort = 'name';
+        $this->sort = 'first_name';
         $this->dir = 'asc';
 
         $this->route_prefix = 'user';

@@ -61,19 +61,59 @@ class SentryGroupSeeder extends Seeder {
                 'adm_amend_appointments' => '1',
                 'adm_change_appointment_status' => '1',
                 'adm_export_appointments' => '1',
+
         ]]);
 
         Sentry::getGroupProvider()->create([
             'name' => 'medical_doctor',
-            'permissions' => []]);
+            'permissions' => [
+            	'list_member'				=> '1',
+            	'create_member'				=> '1',
+            	'activate_deactivate_member'=> '1',
+            	'delete_member'				=> '1',
+            	'message_to_member'			=> '1',
+            	'member_calender'			=> '1',
+            		
+            	'list_all_appointments'		=> '1',
+            	'create_appointments'		=> '1',
+            	'amend_appointments'		=> '1',
+            	'change_appointment_status' => '1',
+            	'export_appointments'		=> '1',
+            ]]);
 
         Sentry::getGroupProvider()->create([
             'name' => 'fitness_coach',
-            'permissions' => []]);
+            'permissions' => [
+            	'list_member'				=> '1',
+            	'create_member'				=> '1',
+            	'activate_deactivate_member'=> '1',
+            	'delete_member'				=> '1',
+            	'message_to_member'			=> '1',
+            	'member_calender'			=> '1',
+            		
+            	'list_all_appointments'		=> '1',
+            	'create_appointments'		=> '1',
+            	'amend_appointments'		=> '1',
+            	'change_appointment_status' => '1',
+            	'export_appointments'		=> '1',
+            ]]);
 
         Sentry::getGroupProvider()->create([
             'name' => 'wellness_expert',
-            'permissions' => []]);
+            'permissions' => [
+            	'list_member'				=> '1',
+            	'create_member'				=> '1',
+           		'activate_deactivate_member'=> '1',
+           		'delete_member'				=> '1',
+           		'message_to_member'			=> '1',
+           		'member_calender'			=> '1',
+           		
+          		'list_all_appointments'		=> '1',
+           		'create_appointments'		=> '1',
+           		'amend_appointments'		=> '1',
+           		'change_appointment_status' => '1',
+           		'export_appointments'		=> '1',
+            ]]);
 
         Sentry::getGroupProvider()->create([
             'name' => 'member',
@@ -100,3 +140,4 @@ class SentryGroupSeeder extends Seeder {
     }
 
 }
+

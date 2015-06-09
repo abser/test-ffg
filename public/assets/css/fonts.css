@@ -1,0 +1,83 @@
+/** Bold **/
+
+@font-face {
+font-family: 'fontfabric-unisansbold';
+src: url('../flaticon_converted_font/fontfabric-unisansbold.eot');
+src: url('../flaticon_converted_font/fontfabric-unisansbold.eot?#iefix') format('embedded-opentype'),
+     url('../flaticon_converted_font/fontfabric-unisansbold.woff') format('woff'),
+     url('../flaticon_converted_font/fontfabric-unisansbold.ttf') format('truetype'),
+     url('../fontfabric-unisansbold.svg') format('svg');
+font-weight: normal;
+font-style: normal;
+
+}
+
+
+/** Sami Bold **/
+
+@font-face {
+font-family: 'fontfabric-unisanssemibold';
+src: url('../flaticon_converted_font/fontfabric-unisanssemibold.eot');
+src: url('../flaticon_converted_font/fontfabric-unisanssemibold.eot?#iefix') format('embedded-opentype'),
+     url('../flaticon_converted_font/fontfabric-unisanssemibold.woff') format('woff'),
+     url('../flaticon_converted_font/fontfabric-unisanssemibold.ttf') format('truetype'),
+     url('../fontfabric-unisanssemibold.svg') format('svg');
+font-weight: normal;
+font-style: normal;
+
+}
+
+/** BOOK **/
+
+@font-face {
+font-family: 'fontfabric-unisansbook';
+src: url('../flaticon_converted_font/fontfabric-unisansbook.eot');
+src: url('../flaticon_converted_font/fontfabric-unisansbook.eot?#iefix') format('embedded-opentype'),
+     url('../flaticon_converted_font/fontfabric-unisansbook.woff') format('woff'),
+     url('../flaticon_converted_font/fontfabric-unisansbook.ttf') format('truetype'),
+     url('../fontfabric-unisansbook.svg') format('svg');
+font-weight: normal;
+font-style: normal;
+
+}
+
+
+/** Heavy **/
+
+@font-face {
+font-family: 'fontfabric-unisansheavy';
+src: url('../flaticon_converted_font/fontfabric-unisansheavy.eot');
+src: url('../flaticon_converted_font/fontfabric-unisansheavy.eot?#iefix') format('embedded-opentype'),
+     url('../flaticon_converted_font/fontfabric-unisansheavy.woff') format('woff'),
+     url('../flaticon_converted_font/fontfabric-unisansheavy.ttf') format('truetype'),
+     url('../fontfabric-unisansheavy.svg') format('svg');
+font-weight: normal;
+font-style: normal;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/** regular **/
+
+@font-face {
+font-family: 'fontfabric-unisansregular';
+src: url('../flaticon_converted_font/fontfabric-unisansregular.eot');
+src: url('../flaticon_converted_font/fontfabric-unisansregular.eot?#iefix') format('embedded-opentype'),
+     url('flaticon_converted_font/fontfabric-unisansregular.woff') format('woff'),
+     url('flaticon_converted_font/fontfabric-unisansregular.ttf') format('truetype'),
+     url('fontfabric-unisansregular.svg') format('svg');
+font-weight: normal;
+font-style: normal;
+
+}

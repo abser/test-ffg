@@ -18,19 +18,20 @@ class RoomServiceRepository extends AbstractRepository implements RoomServiceInt
 
     public function _save($input, $_room_id)
     {
-    	if ($_room_id){
-    		$room_service = $this->find($_room_id);
-    	} else {
-    		$room_service				= new $this->model;
-    		$room_service->room_id		= $_room_id;
-    		$room_service->service_id 	= \Session::get('user.id');
-    		$room_service->created_by 	= \Session::get('user.id');
-    	}
-    	 
-    	if($room_service->save()){
-    
-    		return $room_service->id;
-    	}
-    
+    	$this->model->where('room_id', '=', $_room_id)->delete();
+        
+    	if (array_key_exists('id', $input)){
+        	foreach ($input['id'] as $id){
+        		
+        		$model				= $this->model->newInstance();
+        		$model->room_id		= $_room_id; 
+        		$model->service_id	= $id;
+        		$model->created_by	= \Session::get('user.id');
+        		
+        		$model->save();
+        		
+            	// $this->create(['room_id' => $_room_id, 'service_id' => $id]);
+            }
+    	} 
     }
 }

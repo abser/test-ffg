@@ -1,7 +1,5 @@
 @extends("layouts.admin")
 @section("content")
-<div class="row-fluid">
-<div class="col-md-6 col-xs-12">
 
 <div class="panel">
     <div class="panel-heading">
@@ -13,11 +11,13 @@
         {{ Form::close() }}
     </div>
 </div>
-
-</div>
-</div>	
+	
 @stop
 
 @section('js')
+<script type="text/javascript">
+    var service_sub_category_id = {{ $data['service']->service_sub_category_id or 0 }};
+    var url_api_services_sub_category = "{{ url('api/services_sub_category/')}}";    
+</script>
 {{ HTML::script('/assets/js/service.form.js') }}
 @stop

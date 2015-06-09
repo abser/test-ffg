@@ -3,6 +3,7 @@
 use Sprim\Repositories\Eloquent\AbstractRepository;
 use Sprim\Repositories\Contracts\ServiceInterface;
 use Sprim\Repositories\Contracts\ServiceCategoryInterface as ServiceCategory;
+use Sprim\Repositories\Contracts\ServicePriceInterface as ServicePrice;
 
 use Sprim\Model\Service;
 use Carbon\Carbon;
@@ -16,10 +17,11 @@ class ServiceRepository extends AbstractRepository implements ServiceInterface {
     		'service_category_id'	=> 'service_category_id'
     ];
 
-    public function __construct(Service $model, ServiceCategory $service_category) {   	
+    public function __construct(Service $model, ServiceCategory $service_category, ServicePrice $service_price) {   	
     	
         $this->model			= $model;
         $this->service_category	= $service_category;
+        $this->service_price	= $service_price;
 
         parent::__construct();
     }
@@ -32,11 +34,13 @@ class ServiceRepository extends AbstractRepository implements ServiceInterface {
     
     	$model = \DB::table('services')
     	->select(\DB::raw('services.id, services.name, services.service_category_id, services.service_sub_category_id, services.description, services.status, 
+    				clubs.name AS club_name, 
     				service_categories.name AS service_category,
     				ssc.name AS service_sub_category,
     				DATE_FORMAT('.\Helpers::dateTz('services.created_at').', "'.$this->mysql_dt_format.'") AS created_date,
     				services.created_at
     		'))
+    	->leftJoin('clubs', 'services.club_id', '=', 'clubs.id')
     	->leftJoin('service_categories', 'services.service_category_id', '=', 'service_categories.id')
     	->leftJoin(
     			\DB::raw('(SELECT id, name FROM service_categories) ssc'),
@@ -85,7 +89,9 @@ class ServiceRepository extends AbstractRepository implements ServiceInterface {
     	$obj->name              = \Helpers::keyInput('name', $input);
     	$obj->description       = \Helpers::keyInput('description', $input);
     	$obj->cancellation_notes= \Helpers::keyInput('cancellation_notes', $input);
-    	$obj->cancellation_notice_period	= \Helpers::keyInput('cancellation_notice_period', $input);
+    	$obj->cancellation_notice_period	= \Helpers::keyInput('cancellation_notice_period', $input);    	
+    	$obj->ghcp_appointment	= 0;
+    	$obj->only_ghcp			= 0;
     	
     	if (array_key_exists('ghcp_appointment', $input)){
     		$obj->ghcp_appointment	= \Helpers::keyInput('ghcp_appointment', $input);
@@ -106,4 +112,12 @@ class ServiceRepository extends AbstractRepository implements ServiceInterface {
     	return $obj;
     }
     
+    public function saveRelations($service, $input)
+    {
+    	if (!$service) return false;
+    	   	    
+    	if (array_key_exists('price', $input)){
+    		return $this->service_price->_save($input['price'], $service->id);
+    	}
+    }
 }

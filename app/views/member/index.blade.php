@@ -12,7 +12,7 @@
                 <thead style="background-color: grey;">
                     <tr>
                         <th>{{link_to_route($data['route'], 'ID', array_merge($data['append_url'], ['sort' => 'id']))}}</th>
-                        <th>{{link_to_route($data['route'], 'Name', array_merge($data['append_url'], ['sort' => 'name']))}}</th>
+                        <th>{{link_to_route($data['route'], 'Name', array_merge($data['append_url'], ['sort' => 'first_name']))}}</th>
                         <th>{{link_to_route($data['route'], 'Email', array_merge($data['append_url'], ['sort' => 'email']))}}</th>
                         <th>{{link_to_route($data['route'], 'Contact', array_merge($data['append_url'], ['sort' => 'info']))}}</th>			
                         <th>Action</th>

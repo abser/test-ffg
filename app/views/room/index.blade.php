@@ -1,11 +1,10 @@
 @extends("layouts.admin")
 @section("content")
 
-<div class="row-fluid">
-<div class="col-md-6 col-xs-12">
-
-<h3>Rooms ({{ $data['model']->getTotal() }})</h3>
-<div><a href="{{ URL::route($data['r_prefix'].'.create') }}" class="btn btn-default btn-raised">Add New Room</a></div>
+<div class="box-header with-border">
+	<h3 class="box-title">Rooms ({{ $data['model']->getTotal() }})</h3>
+</div>
+<div style="padding-bottom: .5em;"><a href="{{ URL::route($data['r_prefix'].'.create') }}" class="btn btn-default btn-raised">Add New Room</a></div>
 
 <div>
 	<table class="table table-hover">
@@ -57,12 +56,4 @@
 </table>
 </div>
 	
-</div>	
-<div class="col-md-6 col-xs-12">
-
-	
-
-</div>
-</div>
-
 @stop

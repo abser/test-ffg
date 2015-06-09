@@ -1,11 +1,10 @@
 @extends("layouts.admin")
 @section("content")
 
-<div class="row-fluid">
-<div class="col-md-6 col-xs-12">
-
-<h3>Services ({{ $data['model']->getTotal() }})</h3>
-<div><a href="{{ URL::route($data['r_prefix'].'.create') }}" class="btn btn-default btn-raised">Add New Service</a></div>
+<div class="box-header with-border">
+	<h3 class="box-title">Services ({{ $data['model']->getTotal() }})</h3>
+</div>
+<div style="padding-bottom: .5em;"><a href="{{ URL::route($data['r_prefix'].'.create') }}" class="btn btn-default btn-raised">Add New Service</a></div>
 
 <div>
 	<table class="table table-hover">
@@ -13,7 +12,8 @@
 		<tr>
 			<th>{{link_to_route($data['route'], 'ID', array_merge($data['append_url'], ['sort' => 'id']))}}</th>
 			<th>{{link_to_route($data['route'], 'Service Name', array_merge($data['append_url'], ['sort' => 'name']))}}</th>
-			<th>{{link_to_route($data['route'], 'Service Category', array_merge($data['append_url'], ['sort' => 'service_category']))}}</th>			
+			<th>{{link_to_route($data['route'], 'Service Category', array_merge($data['append_url'], ['sort' => 'service_category']))}}</th>	
+			<th>{{link_to_route($data['route'], 'Club Name', array_merge($data['append_url'], ['sort' => 'club_name']))}}</th>		
 		    <th>Action</th>
 		</tr>
 	</thead>
@@ -39,6 +39,9 @@
 				@endif
 			</td>
 			<td>
+				<span class="{{(Input::get('sort' ) == 'club_name')? 'sprim-sort' : '' }}">{{ucfirst($row->club_name)}}</span>
+			</td>
+			<td>
 				<ul class="list-inline">
 					<li><a href="{{ URL::route('service.edit', $row->id) }}"><i class="fi-pencil">Edit</i></a></li>
 					<li>@if($row->status == 1)
@@ -53,14 +56,6 @@
 		@endforeach	
 	</tbody>
 </table>
-</div>
-	
-</div>	
-<div class="col-md-6 col-xs-12">
-
-	
-
-</div>
 </div>
 
 @stop

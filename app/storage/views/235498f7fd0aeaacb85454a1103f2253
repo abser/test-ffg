@@ -1,11 +1,10 @@
 <?php $__env->startSection("content"); ?>
 
-<div class="row-fluid">
-<div class="col-md-6 col-xs-12">
-
-<h3>Clubs (<?php echo $data['model']->getTotal(); ?>)</h3>
-<div><a href="<?php echo URL::route($data['r_prefix'].'.create'); ?>" class="btn btn-default btn-raised">Add New Club</a></div>
-
+<div class="box-header with-border">
+	<h3 class="box-title">Clubs (<?php echo $data['model']->getTotal(); ?>)</h3>
+</div>
+             
+<div style="padding-bottom: .5em;"><a href="<?php echo URL::route($data['r_prefix'].'.create'); ?>" class="btn btn-default btn-raised">Add New Club</a></div>
 <div>
 	<table class="table table-hover">
 	<thead style="background-color: grey;">
@@ -48,14 +47,7 @@
 	</tbody>
 </table>
 </div>
-	
-</div>	
-<div class="col-md-6 col-xs-12">
 
-	
-
-</div>
-</div>
 
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make("layouts.admin", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -68,4 +68,9 @@ class ServiceCategoryRepository extends AbstractRepository implements ServiceCat
     	// return array_merge($init,$options);
     	return array_replace($init,$options);
     }
+    
+    public function getListByServiceCategory($category_id)
+    {
+    	return $this->model->where('parent_id', '=', $category_id)->rememberForever()->get(array('id', 'name'));
+    }
 }

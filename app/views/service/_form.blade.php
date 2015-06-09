@@ -9,18 +9,18 @@
 <div class="form-group">	
 	{{ Form::label('name', 'Service Name', array('class' => 'col-lg-3 control-label')) }}
     <div class="col-lg-9">
-    	{{ Form::text('name', Input::old('name'), ['class'=>'form-control', 'placeholder'=>'service name', 'required'=>'required']) }}
+    	{{ Form::text('name', Input::old('name'), ['class'=>'form-control', 'placeholder'=>'service name', 'required'=>'required', 'size'=>'100', 'maxlength'=>'100']) }}
     	@if ($errors->has('name')) <p class="alert alert-danger">{{ $errors->first('name') }}</p> @endif
     </div>
 </div>
 <div class="form-group">	
-	{{ Form::label('service_category_id', 'Service Category', array('class' => 'col-lg-3 control-label')) }}
+	{{ Form::label('service_category', 'Service Category', array('class' => 'col-lg-3 control-label')) }}
     <div class="col-lg-9">
     	{{ Form::select('service_category_id', $categories, Input::old('service_category_id'), array('id' => 'service_category_id', 'class'=>'form-control')); }}
     	@if ($errors->has('service_category_id')) <p class="alert alert-danger">{{ $errors->first('service_category_id') }}</p> @endif
     	<div><a id="add_service_category">Add New Category</a></div>
     	<div class="row" id="add_service_category_box" style="display: none">
-    		<div class="col-lg-9">{{ Form::text('service_category', Input::old('service_category'), ['class'=>'form-control', 'placeholder'=>'service category']) }}</div>
+    		<div class="col-lg-9">{{ Form::text('service_category', Input::old('service_category'), ['class'=>'form-control', 'placeholder'=>'service category', 'size'=>'100', 'maxlength'=>'100']) }}</div>
     		<div class="col-lg-3"><button id="add_service_category_cancel">Cancel</button></div>
     	</div>
     </div>
@@ -32,31 +32,42 @@
 		@if ($errors->has('service_sub_category_id')) <p class="alert alert-danger">{{ $errors->first('service_sub_category_id') }}</p> @endif
 		<div id="add_service_sub_category"><a href="#">Add New Sub-Category</a></div>		
     	<div class="row" id="add_service_sub_category_box" style="display: none">
-    		<div class="col-lg-9">{{ Form::text('service_sub_category', Input::old('service_sub_category'), ['class'=>'form-control', 'placeholder'=>'service sub-category']) }}</div>
+    		<div class="col-lg-9">{{ Form::text('service_sub_category', Input::old('service_sub_category'), ['class'=>'form-control', 'placeholder'=>'service sub-category', 'size'=>'100', 'maxlength'=>'100']) }}</div>
     		<div class="col-lg-3"><button id="add_service_sub_category_cancel">Cancel</button></div>
     	</div>
 	</div>
 </div>
 <div class="form-group">	
-	{{ Form::label('duration', 'Service Duration', array('class' => 'col-lg-3 control-label')) }}
-    <div class="col-lg-9">
-    	<!-- <div class="row" style="background-color: grey;">
-    		<div class="col-lg-4">Duration</div>
-    		<div class="col-lg-4">Price</div>
-    		<div class="col-lg-4"><i class="icon-large icon-plus-sign"></i></div>
-    	</div> -->    	
+	{{ Form::label('price', 'Service Duration', array('class' => 'col-lg-3 control-label')) }}
+    <div class="col-lg-9">    	
     	<table class="table">
     	<thead><tr style="background-color: grey;">
+    		<th>&nbsp;</th>
     		<th>Duration</th>
+    		<th>&nbsp;</th>
     		<th>Price</th>
-    		<th><i class="fa fa-plus-circle fa-lg"></i></th>
+    		<th>&nbsp;</th>
+    		<th id="add_price_icon"><i class="fa fa-plus-circle fa-lg"></i></th>
     		</tr>
     	</thead>
-    	<tbody>
-    		<tr>
-    			<td>{{ Form::text('duration[]', Input::old('duration[]'), ['class'=>'form-control inline']) }} <span class="inline">mins</span></td>
-    			<td>$ {{ Form::text('price[]', Input::old('price[]'), ['class'=>'form-control']) }}</td>   
-    			<td><i class="fa fa-minus-circle fa-lg"></i></td> 		
+    	<tbody id="price_table_body">    	
+    		@if($service && $service->service_prices)    		
+    			@foreach($service->service_prices as $service_prices)    		
+    				<tr><td>&nbsp;</td>
+    				<td>{{ Form::text('price[0][]', $service_prices->duration, ['class'=>'form-control inline', 'placeholder'=>'mins', 'pattern'=>'\d{1,3}']) }}</td>
+    				<td>&nbsp;</td>
+    				<td>{{ Form::text('price[0][]', $service_prices->price, ['class'=>'form-control', 'placeholder'=>'$', 'pattern'=>'\d+(\.\d{2})?']) }}</td> 
+    				<th>&nbsp;</th>  
+    				<td><!-- <i class="fa fa-minus-circle fa-lg"></i> --></td> 		
+    				</tr>
+    			@endforeach    		
+    		@endif   	
+    		<tr><td>&nbsp;</td>
+    			<td>{{ Form::text('price[0][]', Input::old('price[0][]'), ['class'=>'form-control inline', 'placeholder'=>'mins', 'pattern'=>'\d{1,3}']) }}</td>
+    			<td>&nbsp;</td>
+    			<td>{{ Form::text('price[0][]', Input::old('price[][]'), ['class'=>'form-control', 'placeholder'=>'$', 'pattern'=>'\d+(\.\d{2})?']) }}</td> 
+    			<th>&nbsp;</th>  
+    			<td><!-- <i class="fa fa-minus-circle fa-lg"></i> --></td> 		
     		</tr>
     	</tbody>
     	</table>
@@ -101,7 +112,7 @@
     	<label for="only_ghcp" class="control-label">Only GHCP can view this Service and create appointment</label>
     </div>
 </div>
-<div class="form-group">
+<div class="form-group" style="padding-top: 1em;">
 	<div class="col-lg-3"></div>
     <div class="col-lg-9">
     	<button type="submit" class="btn btn-default">Save Service</button>

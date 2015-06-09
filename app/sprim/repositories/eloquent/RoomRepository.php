@@ -104,4 +104,18 @@ class RoomRepository extends AbstractRepository implements RoomInterface {
     	return array_replace($init,$options);
     }
     
+    
+    public function saveRelations($room, $input)
+    {
+    	if (!$room) return false;
+
+    	if (array_key_exists('service', $input)){
+        	$this->room_service->_save($input['service'], $room->id);
+    	}
+    	
+        if (array_key_exists('room_conjuncts', $input)){
+        	$this->room_conjunct->_save($input['room_conjuncts'], $room->id);
+        }
+     
+    }
 }

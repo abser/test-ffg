@@ -13,16 +13,15 @@ class Addresses extends Migration {
     public function up() {
         Schema::create('addresses', function($table) {
             $table->increments('id');
-            $table->string('address1', 100)->nullable();
-            $table->string('address2', 100)->nullable();
-            $table->string('street', 100)->nullable();
-            $table->string('city', 50)->nullable();
-            $table->integer('region_id')->unsigned()->nullable();
-            $table->string('country_code', 2)->nullable();
-            $table->string('postal_code', 10)->nullable();
-
-            $table->integer('created_by')->unsigned();
-            $table->integer('updated_by')->unsigned()->nullable();
+            $table->string		('address1', 100)	->nullable();
+            $table->string		('address2', 100)	->nullable();
+            $table->string		('street', 100)		->nullable();
+            $table->string		('city', 100)		->nullable();
+            $table->integer		('region_id')		->unsigned()->nullable();
+            $table->string		('country_code', 2)	->nullable();
+            $table->string		('postal_code', 10)	->nullable();
+            $table->integer		('created_by')		->unsigned();
+            $table->integer		('updated_by')		->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
 

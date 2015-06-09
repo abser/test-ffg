@@ -18,7 +18,7 @@ class UserController extends \BaseController {
         $this->club = $club;
         parent::__construct();
         //$this->owner_table = Config::get('sprim.tables.room');
-        $this->sort = 'name';
+        $this->sort = 'first_name';
         $this->dir = 'asc';
 
         $this->route_prefix = 'user';
@@ -192,7 +192,7 @@ class UserController extends \BaseController {
         $pageParams = Helpers::paginatorParams($this->sort, $this->dir);
         $data = $pageParams;
         $data['r_prefix'] = 'user';
-        $data['s_fields'] = array('all' => 'All', 'name' => 'user Name', 'service_category' => 'Service Category');
+        $data['s_fields'] = array('all' => 'All', 'first_name' => 'user Name', 'service_category' => 'Service Category');
 
         $obj = $this->model->paginate($pageParams);
         $data['model'] = Paginator::make($obj->items, $obj->totalItems, $pageParams['limit']);

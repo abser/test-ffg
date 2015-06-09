@@ -89,7 +89,7 @@ abstract class AbstractRepository {
         $result->totalItems = 0;
         $result->items = array();
 
-        $query = $this->filteredModel(trim($s_term), $s_field, $controllertype);
+        $query = $this->filteredModel(trim($s_term), $s_field);
         $order = $this->sqlField($sort);
 
         $result->totalItems = count($query->get());

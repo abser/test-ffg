@@ -30,7 +30,8 @@
         "Sprim\\Composers\\ComposerServiceProvider",
         "Aws\\Laravel\\AwsServiceProvider",
         "Cartalyst\\Sentry\\SentryServiceProvider",
-        "Way\\Generators\\GeneratorsServiceProvider"
+        "Way\\Generators\\GeneratorsServiceProvider",
+        "BCA\\LaravelInspect\\LaravelInspectServiceProvider"
     ],
     "eager": [
         "Illuminate\\Cookie\\CookieServiceProvider",
@@ -44,7 +45,8 @@
         "Sprim\\Composers\\ComposerServiceProvider",
         "Aws\\Laravel\\AwsServiceProvider",
         "Cartalyst\\Sentry\\SentryServiceProvider",
-        "Way\\Generators\\GeneratorsServiceProvider"
+        "Way\\Generators\\GeneratorsServiceProvider",
+        "BCA\\LaravelInspect\\LaravelInspectServiceProvider"
     ],
     "deferred": {
         "artisan": "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",

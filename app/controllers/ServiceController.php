@@ -3,15 +3,17 @@
 use Sprim\Repositories\Contracts\ServiceInterface as Service;
 use Sprim\Repositories\Contracts\ClubInterface as Club;
 use Sprim\Repositories\Contracts\ServiceCategoryInterface as ServiceCategory;
+use Sprim\Repositories\Contracts\ServicePriceInterface as ServicePrice;
 
 class ServiceController extends \BaseController {
 
-	public function __construct(Service $service, ServiceCategory $service_category, Club $club)
+	public function __construct(Service $service, Club $club, ServiceCategory $service_category, ServicePrice $service_price)
 	{
 		$this->model	= $service;
 		$this->service	= $service;
 		$this->club		= $club;
 		$this->service_category = $service_category;
+		$this->service_price = $service_price;
 		
 		parent::__construct();
 		$this->owner_table = Config::get('sprim.tables.service');
@@ -28,9 +30,9 @@ class ServiceController extends \BaseController {
 	 * @return Response
 	 */
 	public function index()
-	{		
-		$data = $this->getList();
-		$data['route']   = 'service.index';
+	{
+		$data			= $this->getList();
+		$data['route']  = 'service.index';
 		
 		return View::make("service.index", compact('data'));
 	}
@@ -43,6 +45,7 @@ class ServiceController extends \BaseController {
 	 */
 	public function create()
 	{
+		$data['service']    = $this->model->newInstance();
 		$data['clubs']		= $this->club->getSelectList();
 		$data['categories']	= $this->service_category->getSelectList(0);
 		$data['sub_categories']	= $this->service_category->getSelectList(1);
@@ -58,8 +61,8 @@ class ServiceController extends \BaseController {
 	 */
 	public function store()
 	{
-		$input              = Input::all();		
-		$model              = $this->model->newInstance();		
+		$input              = Input::all();
+		$model              = $this->model->newInstance();
 		$model              = $this->model->fields($model, $input);
 		
 		$model->status		= 0;
@@ -93,10 +96,11 @@ class ServiceController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$data['service']	= $this->model->getById($id, array('service_category'));
+		$data['service']	= $this->model->getById($id, ['club', 'service_category', 'service_prices']);
 		$data['clubs']		= $this->club->getSelectList();
 		$data['categories']	= $this->service_category->getSelectList(0);
-		$data['sub_categories']	= $this->service_category->getSelectList(1);
+		$data['sub_categories']	= $this->service_category->getSelectList(1);		
+		// $data['service_prices']	= $this->service_price->getManyBy('service_id', $id);	
 		
 		if(!$data['service']){
 			return Response::view('errors.404', array(), 404);
@@ -121,6 +125,9 @@ class ServiceController extends \BaseController {
 		if (!$model->save()){
 			return Redirect::to('service/create')->withErrors($model->errors())->withInput();
 		} else {
+			
+			$this->model->saveRelations($model, $input);
+			
 			return Redirect::to('service');
 		}
 	}

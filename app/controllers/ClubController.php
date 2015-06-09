@@ -4,8 +4,8 @@ use Sprim\Repositories\Contracts\ClubInterface as Club;
 
 class ClubController extends \BaseController {
 
-	public function __construct(Club $club) {
-		
+	public function __construct(Club $club)
+	{
 		$this->model	= $club;
 		$this->club		= $club;
 		
@@ -25,12 +25,8 @@ class ClubController extends \BaseController {
 	 */
 	public function index()
 	{
-		// $data['clubs'] = $this->model->all();
-		$data = $this->getList();
-                echo '<pre>';
-               // print_r($data);
-                echo '</pre>';
-		$data['route']   = 'club.index';
+		$data			= $this->getList();            
+		$data['route']	= 'club.index';
 		
 		return View::make("club.index", compact('data'));
 	}
@@ -42,7 +38,7 @@ class ClubController extends \BaseController {
 	 * @return Response
 	 */
 	public function create()
-	{				
+	{
 		return View::make("club.create");
 	}
 
@@ -55,16 +51,14 @@ class ClubController extends \BaseController {
 	public function store()
 	{
 		$input              = Input::all();
-		$model              = $this->model->newInstance();		
-		$model              = $this->model->fields($model, $input);	
+		$model              = $this->model->newInstance();
+		$model              = $this->model->fields($model, $input);
 		$model->status		= 0;
 		$model->created_by  = \Session::get('user.id');
-		// dd(Sentry::getUser());
-		// dd(Session::all());
 		
 		if (!$model->save()){
 			return Redirect::to('club/create')->withErrors($model->errors())->withInput();
-		} else {		
+		} else {
 			return Redirect::to('club');
 		}
 	}
@@ -108,7 +102,7 @@ class ClubController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$input  = Input::all();		
+		$input  = Input::all();
 		$model  = $this->model->fields($this->model->find($id), $input);
 		$model->updated_by 	= \Session::get('user.id');
 		
@@ -181,8 +175,7 @@ class ClubController extends \BaseController {
 		$obj                = $this->model->paginate($pageParams);
 		$data['model']      = Paginator::make($obj->items, $obj->totalItems, $pageParams['limit']);
 	
-		$data['controller']     = 'club';		
+		$data['controller']     = 'club';
 		return $data;
 	}
-
 }

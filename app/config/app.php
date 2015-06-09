@@ -127,7 +127,8 @@ return array(
 			
 		'Aws\Laravel\AwsServiceProvider',
 		'Cartalyst\Sentry\SentryServiceProvider',
-		'Way\Generators\GeneratorsServiceProvider'
+		'Way\Generators\GeneratorsServiceProvider',
+		'BCA\LaravelInspect\LaravelInspectServiceProvider'
 	),
 
 	/*

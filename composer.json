@@ -11,7 +11,8 @@
 		"league/factory-muffin": "2.*",
 		"aws/aws-sdk-php-laravel": "1.*",
 		"cartalyst/sentry": "2.1.*",
-		"way/generators": "3"
+		"way/generators": "3",
+		"bca/laravel-inspect": "~1.3"
 	},
 	"autoload": {
 		"classmap": [
