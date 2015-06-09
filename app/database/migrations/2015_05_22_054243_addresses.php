@@ -20,7 +20,6 @@ class Addresses extends Migration {
             $table->integer		('region_id')		->unsigned()->nullable();
             $table->string		('country_code', 2)	->nullable();
             $table->string		('postal_code', 10)	->nullable();
-
             $table->integer		('created_by')		->unsigned();
             $table->integer		('updated_by')		->unsigned()->nullable();
             $table->timestamps();

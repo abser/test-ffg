@@ -1,0 +1,147 @@
+<?php $__env->startSection("content"); ?>
+
+<?php
+//$dataaaa = Session::all();
+//echo '<pre>';
+//print_r($data['memberData']);
+//echo '</pre>';
+//foreach ($data['memberData'] as $d1)
+//{
+//    
+//   echo $d1->id;
+// 
+//}
+//    
+//
+//die();
+?>
+<div class="row">
+    <div class="small-5 columns" style="float: right">
+        <!--        <a class="item" href="<?php echo URL::current().'/create'; ?>">
+                    <i class="fi-plus"></i> Add New Club
+                </a>-->
+        <ul>
+            <a href="member/create" data-reveal-id="new_club">
+                <i> Add New Member</i>
+
+            </a>
+
+            <a href="#new-club" data-reveal-id="new_club">
+                <i> Message Broadcast</i> 
+            </a>
+        </ul>
+    </div>
+</div>
+
+<div class="infinite-div">
+    <?php if(count($data['memberData'] ) > 0): ?>
+    <table class="small-12 infinite-table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Contact
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <thead>
+            <?php foreach($data['memberData']  as $column => $field): ?>
+            <tr>
+                <th>
+                    <?php echo $field['first_name'].$field['last_name']; ?>
+
+                </th>
+                <th>
+                    <?php echo $field['email']; ?>
+
+                </th>
+                <th>
+                    <?php echo $field['info']; ?>
+
+                </th>
+                <th>
+
+                    <?php if($field['activated'] == 1): ?>
+
+                    <a href="#deactivate-member" class="member-deactivate" data-member_status ="deactivate" data-member_deactivate_id="<?php echo $field['id']; ?>">   <i> Deactivate</i>
+                    </a>
+                    <?php else: ?>
+
+                    <a href="#activate-member" class="member-deactivate" data-member_status ="activate"  data-member_deactivate_id="<?php echo $field['id']; ?>">   <i> Activate</i>
+                    </a>
+                    <?php endif; ?>
+                </th>
+                <th>
+                    <a href="#edit-club" class="club-edit" data-club_edit_id="<?php echo $field['id']; ?>" data-reveal-id="edit_club">
+                        <i> H.index</i>
+                    </a>
+
+                </th>
+                <th>
+                    <a href="#edit-club" class="club-edit" data-club_edit_id="<?php echo $field['id']; ?>" data-reveal-id="edit_club">
+                        <i> Message</i>
+                    </a>
+
+                </th>
+                <th>
+                    <a href="#edit-club" class="club-edit" data-club_edit_id="<?php echo $field['id']; ?>" data-reveal-id="edit_club">
+                        <i> Appointment</i>
+                    </a>
+
+                </th>
+
+            </tr>
+            <?php endforeach; ?>
+
+        </thead>
+    </table>
+    <?php endif; ?>
+</div>
+<?php $__env->startSection('footer'); ?>
+@parent
+
+<script>
+
+    $(document).ready(function () {
+        $(".member-deactivate").click(function () {
+            //  alert("hi edit");
+            var member_deactivateId = $(this).data('member_deactivate_id');
+            var member_status = $(this).data('member_status');
+            // alert(club_id);
+
+            $.ajax({
+                type: 'POST',
+                url: '/member/activateMember',
+                data: {
+                    member_id: member_deactivateId,
+                    member_status: member_status
+                },
+                success: function (data) {
+                    // alert(data);
+                    window.alert('Action completed')
+                    window.location.href = 'member';
+
+                }
+            });
+
+
+        });
+    });
+
+</script>
+
+<?php $__env->stopSection(); ?>
+
+
+
+
+
+<?php echo $__env->make("layouts.admin", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

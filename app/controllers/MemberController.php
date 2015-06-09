@@ -1,6 +1,9 @@
 <?php
 
-use Sprim\Repositories\Contracts\MemberInterface as Member;
+//use Sprim\Repositories\Contracts\MemberInterface as Member;
+use Sprim\Repositories\Contracts\UserInterface as User;
+use Sprim\Repositories\Contracts\ClubInterface as Club;
+use Sprim\Repositories\Contracts\ServiceInterface as Service;
 
 class MemberController extends \BaseController {
 
@@ -9,26 +12,23 @@ class MemberController extends \BaseController {
      *
      * @return Response
      */
-    public function __construct(Member $member) {
+    public function __construct(User $user, Club $club, Service $service) {
 
-        $this->model = $member;
+        $this->model = $user;
+        $this->service = $service;
+        $this->club = $club;
         parent::__construct();
-        $this->owner_table = Config::get('sprim.tables.member');
-        $this->sort = 'name';
+        $this->owner_table = Config::get('sprim.tables.user');
+        $this->sort = 'first_name';
         $this->dir = 'asc';
 
-        $this->route_prefix = 'member';
+        $this->route_prefix = 'user';
     }
 
     public function index() {
-        $data['route'] = 'member';
-        $data['header'] = 'Add New Member';
-        $data['form'] = 'Member';
-        $data['email_disabled'] = '';
-        $data['memberData'] = $this->model->memberList();
-        $user_id = Sentry::getUser();
-        $data['logged_user_id'] = $user_id['id'];
-        return View::make('member.index', compact('data'));
+        $data = $this->getList();
+        $data['route'] = 'member.index';
+        return View::make("member.index", compact('data'));
     }
 
     /**
@@ -37,11 +37,14 @@ class MemberController extends \BaseController {
      * @return Response
      */
     public function create() {
+        $data['clubs'] = $this->club->getSelectList();
         $data['route'] = 'member';
         $data['header'] = 'Add New Member';
         $data['form'] = 'Member';
         $data['email_disabled'] = '';
         $data['paId'] = $this->model->getPaList();
+        $data['service'] = $this->model->getServiceList();
+        // $data['rooms'] = $this->model->getServiceList();
         return View::make('member.create', compact('data'));
     }
 
@@ -51,6 +54,9 @@ class MemberController extends \BaseController {
      * @return Response
      */
     public function store() {
+         $user_id = Sentry::getUser();
+        $logged_user_id = $user_id['id'];
+
         $member_password = $this->ranPass();
 
         $senData = Sentry::register(array(
@@ -60,7 +66,7 @@ class MemberController extends \BaseController {
                     'last_name' => $_POST['last_name'],
         ));
 
-        $member_id = $this->model->createMember(Input::all(), $senData['id']);
+        $member_id = $this->model->createMember(Input::all(), $senData['id'], $logged_user_id);
         $fileData = explode('+', $member_id);
         $user_id = $fileData[0];
         $address_id = $fileData[1];
@@ -81,8 +87,7 @@ class MemberController extends \BaseController {
             }
         }
 
-        $user_id = Sentry::getUser();
-        $data['logged_user_id'] = $user_id['id'];
+        $data['logged_user_id'] = $logged_user_id;
         $data['member_email'] = $_POST['member_email'];
         $data['member_password'] = $member_password;
         \Mail::send('emails.auth.member_mail', $data, function($m) use($data) {
@@ -109,7 +114,21 @@ class MemberController extends \BaseController {
      * @return Response
      */
     public function edit($id) {
-        //
+        //$data['member'] = $this->model->getById($id);
+        $data['member'] = $this->model->EditmemberList($id);
+        $data['clubs'] = $this->club->getSelectList();
+        $data['paId'] = $this->model->getPaList();
+//        echo '<pre>';
+//        print_r( $data['member']);
+//        echo '</pre>';
+        //  die();
+        // $data['rooms'] = $this->model->getSelectList($data['room']->id);
+
+        if (!$data['member']) {
+            return Response::view('errors.404', array(), 404);
+        }
+
+        return View::make('member.edit', compact('data'));
     }
 
     /**
@@ -119,7 +138,8 @@ class MemberController extends \BaseController {
      * @return Response
      */
     public function update($id) {
-        //
+        $model = $this->model->updateMember(Input::all());
+        return Redirect::route('member.index');
     }
 
     /**
@@ -182,7 +202,7 @@ class MemberController extends \BaseController {
         $data['member_id'] = $member_data['id'];
         $data['msg_body'] = $_POST['msg_body'];
         \Mail::send('emails.auth.member_message_mail', $data, function($m) use($data) {
-            $m->to(  $data['member_email'] )->subject(\Config::get('sprim.site_name'));
+            $m->to($data['member_email'])->subject(\Config::get('sprim.site_name'));
         });
         Session::flash('message', 'Message send successfully');
         return Redirect::to('member');
@@ -197,6 +217,33 @@ class MemberController extends \BaseController {
             $pass[] = $alphabet[$n];
         }
         return implode($pass); //turn the array into a string
+    }
+
+    public function servicelist() {
+        return $serviceList = $this->model->getServiceList();
+    }
+
+    public function memberList() {
+        $tbl_user = $this->User->getTable();
+        $tbl_profile_contact = $this->ProfileContacts->getTable();
+        $memberdata = $this->User->select($tbl_user . '.id', $tbl_user . '.email', $tbl_user . '.first_name', $tbl_user . '.last_name', $tbl_user . '.activated', 'profile_contacts.info')
+                ->join('profile_contacts', $tbl_user . '.id', '=', 'profile_contacts.user_id')
+                ->where('profile_contacts.contact_type', '=', 3)
+                ->whereNotIn($tbl_user . '.id', array(1, 2, 3));
+        return $resultData = $memberdata->get();
+    }
+
+    protected function getList() {
+        $pageParams = Helpers::paginatorParams($this->sort, $this->dir);
+        $data = $pageParams;
+        $data['r_prefix'] = 'member';
+        $data['s_fields'] = array('all' => 'All', 'name' => 'Member Name', 'service_category' => 'Service Category');
+
+        $obj = $this->model->paginate($pageParams,'memberCont');
+        $data['model'] = Paginator::make($obj->items, $obj->totalItems, $pageParams['limit']);
+
+        $data['controller'] = 'member';
+        return $data;
     }
 
 }

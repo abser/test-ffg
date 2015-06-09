@@ -17,7 +17,8 @@ return array(
     'tables' => [
         'club' => '1',
         'service' => '2',
-        'room' => '3'
+        'room' => '3',
+        'user' => '4'
     ],
     'file_types' => [
         'avatar' => '1',

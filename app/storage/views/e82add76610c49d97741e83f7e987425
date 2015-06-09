@@ -1,0 +1,38 @@
+<?php $__env->startSection("content"); ?>
+
+<div class="row">
+    <div class="medium-8 medium-centered columns end">
+        <div class="panel">
+
+            <?php echo Form::open(["route" => "auth.request", "autocomplete" => "off", "data-abide"]); ?>
+
+            <h1>Reset password</h1>
+            <div class="row">
+                <div class="medium-8 columns">
+                    <?php echo Form::email("email", Input::get("email"), ["placeholder" => "Enter your email address", 
+                        "required" ]); ?>
+
+                    <small class="error">Valid email is required.</small>
+                </div>
+
+                <div class="medium-4 columns end">
+                    <?php echo Form::submit("Send reset in email", ['class' => 'button']); ?>
+
+                </div>
+            </div>
+            <?php echo Form::close(); ?>
+
+
+            <?php if(count($errors)): ?>
+            <div data-alert class="alert-box alert">
+                <?php echo HTML::ul($errors->all(), ['class' => 'no-bullet']); ?>
+
+            </div>
+            <?php endif; ?>
+
+        </div>
+    </div>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make("layout", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -16,7 +16,7 @@ class ClubUser extends Ardent {
 		'status'	=> 'required|in:0,1'
 	);  
     
-    public function clubs() {
+    public function club() {
     	return $this->belongsTo('Sprim\Model\Club');
     }
 }

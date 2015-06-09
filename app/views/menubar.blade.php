@@ -12,8 +12,9 @@
             			<li><a href="{{URL::route('service.index')}}">Service</a></li>
             			<li><a href="{{URL::route('room.index')}}">Room</a></li>
             			<li><a href="{{URL::route('wellness-team.index')}}">Wellness Team</a></li>
+                                <li><a href="{{URL::route('user.index')}}">Users</a></li> 
             			<li class="divider"></li>
-            			<li><a href="#">Users</a></li>
+            			
             		</ul>
             	</li>
             	<li><a href="{{URL::route('member.index')}}">Member</a></li>
@@ -38,6 +39,7 @@
                 <span class="hidden-xs">User Name Here {{ \Session::get('user.id'); }}</span>
                 </a>
                 <ul class="dropdown-menu">
+
                	<!-- The user image in the menu -->
                   	<li class="user-header">
                    	<img src="{{ asset('assets/images/man.jpg') }}" class="img-circle" alt="User Image" />
@@ -54,6 +56,7 @@
                    			<a href="{{URL::route('auth.logout')}}" class="btn btn-default btn-flat">Sign out</a>
                    		</div>
                    	</li>
+
                 </ul>
             </li>
             </ul>

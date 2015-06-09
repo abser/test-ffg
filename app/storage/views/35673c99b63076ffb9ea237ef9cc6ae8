@@ -1,0 +1,344 @@
+<!-- <?php if($errors->has()): ?>
+        <div class="alert alert-danger">
+        <?php foreach($errors->all() as $error): ?>
+                <?php echo $error; ?><br>
+        <?php endforeach; ?>
+        </div>
+<?php endif; ?> -->
+
+
+
+<div class="form-group">	
+    <?php echo Form::label('first_name', 'First Name', array('class' => 'col-lg-2 control-label')); ?>
+
+    <div class="col-lg-10">
+        <?php echo Form::text('first_name', Input::old('first_name'),  array('class'=>'form-control','placeholder' => 'First name','required' => 'required')); ?>
+
+        <?php if($errors->has('first_name')): ?> <p class="alert alert-danger"><?php echo $errors->first('first_name'); ?></p> <?php endif; ?>
+    </div>
+</div>
+
+<div class="form-group">	
+    <?php echo Form::label('last_name', 'Last Name', array('class' => 'col-lg-2 control-label')); ?>
+
+    <div class="col-lg-10">
+        <?php echo Form::text('last_name', Input::old('last_name'),  array('class'=>'form-control','placeholder' => 'Last name','required' => 'required')); ?>
+
+        <?php if($errors->has('last_name')): ?> <p class="alert alert-danger"><?php echo $errors->first('last_name'); ?></p> <?php endif; ?>
+    </div>
+</div>
+
+<div class="form-group">	
+    <?php echo Form::label('member_email', 'Email', array('class' => 'col-lg-2 control-label')); ?>
+
+    <div class="col-lg-10">
+        <?php echo Form::email('member_email', Input::old('member_email'),  array('class'=>'form-control','placeholder' => 'Email','required' => 'required')); ?>
+
+        <?php if($errors->has('member_email')): ?> <p class="alert alert-danger"><?php echo $errors->first('member_email'); ?></p> <?php endif; ?>
+    </div>
+</div>
+
+<div class="form-group">	
+    <?php echo Form::label('member_phone', 'Phone', array('class' => 'col-lg-2 control-label')); ?>
+
+    <div class="col-lg-10">
+        <?php echo Form::number('member_phone', Input::old('member_phone'),  array('class'=>'form-control','placeholder' => 'Phone','required' => 'required')); ?>
+
+        <?php if($errors->has('member_phone')): ?> <p class="alert alert-danger"><?php echo $errors->first('member_phone'); ?></p> <?php endif; ?>
+    </div>
+</div>  
+
+<div class="form-group">	
+    <?php echo Form::label('club_id', 'Club', array('class' => 'col-lg-2 control-label')); ?>
+
+    <div class="col-lg-10">
+        <?php echo Form::select('club_id', $data['clubs'], Input::old('club_id'), array('id' => 'userClub_id', 'class'=>'form-control', 'multiple'=>'multiple', 'required'=>'required'));; ?>
+
+        <?php if($errors->has('club_id')): ?> <p class="alert alert-danger"><?php echo $errors->first('club_id'); ?></p> <?php endif; ?>
+    </div>
+</div>
+
+<div class="form-group">	
+    <?php echo Form::label('user_type', 'Choose User Type', array('class' => 'col-lg-2 control-label')); ?>
+
+    <div class="col-lg-10 radio-inline-inline">&nbsp;&nbsp;
+        Admin User	 <?php echo Form::radio('user_type', '1', true, array('class' => 'name')); ?> &nbsp;&nbsp;&nbsp;&nbsp;
+        PA	 <?php echo Form::radio('user_type', '2', false, array('class' => 'name')); ?>&nbsp;&nbsp;&nbsp;&nbsp;
+<!--        Medical Doctor	 <?php echo Form::radio('user_type', '3', false, array('class' => 'name')); ?>&nbsp;&nbsp;&nbsp;&nbsp;
+        Fitness Coach	 <?php echo Form::radio('user_type', '4', false, array('class' => 'name')); ?>&nbsp;&nbsp;&nbsp;&nbsp;
+        Wellness Experts <?php echo Form::radio('user_type', '5', false, array('class' => 'name')); ?>&nbsp;&nbsp;&nbsp;&nbsp;-->
+
+    </div>
+</div>
+<div id="admin_user_div" style="display: none">
+
+<div class="form-group">	
+    <?php echo Form::label('user_type', 'Club Full Access', array('class' => 'col-lg-2 control-label')); ?>
+
+    <div class="col-lg-10 radio-inline-inline">&nbsp;&nbsp;
+        <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox1" value="option1"> List Clubs
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox2" value="option2"> Create Club
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox3" value="option3"> Activate/Deactivate Club
+        </label>
+
+        <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox3" value="option3"> Delete Club
+        </label>
+    </div>
+</div>
+
+    <br>
+    
+    <div class="form-group">	
+        <?php echo Form::label('user_type', 'User Full Access', array('class' => 'col-lg-2 control-label')); ?>
+
+        <div class="col-lg-10 radio-inline-inline">&nbsp;&nbsp;
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox1" value="option1"> List User
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox2" value="option2"> Create User
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox3" value="option3"> Activate/Deactivate User
+            </label>
+
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox3" value="option3"> Delete User
+            </label>
+        </div>
+    </div> <br>
+
+    <div class="form-group">	
+        <?php echo Form::label('user_type', 'Member Full Access', array('class' => 'col-lg-2 control-label')); ?>
+
+        <div class="col-lg-10 radio-inline-inline">&nbsp;&nbsp;
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox1" value="option1"> List Members
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox2" value="option2"> Create Member
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox3" value="option3"> Activate/Deactivate Member
+            </label>
+
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox3" value="option3"> Delete Member
+            </label>
+        </div>
+
+        <div class="col-lg-10 radio-inline-inline">&nbsp;&nbsp;
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox1" value="option1"> Message to Members
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox2" value="option2"> Member Calender
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox3" value="option3"> Health Indexex
+            </label>
+
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox3" value="option3"> Sleep Indexes
+            </label>
+        </div>
+
+        <div class="col-lg-10 radio-inline-inline">&nbsp;&nbsp;
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox1" value="option1"> Medical Indexes
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox2" value="option2"> Nutrition Indexes
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox3" value="option3">Exercise Indexes
+            </label>
+
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox3" value="option3"> Other Indexes
+            </label>
+        </div>
+
+
+
+    </div> <br>
+
+    <div class="form-group">	
+        <?php echo Form::label('user_type', 'Profiles Full Access', array('class' => 'col-lg-2 control-label')); ?>
+
+        <div class="col-lg-10 radio-inline-inline">&nbsp;&nbsp;
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox1" value="option1"> List Profiles
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox2" value="option2"> Create Profiles
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox3" value="option3"> Activate/Deactivate Profiles
+            </label>
+
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox3" value="option3"> Delete Profiles
+            </label>
+        </div>
+
+        <div class="col-lg-10 radio-inline-inline">&nbsp;&nbsp;
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox1" value="option1"> Profile Calender Setup
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox2" value="option2">  Profile Calender View
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox3" value="option3"> Export Profiles
+            </label>
+
+        </div>
+    </div> <br>
+
+    <div class="form-group">	
+        <?php echo Form::label('user_type', 'Group Full Access', array('class' => 'col-lg-2 control-label')); ?>
+
+        <div class="col-lg-10 radio-inline-inline">&nbsp;&nbsp;
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox1" value="option1"> List Group
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox2" value="option2"> Create Group
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox3" value="option3"> Published/Unpublished Group
+            </label>
+
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox3" value="option3"> Delete Group
+            </label>
+        </div>
+
+    </div> <br>
+
+    <div class="form-group">	
+        <?php echo Form::label('user_type', 'Event Full Access', array('class' => 'col-lg-2 control-label')); ?>
+
+        <div class="col-lg-10 radio-inline-inline">&nbsp;&nbsp;
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox1" value="option1"> List Events
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox2" value="option2"> Create Events
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox3" value="option3"> Published/Unpublished Events
+            </label>
+
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox3" value="option3"> Delete Events
+            </label>
+        </div>
+
+    </div> <br>
+
+    <div class="form-group">	
+        <?php echo Form::label('user_type', 'Room Full Access', array('class' => 'col-lg-2 control-label')); ?>
+
+        <div class="col-lg-10 radio-inline-inline">&nbsp;&nbsp;
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox1" value="option1"> List Rooms
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox2" value="option2"> Create Rooms
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox3" value="option3"> ACtivate/Deactivate Rooms
+            </label>
+
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox3" value="option3"> Delete Rooms
+            </label>
+        </div>
+
+    </div> <br>
+
+    <div class="form-group">	
+        <?php echo Form::label('user_type', 'Appointment Full Access', array('class' => 'col-lg-2 control-label')); ?>
+
+        <div class="col-lg-10 radio-inline-inline">&nbsp;&nbsp;
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox1" value="option1"> List All Appointments
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox2" value="option2"> Create Appointments
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox3" value="option3"> Amend Appointment
+            </label>
+
+        </div>
+
+        <div class="col-lg-10 radio-inline-inline">&nbsp;&nbsp;
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox1" value="option1"> Change Appointment Status(Confirm or Cancel)
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox2" value="option2">  Export Appointments
+            </label>
+
+
+        </div>
+    </div> <br>
+
+    <div class="form-group">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-10">
+            <button type="submit" class="btn btn-default">Save Member</button>
+            <a href="<?php echo URL::route('member.index'); ?>"><button type="button" class="btn">Cancel</button></a>
+        </div>
+    </div>
+
+</div>
+
+
+<div id="pa_user_div" style="display: none">
+
+
+    <div class="form-group">	
+        <?php echo Form::label('user_type', 'Respective Member Access', array('class' => 'col-lg-2 control-label')); ?>
+
+        <div class="col-lg-10 radio-inline-inline">&nbsp;&nbsp;
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox1" value="option1"> List Assigned Members
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox2" value="option2"> Message to Member
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox3" value="option3"> Member Calendar
+            </label>
+        </div>
+
+        <div class="col-lg-10 radio-inline-inline">&nbsp;&nbsp;
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox1" value="option1"> Message Events
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox2" value="option2"> Reservations
+            </label>
+                  </div>
+    </div> <br>
+
+    <div class="form-group">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-10">
+            <button type="submit" class="btn btn-default">Save Member</button>
+            <a href="<?php echo URL::route('member.index'); ?>"><button type="button" class="btn">Cancel</button></a>
+        </div>
+    </div>
+
+</div>
+

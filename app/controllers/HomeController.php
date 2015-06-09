@@ -15,7 +15,7 @@ class HomeController extends BaseController {
         if (Session::get('user.is_member')) {
 			return View::make('site.member.index', compact('data'));
         } else {
-        	return View::make('user.dashboard', compact('data'));
+        	return View::make('admin.dashboard', compact('data'));
         }
 	}
     

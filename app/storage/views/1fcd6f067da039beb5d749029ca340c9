@@ -1,0 +1,103 @@
+
+<div class="form-group">	
+	<?php echo Form::label('club_id', 'Club', array('class' => 'col-lg-3 control-label')); ?>
+
+    <div class="col-lg-9">
+    	<?php echo Form::select('club_id', $clubs, Input::old('club_id'), array('id' => 'club_id', 'class'=>'form-control', 'required'=>'required'));; ?>
+
+    	<?php if($errors->has('club_id')): ?> <p class="alert alert-danger"><?php echo $errors->first('club_id'); ?></p> <?php endif; ?>
+    </div>
+</div>
+<div class="form-group">	
+	<?php echo Form::label('name', 'Room Name', array('class' => 'col-lg-3 control-label')); ?>
+
+    <div class="col-lg-9">
+    	<?php echo Form::text('name', Input::old('name'), ['class'=>'form-control', 'placeholder'=>'room name', 'required'=>'required']); ?>
+
+    	<?php if($errors->has('name')): ?> <p class="alert alert-danger"><?php echo $errors->first('name'); ?></p> <?php endif; ?>
+    </div>
+</div>
+<div class="form-group">	
+	<?php echo Form::label('room_number', 'Room Number', array('class' => 'col-lg-3 control-label')); ?>
+
+    <div class="col-lg-9">
+    	<?php echo Form::text('room_number', Input::old('room_number'), ['class'=>'form-control', 'placeholder'=>'room number', 'required'=>'required']); ?>
+
+    	<?php if($errors->has('room_number')): ?> <p class="alert alert-danger"><?php echo $errors->first('room_number'); ?></p> <?php endif; ?>
+    </div>
+</div>
+<div class="form-group">	
+	<?php echo Form::label('service', 'Service Selection', array('class' => 'col-lg-3 control-label')); ?>
+
+    <div class="col-lg-9"> 
+    	<div> 
+    	<ul class="tree">
+    	<?php foreach($data['categories']  as $key => $value): ?>
+    		<li><?php echo Form::checkbox('service[category][]', $key); ?> &nbsp; <?php echo $value; ?>
+
+    			<ul>
+    			<?php foreach($data['services']  as $service): ?>
+    				<?php if(!$service->service_sub_category_id  && $key == $service->service_category_id): ?>
+    					<li><?php echo Form::checkbox('service[id][]', $service->id); ?> &nbsp; <?php echo $service->name; ?></li>
+    				<?php endif; ?>  
+    			<?php endforeach; ?>
+    			
+    			<?php foreach($data['sub_categories']  as $sub_category): ?>
+    				<?php if($sub_category->parent_id == $key): ?>
+    					<li><?php echo Form::checkbox('service[sub_category][]', $sub_category->id); ?> &nbsp; <?php echo $sub_category->name; ?>
+
+    					<ul>
+    					<?php foreach($data['services']  as $service): ?>
+    						<?php if($sub_category->id == $service->service_sub_category_id): ?>
+    							<li><?php echo Form::checkbox('service[id][]', $service->id); ?> &nbsp; <?php echo $service->name; ?></li>
+    						<?php endif; ?>  
+    					<?php endforeach; ?>    									
+    					</li>
+    				<?php endif; ?>
+    			<?php endforeach; ?>
+    			</ul>
+    		</li>
+    	<?php endforeach; ?>
+    	</ul>
+    	</div>
+    	<div id="directoryTree_container"></div>    		
+    	<?php if($errors->has('room_number')): ?> <p class="alert alert-danger"><?php echo $errors->first('room_number'); ?></p> <?php endif; ?>
+    </div>
+</div>
+<div class="form-group">	
+	<?php echo Form::label('capacity', 'Capacity', array('class' => 'col-lg-3 control-label')); ?>
+
+    <div class="col-lg-9">
+    	<?php echo Form::text('capacity', Input::old('capacity'), ['class'=>'form-control', 'placeholder'=>'capacity', 'required'=>'required']); ?>
+
+    	<?php if($errors->has('capacity')): ?> <p class="alert alert-danger"><?php echo $errors->first('capacity'); ?></p> <?php endif; ?>
+    </div>
+</div>
+<div class="form-group">
+	<div class="col-lg-3"></div>
+    <div class="col-lg-9">
+    	<?php echo Form::checkbox('is_conjunct', '1', Input::old('is_conjunct'), ['id'=>'is_conjunct']); ?>
+
+    	<label for="is_conjunct" class="control-label">This room is conjunct with other room.</label>
+    </div>
+</div>
+<div  class="form-group" id="conjunct_box" style="display: none">	
+	<?php echo Form::label('conjunct[]', 'Select Conjunct Room', array('class' => 'col-lg-3 control-label')); ?>
+
+    <div class="col-lg-9">
+    	<p style="background-color: grey;">This room is conjunct with below selected rooms, This room will be booked with selected rooms, This room can has overlapping booking if only any of the selected room is available</p>
+    	<div>
+    		<?php echo Form::select('conjunct[]', $rooms, Input::old('conjunct[]'), array('id' => 'conjunct', 'class'=>'form-control', 'multiple'=>'multiple'));; ?>
+
+    		<?php if($errors->has('conjunct[]')): ?> <p class="alert alert-danger"><?php echo $errors->first('conjunct[]'); ?></p> <?php endif; ?>
+    	</div>
+    </div>
+</div>
+
+<div class="form-group">
+	<div class="col-lg-3"></div>
+    <div class="col-lg-9">
+    	<button type="submit" class="btn btn-default">Save Room</button>
+    	<a href="<?php echo URL::route('room.index'); ?>"><button type="button" class="btn">Cancel</button></a>
+    </div>
+</div>
