@@ -17,7 +17,7 @@
                     <li><a href="{{URL::route('service.index')}}">Service</a></li>
                     <li><a href="{{URL::route('room.index')}}">Room</a></li> 
                     <li><a href="">Wellness Team</a></li>
-                    <li><a href="">Users</a></li>
+                    <li><a href="{{URL::route('user.index')}}">Users</a></li> 
                 </ul>
             </li>
             <li><a href="{{URL::route('member.index')}}">Member</a></li>

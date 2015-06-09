@@ -13,7 +13,6 @@ class Addresses extends Migration {
     public function up() {
         Schema::create('addresses', function($table) {
             $table->increments('id');
-            $table->string('user_id');
             $table->string('address1', 100)->nullable();
             $table->string('address2', 100)->nullable();
             $table->string('street', 100)->nullable();

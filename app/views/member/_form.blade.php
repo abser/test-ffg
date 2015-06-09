@@ -6,6 +6,13 @@
         </div>
 @endif -->
 
+<div class="form-group">	
+    {{ Form::label('club_id', 'Club', array('class' => 'col-lg-2 control-label')) }}
+    <div class="col-lg-10">
+        {{ Form::select('club_id', $data['clubs'], Input::old('club_id'), array('id' => 'club_id', 'class'=>'form-control', 'required'=>'required')); }}
+        @if ($errors->has('club_id')) <p class="alert alert-danger">{{ $errors->first('club_id') }}</p> @endif
+    </div>
+</div>
 
 <div class="form-group">	
     {{ Form::label('first_name', 'First Name', array('class' => 'col-lg-2 control-label')) }}
@@ -51,7 +58,7 @@
 <div class="form-group">	
     <label for="gender" class="col-lg-2 control-label">Gender</label>
     <div class="col-lg-10">
-        {{  Form::select('gender', array('M' => 'Male', 'F' => 'Female'),array('class'=>'form-control','placeholder' => 'Gender','required' => 'required'))}}
+        {{  Form::select('gender', array('' => 'Select Gender','M' => 'Male','F' => 'Female'),'default',array('class'=>'form-control','placeholder' => 'Gender','required' => 'required'))}}
         @if ($errors->has('gender')) <p class="alert alert-danger">{{ $errors->first('gender') }}</p> @endif
     </div>
 </div> 
@@ -60,7 +67,7 @@
 <div class="form-group">
     <label for="age_group" class="col-lg-2 control-label">Age Group</label>
     <div class="col-lg-10">
-        {{  Form::select('age_group', array('g1' => '20-30', 'g2' => '30-40','g3' => '30-40', 'g4' => '40-50'),array('class'=>'form-control','placeholder' => 'age_group','required' => 'required'))}}
+        {{  Form::select('age_group', array('' => 'Select Age Group','g1' => '20-30', 'g2' => '30-40','g3' => '30-40', 'g4' => '40-50'),'default',array('class'=>'form-control','placeholder' => 'age_group','required' => 'required'))}}
         @if ($errors->has('age_group')) <p class="alert alert-danger">{{ $errors->first('age_group') }}</p> @endif
     </div>
 </div>
@@ -69,6 +76,15 @@
     <div class="col-lg-10">
         {{Form::text('occupation', Input::old('occupation'),  array('class'=>'form-control','placeholder' => 'Occupation','required' => 'required'))}}
         @if ($errors->has('occupation')) <p class="alert alert-danger">{{ $errors->first('occupation') }}</p> @endif
+    </div>
+</div>
+
+
+<div class="form-group">	
+    {{ Form::label('member_hobbies', 'Interest / Hobbies', array('class' => 'col-lg-2 control-label')) }}
+    <div class="col-lg-10">
+        {{Form::text('member_hobbies', Input::old('member_hobbies'),  array('class'=>'form-control','placeholder' => 'Interest / Hobbies'))}}
+
     </div>
 </div>
 
@@ -108,20 +124,20 @@
     <label for="image" class="col-lg-2 control-label">Picture</label>
     <div class="col-lg-10">
         {{ Form::file('image', ['id'=>'','class' => 'field']) }}
-        
-         
+
+
         <div class="small-9 columns">
-  &nbsp;&nbsp;    You can upload JPEG,GIP and PNG images     &nbsp;&nbsp;     {{Form::checkbox('display_pic','1',false,array('class'=>'checkdisplayClass','id'=>'display_pic'))}} Display profile picture
+            &nbsp;&nbsp;    You can upload JPEG,GIP and PNG images     &nbsp;&nbsp;     {{Form::checkbox('display_pic','1',false,array('class'=>'checkdisplayClass','id'=>'display_pic'))}} Display profile picture
         </div>
-                        
-        
+
+
     </div>
 </div>
 
 <div class="form-group">
     <div class="col-lg-2">&nbsp;</div>
-   <div class="col-lg-10">{{Form::checkbox('change_def_pass','1',false,array('class'=>'change_def_pass_class','id'=>'change_def_pass_id'))}} 
-Change Default Password</div>
+    <div class="col-lg-10">{{Form::checkbox('change_def_pass','1',true,array('class'=>'change_def_pass_class','id'=>'change_def_pass_id'))}} 
+        Change Default Password</div>
 </div>
 
 
@@ -129,7 +145,7 @@ Change Default Password</div>
 <div class="form-group">
     <label for="pa_id" class="col-lg-2 control-label">Personal Assisstant</label>
     <div class="col-lg-10">
-        {{Form::select('PaId',  array('' => 'Select PA') + $data['paId'],'default',array('id'=>'pa_id','required' => 'required'))}}
+        {{Form::select('PaId',  array('' => 'Select PA') + $data['paId'],'default',array('id'=>'pa_id'))}}
     </div>
 </div>
 <div class="form-group">

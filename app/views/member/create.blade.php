@@ -1,7 +1,7 @@
 @extends("layouts.admin")
 @section("content")
 <div class="row-fluid">
-<div class="col-md-6 col-xs-12">
+<div class="col-md-10 col-xs-12">
 
 <div class="panel">
     <div class="panel-heading">
@@ -20,10 +20,14 @@
 @stop
 
 @section('js')
+{{ HTML::script('/assets/js/club.form.js') }}
+{{ HTML::script('/assets/js/bootstrap-multiselect.js') }}
+{{ HTML::script('/assets/js/directoryTree.js') }}
+{{ HTML::script('/assets/js/member.form.js') }}
 <script type="text/javascript">
     var region_id = {{ $data['club']->address->region_id or 0 }};
-    var url_api_regions = "{{ url('api/regions/')}}";    
+    var url_api_regions = "{{ url('api/regions/')}}"; 
 </script>
 
-{{ HTML::script('/assets/js/club.form.js') }}
+
 @stop

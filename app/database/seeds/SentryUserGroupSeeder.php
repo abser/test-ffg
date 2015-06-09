@@ -19,7 +19,9 @@ class SentryUserGroupSeeder extends Seeder {
 			
         $sprimGroup			= Sentry::getGroupProvider()->findByName('sprim');			
 		$adminGroup			= Sentry::getGroupProvider()->findByName('admin');
-		$wellnessTeamGroup	= Sentry::getGroupProvider()->findByName('wellness_team');
+		$wellnessTeamGroup	= Sentry::getGroupProvider()->findByName('wellness_expert');
+                $wellnessTeamGroup	= Sentry::getGroupProvider()->findByName('medical_doctor');
+                $wellnessTeamGroup	= Sentry::getGroupProvider()->findByName('fitness_coach');
 		$memberGroup		= Sentry::getGroupProvider()->findByName('member');
 		$paGroup			= Sentry::getGroupProvider()->findByName('pa');
 

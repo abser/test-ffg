@@ -9,35 +9,51 @@ use Sprim\Model\UserProfile;
 use Sprim\Model\ProfileContacts;
 use Sprim\Model\PaUsers;
 use Sprim\Model\User;
+use Sprim\Model\Service;
+use Sprim\Model\ClubUser;
+use Sprim\Model\ServiceUsers;
+use Sprim\Model\UserGroup;
 use Sprim\Repositories\Contracts\MemberInterface;
 
 class MemberRepository extends AbstractRepository implements MemberInterface {
 
     protected $model;
 
-    public function __construct(Member $model, Address $address, UserProfile $UserProfile, ProfileContacts $ProfileContacts, PaUsers $PaUsers, User $User) {
+    public function __construct(Member $model, Address $address, UserProfile $UserProfile, ProfileContacts $ProfileContacts, PaUsers $PaUsers, User $User, Service $service, ClubUser $ClubUsers, ServiceUsers $ServiceUser,UserGroup $UserGroup) {
         $this->model = $model;
         $this->address = $address;
         $this->UserProfile = $UserProfile;
         $this->ProfileContacts = $ProfileContacts;
         $this->PaUsers = $PaUsers;
+        $this->service = $service;
         $this->User = $User;
+        $this->ClubUsers = $ClubUsers;
+        $this->ServiceUser = $ServiceUser;
+        $this->UserGroup = $UserGroup;
         parent::__construct();
     }
 
-    public function getPaList() {
-        return $usersId = User::lists('email', 'id');
-    }
 
-    public function createMember($input, $memberId) {
-        if ($memberId != 0) {
-            $addressId = $this->address->create(['user_id' => $memberId, 'address1' => $input['address1'], 'address2' => $input['address2'], 'city' => $input['address']['city'], 'region_id' => $input['address']['region_id'], 'country_code' => $input['address']['country_code'], 'postal_code' => $input['postalCode']]);
+
+    public function createMember($input, $memberId, $user_id) {
+//        echo '<pre>';
+//        // print_r($input['member_service']);
+//        echo '</pre>';
+//
+//        foreach ($input['member_service'] as $serviceId) {
+//            echo $serviceId;
+//        }
+//        die();
+        $groupUsersId = $this->UserGroup->create(['user_id' => $memberId, 'group_id' => 4]);
+        $clubUsersId = $this->ClubUsers->create(['user_id' => $memberId, 'club_id' => $input['club_id'], 'type' => 4, 'status' => 1, 'created_by' => $user_id]);
+           if ($memberId != 0) {
+            $addressId = $this->address->create(['address1' => $input['address1'], 'address2' => $input['address2'], 'city' => $input['address']['city'], 'region_id' => $input['address']['region_id'], 'country_code' => $input['address']['country_code'], 'postal_code' => $input['postalCode']]);
             $address_id = $addressId['id'];
         }
         return $memberId . "+" . $address_id;
     }
 
-    public function createProfile($user_id, $address_id, $input, $pic = '') {
+    public function createProfile($user_id, $address_id = '', $input, $pic = '') {
         if (isset($input['display_pic'])) {
             $display_pic = 1;
         } else {
@@ -55,7 +71,10 @@ class MemberRepository extends AbstractRepository implements MemberInterface {
         } else {
             $gender = "Female";
         }
-        $PaUsersId = $this->PaUsers->create(['user_id' => $user_id, 'pa_user_id' => $input['PaId']]);
+
+//        if (isset($input['PaId'])) {
+//            $PaUsersId = $this->PaUsers->create(['user_id' => $user_id, 'pa_user_id' => $input['PaId']]);
+//        }
         $profileId = $this->UserProfile->create(['user_id' => $user_id, 'address_id' => $address_id, 'profile_image' => $pic, 'display_profile_pic' => $display_pic, 'change_default_password' => $change_def_pass, 'gender' => $gender, 'occupation' => $input['occupation'], 'age_group' => $input['age_group']]);
         $profileId = $profileId['id'];
         if (isset($input['member_email'])) {
@@ -85,5 +104,7 @@ class MemberRepository extends AbstractRepository implements MemberInterface {
         }
         $memberId = $this->User->where('id', $memberId['member_id'])->update(array('activated' => $status));
     }
+
+ 
 
 }

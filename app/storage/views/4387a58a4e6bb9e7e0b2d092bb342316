@@ -1,0 +1,83 @@
+<?php $__env->startSection("content"); ?>
+
+<div class="row-fluid">
+    <div class="col-md-6 col-xs-12">
+
+        <div><a href="member/create" class="btn btn-default btn-raised">Add New Member</a> &nbsp;&nbsp;<a href="member/messageBroadcast" class="btn btn-default btn-raised">Message Broadcast</a></div>
+
+        <div>
+            <table class="table table-hover">
+                <thead>
+
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Contact
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>		
+
+                </thead>
+                <tbody>
+                    <?php foreach($data['memberData']  as $column => $field): ?>
+                    <tr>
+                        <th>
+                            <?php echo $field['first_name'].$field['last_name']; ?>
+
+                        </th>
+                        <th>
+                            <?php echo $field['email']; ?>
+
+                        </th>
+                        <th>
+                            <?php echo $field['info']; ?>
+
+                        </th>
+                        <th>
+
+                            <?php if($field['activated'] == 1): ?>
+                            <a href="<?php echo URL::to('member/deactivate/'. $field['id']); ?>"><i>Deactivate</i></a>
+                            <?php else: ?>
+                            <a href="<?php echo URL::to('member/activate/'. $field['id']); ?>"><i>Activate</i></a>
+                            <?php endif; ?>
+                        </th>
+                        <th>
+                            <a href="#edit-club" class="club-edit" data-club_edit_id="<?php echo $field['id']; ?>" data-reveal-id="edit_club">
+                                <i> H.index</i>
+                            </a>
+
+                        </th>
+                        <th>
+                            <a href="<?php echo URL::to('member/message/'. $field['id']); ?>"><i>Message</i></a>
+
+                        </th>
+                        <th>
+                            <a href="#edit-club" class="club-edit" data-club_edit_id="<?php echo $field['id']; ?>" data-reveal-id="edit_club">
+                                <i> Appointment</i>
+                            </a>
+
+                        </th>
+
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+
+    </div>	
+    <div class="col-md-6 col-xs-12">
+
+
+
+    </div>
+</div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make("layouts.admin", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
