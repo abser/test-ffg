@@ -169,9 +169,6 @@ Route::get('api/regions/{country_code}', function($country_code) {
     return $region->getListByCountry($country_code);
 });
 
-
-
-
 Route::get('api/services_sub_category/{category_id}', function($category_id) {
     $service_sub_category = App::make('Sprim\Repositories\Contracts\ServiceCategoryInterface');
     return $service_sub_category->getListByServiceCategory($category_id);
