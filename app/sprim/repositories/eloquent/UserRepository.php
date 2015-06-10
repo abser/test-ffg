@@ -4,8 +4,8 @@ namespace Sprim\Repositories\Eloquent;
 
 use Sprim\Repositories\Contracts\UserInterface;
 use Sprim\Model\User;
-
 use Sprim\Model\Address;
+use Sprim\Model\Club;
 use Sprim\Model\UserProfile;
 use Sprim\Model\ProfileContacts;
 use Sprim\Model\PaUsers;
@@ -15,12 +15,11 @@ use Sprim\Model\ServiceUsers;
 use Sprim\Model\UserGroup;
 use Carbon\Carbon;
 
-
 class UserRepository extends AbstractRepository implements UserInterface {
 
     protected $model;
- 
-    public function __construct(User $model, Address $address, UserProfile $UserProfile, ProfileContacts $ProfileContacts, PaUsers $PaUsers, Service $service, ClubUser $ClubUsers, ServiceUsers $ServiceUser, UserGroup $UserGroup) {
+
+    public function __construct(User $model, Address $address, UserProfile $UserProfile, ProfileContacts $ProfileContacts, PaUsers $PaUsers, Service $service, ClubUser $ClubUsers, ServiceUsers $ServiceUser, UserGroup $UserGroup, Club $Club) {
         $this->model = $model;
         $this->address = $address;
         $this->UserProfile = $UserProfile;
@@ -28,69 +27,60 @@ class UserRepository extends AbstractRepository implements UserInterface {
         $this->PaUsers = $PaUsers;
         $this->service = $service;
         $this->ClubUsers = $ClubUsers;
+        $this->Club = $Club;
         $this->ServiceUser = $ServiceUser;
         $this->UserGroup = $UserGroup;
         parent::__construct();
     }
-    
+
     protected $fields = [
-    	'first_name'        => 'users.first_name',
-    	'last_name'         => 'users.last_name'
+        'first_name' => 'users.first_name',
+        'last_name' => 'users.last_name'
     ];
-    
-    public function fields($model, $input)
-    {
-    	$model->email           = \Helpers::keyInput('email', $input);
-    	$model->password        = \Helpers::keyInput('password', $input);    	
-    	$model->first_name      = \Helpers::keyInput('first_name', $input);
-    	$model->last_name       = \Helpers::keyInput('last_name', $input);
-    	$model->password_confirmation		= \Helpers::keyInput('password', $input);
-    	 
-    	if (array_key_exists('title', $input)){
-    		$model->title		= \Helpers::keyInput('title', $input);
-    	}
-    	
-    	if (array_key_exists('password_confirmation', $input)){
-    		$model->password_confirmation		= \Helpers::keyInput('password_confirmation', $input);
-    	}   	
-    	
-    	return $model;
+
+    public function fields($model, $input) {
+        $model->email = \Helpers::keyInput('email', $input);
+        $model->password = \Helpers::keyInput('password', $input);
+        $model->first_name = \Helpers::keyInput('first_name', $input);
+        $model->last_name = \Helpers::keyInput('last_name', $input);
+        $model->password_confirmation = \Helpers::keyInput('password', $input);
+
+        if (array_key_exists('title', $input)) {
+            $model->title = \Helpers::keyInput('title', $input);
+        }
+
+        if (array_key_exists('password_confirmation', $input)) {
+            $model->password_confirmation = \Helpers::keyInput('password_confirmation', $input);
+        }
+
+        return $model;
     }
 
-        
-    public function filteredModel11($to_date = null, $from_date = null, $country = null)
-    {
-    	$jc_where_raw   = '';
-    	$has_from_date  = false;
-        
-    	$model = \DB::table('users')
-    		->select(\DB::raw('users.id, users.first_name, users.last_name, users.email'))
-    		->leftJoin('users_groups', 'users.id', '=', 'users_groups.user_id');
-    	
-    	$model->whereRaw('users_groups.group_id = 3');
-    
-    	if ($country) {
-    		$model->whereRaw('(addresses.country_code IN (' . $country . '))');
-    	}
-    
-    	return $model;
+    public function filteredModel11($to_date = null, $from_date = null, $country = null) {
+        $jc_where_raw = '';
+        $has_from_date = false;
+        $model = \DB::table('users')
+                ->select(\DB::raw('users.id, users.first_name, users.last_name, users.email'))
+                ->leftJoin('users_groups', 'users.id', '=', 'users_groups.user_id');
+        $model->whereRaw('users_groups.group_id = 3');
+        if ($country) {
+            $model->whereRaw('(addresses.country_code IN (' . $country . '))');
+        }
+        return $model;
     }
 
-    
-    private function validate($input)
-    {
-        $password   = strval(rand(11111111, 99999999));
-        
-        $user                           = $this->newInstance();
-        $user->email                    = $input['email'];
-        $user->password                 = $password;
-        $user->password_confirmation    = $password;
-        $user->first_name               = $input['first_name'];
-        $user->last_name                = $input['last_name'];
-        
-        if (!$user->validate()){
-			return false;
-		}
+    private function validate($input) {
+        $password = strval(rand(11111111, 99999999));
+        $user = $this->newInstance();
+        $user->email = $input['email'];
+        $user->password = $password;
+        $user->password_confirmation = $password;
+        $user->first_name = $input['first_name'];
+        $user->last_name = $input['last_name'];
+
+        if (!$user->validate()) {
+            return false;
+        }
         return $user;
     }
 
@@ -120,12 +110,9 @@ class UserRepository extends AbstractRepository implements UserInterface {
 
             \Session::flash('success', 'New user has been created');
             $is_saved = true;
-           
+
             //$this->sendWelcomeEmail($user);
-            
-        }
-        catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
-        {
+        } catch (Cartalyst\Sentry\Users\LoginRequiredException $e) {
             \Session::flash('error', 'Login field required.');
         } catch (Cartalyst\Sentry\Users\UserExistsException $e) {
             \Session::flash('error', 'User already exists.');
@@ -133,20 +120,19 @@ class UserRepository extends AbstractRepository implements UserInterface {
 
         return $is_saved;
     }
-    
-    public function getRandomPassword() 
-    {
-    	$alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
-    	$pass = array(); //remember to declare $pass as an array
-    	$alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-    	for ($i = 0; $i < 8; $i++) {
-    		$n = rand(0, $alphaLength);
-    		$pass[] = $alphabet[$n];
-    	}
-    	return implode($pass); //turn the array into a string
+
+    public function getRandomPassword() {
+        $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+        $pass = array(); //remember to declare $pass as an array
+        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        for ($i = 0; $i < 8; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+        }
+        return implode($pass); //turn the array into a string
     }
-    
-     private function sendWelcomeEmail($user) {
+
+    private function sendWelcomeEmail($user) {
         $data['activationCode'] = $user->GetActivationCode();
         $data['email'] = $user->email;
         $data['userId'] = $user->getId();
@@ -184,12 +170,12 @@ class UserRepository extends AbstractRepository implements UserInterface {
     }
 
     public function filteredModel($s_term = null, $s_field = 'all') {
-     $user_model = \DB::table('users')
-                    ->select(\DB::raw('users.id, users.email, users.first_name, users.activated,users.activated,profile_contacts.info
+        $user_model = \DB::table('users')
+                ->select(\DB::raw('users.id, users.email, users.first_name, users.activated,users.activated,profile_contacts.info
     		'))
-                    ->join('profile_contacts', 'users.id', '=', 'profile_contacts.user_id')
-                    ->where('profile_contacts.contact_type', '=', 2)
-                    ->whereNotIn('users.id', array(1, 2, 3));
+                ->join('profile_contacts', 'users.id', '=', 'profile_contacts.user_id')
+                ->where('profile_contacts.contact_type', '=', 2)
+                ->whereNotIn('users.id', array(1, 2, 3));
         return $user_model;
     }
 
@@ -241,13 +227,11 @@ class UserRepository extends AbstractRepository implements UserInterface {
         } else {
             $display_pic = 0;
         }
-
         if (isset($input['change_def_pass'])) {
             $change_def_pass = 1;
         } else {
             $change_def_pass = 0;
         }
-
         if ($input['gender'] == 'M') {
             $gender = "Male";
         } else {
@@ -353,6 +337,20 @@ class UserRepository extends AbstractRepository implements UserInterface {
         if (isset($input['member_phone'])) {
             $EditProfileUsers = $this->ProfileContacts->where('user_id', $input['edit_user_id'])->where('info', 2)->update(array('info' => $input['member_phone']));
         }
+    }
+
+    public function getSelectList() {
+        //	$init	= array('' => 'Select Club');
+        $init = array();
+        $obj = $this->Club->where('status', '=', '1')->orderBy('name')->lists('name', 'id');
+
+        $options = array_map(function($name) {
+            return ucwords($name);
+        }, $obj);
+
+        // return array_merge($init,$options);
+        // return ($init + $options);
+        return array_replace($init, $options);
     }
 
 }
