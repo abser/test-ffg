@@ -4,11 +4,13 @@ use Sprim\Repositories\Contracts\UserInterface as User;
 use Sprim\Repositories\Contracts\ServiceInterface as Service;
 use Sprim\Repositories\Contracts\ClubInterface as Club;
 use Sprim\Repositories\Contracts\ServiceCategoryInterface as ServiceCategory;
-use Sprim\Repositories\Contracts\UserProfileInterface as UserProfile;
+use Sprim\Repositories\Contracts\ProfileInterface as Profile;
+use Sprim\Repositories\Contracts\ProfileContactInterface as ProfileContact;
 
 class WellnessTeamController extends \BaseController {
 
-	public function __construct(User $user, Service $service, ServiceCategory $service_category, Club $club, UserProfile $user_profile)
+	public function __construct(User $user, Service $service, ServiceCategory $service_category, Club $club, UserProfile $user_profile, 
+			Profile $profile, ProfileContact $profile_contact)
 	{
 		$this->model	= $user;
 		$this->user		= $user;
@@ -16,6 +18,9 @@ class WellnessTeamController extends \BaseController {
 		$this->club		= $club;
 		$this->service_category = $service_category;
 		$this->user_profile		= $user_profile;
+		
+		$this->profile	= $profile;
+		$this->profile_contact	= $profile_contact;
 	
 		parent::__construct();
 		$this->owner_table = Config::get('sprim.tables.service');
@@ -76,8 +81,7 @@ class WellnessTeamController extends \BaseController {
 				$user = Sentry::register(array('email' => $user->email,
 						'password'      => $user->password,
 						'first_name'    => $user->first_name,
-						'last_name'     => $user->last_name,
-						'title'			=> $user->title,));
+						'last_name'     => $user->last_name));
 	
 				/* $data['activationCode']     = $user->GetActivationCode();
 				$data['email']              = $inputUser['email'];
@@ -89,19 +93,20 @@ class WellnessTeamController extends \BaseController {
 					$m->to($data['email'])->subject(Config::get('sprim.site_name'));
 				}); */
 	
-				$allGroups   = Sentry::getGroupProvider()->findAll();
-				// $permissions = $this->permissions;
-	
-				foreach ($allGroups as $group) {
-						
-					if ($group->id == 3)
-					{
-						$user->addGroup($group);
-					}
+				if ($input['profile_type'] && $input['profile_type'] == '1')
+				{
+					$group = Sentry::findGroupByName('medical_doctor');
+					$user->addGroup($group);
+					// ($user->removeGroup($adminGroup))
+				} else if ($input['profile_type'] && $input['profile_type'] == '2') {
+					$group = Sentry::findGroupByName('fitness_coach');
+					$user->addGroup($group);
+				} else if ($input['profile_type'] && $input['profile_type'] == '3') {
+					$group = Sentry::findGroupByName('wellness_expert');
+					$user->addGroup($group);
 				}
 				
-				$this->user_profile->_save($input);	
-				// $this->saveOtherDetails($user, Input::all());
+				// $this->saveOtherDetails($user, $input);
 	
 				Session::flash('success', 'New user has been created');
 				return Redirect::route($this->route_prefix.'.index');
@@ -231,7 +236,7 @@ class WellnessTeamController extends \BaseController {
 		$data['r_prefix']   = 'wellness-team';
 		$data['s_fields']   = array('all' => 'All', 'name' => 'Service Name', 'service_category' => 'Service Category');
 	
-		$obj                = $this->model->paginate($pageParams);
+		$obj                = $this->model->paginate1($pageParams);
 		$data['model']      = Paginator::make($obj->items, $obj->totalItems, $pageParams['limit']);
 	
 		$data['controller']     = 'wellness-team';
@@ -258,17 +263,16 @@ class WellnessTeamController extends \BaseController {
 	
 	protected function saveOtherDetails($user, $input)
 	{	
-		$user_model = $this->user->find($user->id);
-		if (count($user_model->profile)){
-			$user_model->profile_id = $user_model->profile->id;
-		}
-	
-		$profile_id = $this->profile->_save($user_model, $input['profile']);
-	
-		if ($profile_id && $this->is_agent){
-			$input = ['profile_id' => $profile_id];
-			$this->agent->_save($input);
-		}
+		$profile_id = $this->profile->_save($user->id, $input);
+		
+		$this->profile_contact->_save($input['email'], \Config::get('sprim.contact_types.email'),
+				$hcp->profile_id);
+		
+		$this->profile_contact->_save($input['office_num'], \Config::get('sprim.contact_types.office_num'),
+				$hcp->profile_id);
+		
+		$this->profile_contact->_save($input['mobile_num'], \Config::get('sprim.contact_types.mobile_num'),
+				$hcp->profile_id);
 	}
 		
 }

@@ -33,8 +33,7 @@ class Services extends Migration {
 			$table->foreign		('club_id')					->references('id')->on('clubs');
 			$table->foreign		('service_category_id')		->references('id')->on('service_categories');
 			$table->foreign		('service_sub_category_id')	->references('id')->on('service_categories');
-				
-			$table->unique('name');
+						
 			$table->index('club_id');
 			$table->index('service_category_id');
 		});
