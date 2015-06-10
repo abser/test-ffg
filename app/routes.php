@@ -160,6 +160,10 @@ Route::group(array("before" => "sentry"), function() {
             "as" => "user.activ",
             "uses" => "UserController@activateAction"
         ))->where(['id' => '[\d+]+']);
+
+        Route::any("/getAccessDiv", [
+            "as" => "user.getAccessDiv",
+            "uses" => "UserController@getAccessDiv"]);
     });
     Route::resource('user', 'UserController');
 });

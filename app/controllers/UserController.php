@@ -26,12 +26,7 @@ class UserController extends \BaseController {
 
     public function index() {
         $data = $this->getList();
-//        echo '<pre>';
-//        print_r($data);
-//        echo '</pre>';
-//        die();
         $data['route'] = 'user.index';
-
         return View::make("user.index", compact('data'));
     }
 
@@ -41,7 +36,7 @@ class UserController extends \BaseController {
      * @return Response
      */
     public function create() {
-        $data['clubs'] = $this->club->getSelectList();
+        $data['clubs'] = $this->model->getSelectList();
         $data['route'] = 'member';
         $data['header'] = 'Add New Member';
         $data['form'] = 'Member';
@@ -54,12 +49,10 @@ class UserController extends \BaseController {
      *
      * @return Response
      */
-    public function store() {
+     public function store() {
         $user_id = Sentry::getUser();
         $logged_user_id = $user_id['id'];
-
         $member_password = $this->model->ranPass();
-
         $senData = Sentry::register(array(
                     'email' => $_POST['member_email'],
                     'password' => $member_password,
@@ -67,52 +60,23 @@ class UserController extends \BaseController {
                     'last_name' => $_POST['last_name'],
         ));
 
-        $member_id = $this->model->createUser(Input::all(), $senData['id'], $logged_user_id);
-
-        $data['logged_user_id'] = $logged_user_id;
-        $data['member_email'] = $_POST['member_email'];
-        $data['member_password'] = $member_password;
-        \Mail::send('emails.auth.member_mail', $data, function($m) use($data) {
-            $m->to($data['member_email'])->subject(\Config::get('sprim.site_name'));
-        });
-        Session::flash('message', 'user created successfully');
-        return Redirect::route('user.index');
-
-
-
-
-
-        // die();
-//        Sentry::createGroup(array(
-//            'name' => 'pa',
-//            'permissions' => array(
-//                'pa_appt_full_access' => 1,
-//                'pa_view_alpa_cancel_appointment' => 1,
-//                'pa_calender_appointment' => 0,
-//                'pa_create_appointment' => 1,
-//                'pa_cancel_appointment' => 0,
-//                'pa_group_full_access' => 1,
-//                'pa_view_all_group' => 1,
-//            ),
-//        ));
-
-
-
-        $input = Input::only('_token', 'permissions');
-
-        if (!$group = Sentry::createGroup($input)) {
-            // return Redirect::to('roles/create')->withErrors($group->errors())->withInput();
+        $input = Input::all();
+        $group = Sentry::findGroupById($input['user_type']);
+        $group->name = $input['name'];
+        $group->permissions = $input['permission'];
+        if (!$group->save()) {
+            return Response::view('errors.404', array(), 404);
         } else {
-            // return Redirect::to('roles');
+            $member_id = $this->model->createUser(Input::all(), $senData['id'], $logged_user_id);
+            $data['logged_user_id'] = $logged_user_id;
+            $data['member_email'] = $_POST['member_email'];
+            $data['member_password'] = $member_password;
+            \Mail::send('emails.auth.member_mail', $data, function($m) use($data) {
+                $m->to($data['member_email'])->subject(\Config::get('sprim.site_name'));
+            });
+            Session::flash('message', 'user created successfully');
+            return Redirect::route('user.index');
         }
-        die();
-        Sentry::createGroup(array(
-            'name' => 'Subscribers',
-            'permissions' => array(
-                'admin' => 1,
-                'users' => 1,
-            ),
-        ));
     }
 
     /**
@@ -133,12 +97,11 @@ class UserController extends \BaseController {
      */
     public function edit($id) {
         $data['user'] = $this->model->EditUserList($id);
-        $data['clubs'] = $this->club->getSelectList();
+        $data['clubs'] = $this->model->getSelectList();
         $data['user_id_edit'] = $id;
         if (!$data['user']) {
             return Response::view('errors.404', array(), 404);
         }
-
         return View::make('user.edit', compact('data'));
     }
 
@@ -193,10 +156,8 @@ class UserController extends \BaseController {
         $data = $pageParams;
         $data['r_prefix'] = 'user';
         $data['s_fields'] = array('all' => 'All', 'first_name' => 'user Name', 'service_category' => 'Service Category');
-
         $obj = $this->model->paginate($pageParams);
         $data['model'] = Paginator::make($obj->items, $obj->totalItems, $pageParams['limit']);
-
         $data['controller'] = 'user';
         return $data;
     }
@@ -232,6 +193,11 @@ class UserController extends \BaseController {
                 return Redirect::to('user');
             }
         }
+    }
+
+    public function getAccessDiv() {
+        $data['userDivType'] = $_POST['userDivType'];
+        return View::make('user.form_access', compact('data'));
     }
 
 }
