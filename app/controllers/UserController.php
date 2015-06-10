@@ -49,19 +49,7 @@ class UserController extends \BaseController {
      *
      * @return Response
      */
-    public function update2222($id) {
-        $input = Input::all();
-        $group = Sentry::findGroupById($id);
-        $group->name = $input['name'];
-        $group->permissions = $input['permissions'];
-        if (!$group->save()) {
-            return Redirect::to('roles/' . $id . '/edit')->withErrors($group->errors())->withInput();
-        } else {
-            return Redirect::to('roles');
-        }
-    }
-
-    public function store() {
+     public function store() {
         $user_id = Sentry::getUser();
         $logged_user_id = $user_id['id'];
         $member_password = $this->model->ranPass();
