@@ -225,7 +225,7 @@ class UserRepository extends AbstractRepository implements UserInterface {
     }
 
     public function createMember($input, $memberId, $user_id) {
-      //  $clubUsersId = $this->ClubUsers->create(['user_id' => $memberId, 'club_id' => $input['club_id'], 'type' => 1, 'status' => 1, 'created_by' => $user_id]);
+        $clubUsersId = $this->ClubUsers->create(['user_id' => $memberId, 'club_id' => $input['club_id'], 'type' => 1, 'status' => 1, 'created_by' => $user_id]);
         $groupUsersId = $this->UserGroup->create(['user_id' => $memberId, 'group_id' => 6]);
         if ($memberId != 0) {
             $addressId = $this->address->create(['address1' => $input['address1'], 'address2' => $input['address2'], 'city' => $input['address']['city'], 'region_id' => $input['address']['region_id'], 'country_code' => $input['address']['country_code'], 'postal_code' => $input['postalCode']]);
@@ -279,9 +279,9 @@ class UserRepository extends AbstractRepository implements UserInterface {
     public function createUser($input, $memberId, $user_id) {
 
         $groupUsersId = $this->UserGroup->create(['user_id' => $memberId, 'group_id' => $input['user_type']]);
-        //$clubUsersId = $this->ClubUsers->create(['user_id' => $memberId, 'club_id' => $input['club_id'], 'type' => $input['user_type'], 'status' => 1, 'created_by' => $user_id]);
+        $clubUsersId = $this->ClubUsers->create(['user_id' => $memberId, 'club_id' => $input['club_id'], 'type' => $input['user_type'], 'status' => 1, 'created_by' => $user_id]);
         if (isset($input['member_phone'])) {
-            $memberId = $this->ProfileContacts->create(['user_id' => $memberId, 'contact_type' => 2, 'info' => $input['member_phone']]);
+            $memberId = $this->ProfileContacts->create(['user_id' => $memberId, 'contact_type' => 2,'created_by' => $user_id, 'info' => $input['member_phone']]);
         }
         return $memberId;
     }
