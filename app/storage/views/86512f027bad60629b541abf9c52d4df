@@ -27,11 +27,18 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('js'); ?>
+<?php echo HTML::script('/assets/js/club.form.js'); ?>
+
 <?php echo HTML::script('/assets/js/bootstrap-multiselect.js'); ?>
 
 <?php echo HTML::script('/assets/js/directoryTree.js'); ?>
 
-<?php echo HTML::script('/assets/js/room.form.js'); ?>
+<?php echo HTML::script('/assets/js/member.form.js'); ?>
+
+<script type="text/javascript">
+    var region_id = <?php echo isset($data['club']->address->region_id) ? $data['club']->address->region_id : 0; ?>;
+    var url_api_regions = "<?php echo url('api/regions/'); ?>"; 
+</script>
 
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make("layouts.admin", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

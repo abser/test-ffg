@@ -25,7 +25,7 @@ class UserController extends \BaseController {
     }
 
     public function index() {
-        $data = $this->getList();
+        $data = $this->getUserList();
         $data['route'] = 'user.index';
         return View::make("user.index", compact('data'));
     }
@@ -49,7 +49,7 @@ class UserController extends \BaseController {
      *
      * @return Response
      */
-     public function store() {
+    public function store() {
         $user_id = Sentry::getUser();
         $logged_user_id = $user_id['id'];
         $member_password = $this->model->ranPass();
@@ -151,12 +151,12 @@ class UserController extends \BaseController {
         //
     }
 
-    protected function getList() {
+    protected function getUserList() {
         $pageParams = Helpers::paginatorParams($this->sort, $this->dir);
         $data = $pageParams;
         $data['r_prefix'] = 'user';
         $data['s_fields'] = array('all' => 'All', 'first_name' => 'user Name', 'service_category' => 'Service Category');
-        $obj = $this->model->paginate($pageParams);
+        $obj = $this->model->paginateUsers($pageParams, 'adminUser');
         $data['model'] = Paginator::make($obj->items, $obj->totalItems, $pageParams['limit']);
         $data['controller'] = 'user';
         return $data;

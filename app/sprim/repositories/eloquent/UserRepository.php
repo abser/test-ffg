@@ -56,7 +56,7 @@ class UserRepository extends AbstractRepository implements UserInterface {
         return $model;
     }
 
-    public function filteredModel11($to_date = null, $from_date = null, $country = null) {
+    public function filteredMode($to_date = null, $from_date = null, $country = null) {
         $jc_where_raw = '';
         $has_from_date = false;
         $model = \DB::table('users')
@@ -169,16 +169,6 @@ class UserRepository extends AbstractRepository implements UserInterface {
         return Utils::profileSave($user_model, $input['profile']);
     }
 
-    public function filteredModel($s_term = null, $s_field = 'all') {
-        $user_model = \DB::table('users')
-                ->select(\DB::raw('users.id, users.email, users.first_name, users.activated,users.activated,profile_contacts.info
-    		'))
-                ->join('profile_contacts', 'users.id', '=', 'profile_contacts.user_id')
-                ->where('profile_contacts.contact_type', '=', 2)
-                ->whereNotIn('users.id', array(1, 2, 3));
-        return $user_model;
-    }
-
     public function acativeMember($memberId) {
         if ($memberId['member_status'] == 'activate') {
             $status = 1;
@@ -213,7 +203,8 @@ class UserRepository extends AbstractRepository implements UserInterface {
 
     public function createMember($input, $memberId, $user_id) {
         $groupUsersId = $this->UserGroup->create(['user_id' => $memberId, 'group_id' => 6]);
-        $clubUsersId = $this->ClubUsers->create(['user_id' => $memberId, 'club_id' => $input['club_id'], 'type' => 4, 'status' => 1, 'created_by' => $user_id]);
+         $clubUsersId = $this->ClubUsers->create(['user_id' => $memberId, 'club_id' => $input['club_id'], 'type' => 4, 'status' => 1, 'created_by' => $user_id]);
+       // $clubUsersId = $this->ClubUsers->create(['user_id' => $memberId, 'club_id' => $input['club_id'], 'type' => 4, 'status' => 1, 'created_by' => $user_id]);
         if ($memberId != 0) {
             $addressId = $this->address->create(['address1' => $input['address1'], 'address2' => $input['address2'], 'city' => $input['address']['city'], 'region_id' => $input['address']['region_id'], 'country_code' => $input['address']['country_code'], 'postal_code' => $input['postalCode']]);
             $address_id = $addressId['id'];
@@ -280,6 +271,7 @@ class UserRepository extends AbstractRepository implements UserInterface {
     		'))
                 ->join('user_profile', 'users.id', '=', 'user_profile.user_id')
                 ->join('profile_contacts', 'users.id', '=', 'profile_contacts.user_id')
+                // ->join('club_users', 'users.id', '=', 'club_users.user_id')
                 // ->whereIn('users.id', array(1, 2, 3))
                 ->where('users.id', $id);
 
@@ -325,8 +317,9 @@ class UserRepository extends AbstractRepository implements UserInterface {
 
     public function EditUserList($id) {
         $query = \DB::table('users')
-                ->select(\DB::raw('users.id, users.email, users.first_name,users.last_name, users.activated,users.activated,profile_contacts.info'))
+                ->select(\DB::raw('users.id, users.email, users.first_name,users.last_name, users.activated,users.activated,profile_contacts.info,club_users.club_id'))
                 ->join('profile_contacts', 'users.id', '=', 'profile_contacts.user_id')
+                 ->join('club_users', 'users.id', '=', 'club_users.user_id')
                 // ->whereIn('users.id', array(1, 2, 3))
                 ->where('users.id', $id);
 
@@ -340,17 +333,51 @@ class UserRepository extends AbstractRepository implements UserInterface {
     }
 
     public function getSelectList() {
-        //	$init	= array('' => 'Select Club');
-        $init = array();
+          $init = array();
         $obj = $this->Club->where('status', '=', '1')->orderBy('name')->lists('name', 'id');
-
         $options = array_map(function($name) {
             return ucwords($name);
         }, $obj);
-
-        // return array_merge($init,$options);
-        // return ($init + $options);
         return array_replace($init, $options);
+    }
+
+    public function paginateUsers($arr, $pageType = '') {
+        extract($arr);
+        $result = new \StdClass;
+        $result->page = $page;
+        $result->limit = $limit;
+        $result->totalItems = 0;
+        $result->items = array();
+        $query = $this->filteredUserModel($pageType);
+        $order = $this->sqlFieldUser($sort);
+
+        $result->totalItems = count($query->get());
+        $result->items = $query->skip($limit * ($page - 1))->take($limit)->orderBy($order, $dir)->get();
+
+        return $result;
+    }
+       public function sqlFieldUser($field) {
+        return (array_key_exists($field, $this->fields) ? $this->fields[$field] : $field);
+    }
+
+    public function filteredUserModel($pageType) {
+        if ($pageType == 'memberUser') {
+            $groupId = 6;
+            $query = \DB::table('users')
+                    ->select(\DB::raw('users.email, users.first_name, users.id,users.activated,profile_contacts.info,users_groups.group_id,users_groups.user_id,users_groups.group_id '))
+                    ->join('users_groups', 'users.id', '=', 'users_groups.user_id')
+                    ->join('profile_contacts', 'users.id', '=', 'profile_contacts.user_id')
+                    ->where('users_groups.group_id', $groupId)
+                    ->where('profile_contacts.contact_type', 3);
+        } elseif ($pageType == 'adminUser') {
+            $groupId = 2;
+            $query = \DB::table('users')
+                    ->select(\DB::raw('users.email, users.first_name, users.id,users.activated,profile_contacts.info,users_groups.group_id,users_groups.user_id,users_groups.group_id '))
+                    ->join('users_groups', 'users.id', '=', 'users_groups.user_id')
+                    ->join('profile_contacts', 'users.id', '=', 'profile_contacts.user_id')
+                    ->whereIn('users_groups.group_id', array(2, 7));
+        }
+        return $query;
     }
 
 }
