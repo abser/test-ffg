@@ -19,4 +19,6 @@ $(document).ready(function($) {
     $("#country").change(function() {
       getRegions($(this).val());
     });
+    $('#clubs').multiselect();
+    /*tinymce.init({selector:'textarea'}); */
 });
