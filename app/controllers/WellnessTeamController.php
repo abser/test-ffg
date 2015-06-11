@@ -51,7 +51,8 @@ class WellnessTeamController extends \BaseController {
 	 */
 	public function create()
 	{
-		$data					= $this->initData();
+		// $data					= $this->initData();
+		$data['user']   		= $this->model->newInstance();
 		$data['clubs']			= $this->club->getSelectList();
 		$data['categories']		= $this->service_category->getSelectList(0);
 		$data['sub_categories']	= $this->service_category->getSelectList(1);
@@ -91,21 +92,9 @@ class WellnessTeamController extends \BaseController {
 				Mail::send('emails.auth.welcome', $data, function($m) use($data)
 				{
 					$m->to($data['email'])->subject(Config::get('sprim.site_name'));
-				}); */
-	
-				if ($input['profile_type'] && $input['profile_type'] == '1')
-				{
-					$group = Sentry::findGroupByName('medical_doctor');
-					$user->addGroup($group);
-				} else if ($input['profile_type'] && $input['profile_type'] == '2') {
-					$group = Sentry::findGroupByName('fitness_coach');
-					$user->addGroup($group);
-				} else if ($input['profile_type'] && $input['profile_type'] == '3') {
-					$group = Sentry::findGroupByName('wellness_expert');
-					$user->addGroup($group);
-				}
+				}); */		
 				
-				// $this->saveOtherDetails($user, $input);
+				$this->saveOtherDetails($user, $input);
 	
 				Session::flash('success', 'New user has been created');
 				return Redirect::route($this->route_prefix.'.index');
@@ -145,15 +134,17 @@ class WellnessTeamController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$data                           = $this->initData();
-		$data['user']                   = $this->user->getById($id);
-		$data['sentry']                 = Sentry::findUserById($id);
+		// $data				= $this->initData();
+		$data['user']           = $this->user->getById($id, ['club_users']);
+		$data['sentry']         = Sentry::findUserById($id);
 		$data['user_groups']    = array();
 		$data['email_opt']      = 'disabled';
 		
 		foreach ($data['sentry']->groups as $group){
 			$data['user_groups'][] = $group->id;
 		}	
+		
+		// dd($data['user']);
 		
 		$data['clubs']		= $this->club->getSelectList();
 		$data['categories']	= $this->service_category->getSelectList(0);
@@ -175,44 +166,23 @@ class WellnessTeamController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		/* $input  = Input::all();
+		$input  = Input::all();
 		$model  = $this->model->fields($this->model->find($id), $input);
-		$model->updated_by 	= \Session::get('user.id');
-		
-		if (!$model->save()){
-			return Redirect::to('service/create')->withErrors($model->errors())->withInput();
-		} else {
+		$model->updated_by 	= \Session::get('user.id');	
 				
-			$this->model->saveRelations($model, $input);
-				
-			return Redirect::to('service');
-		} */
+		if (!$model->updateUniques()){
+			return Redirect::to('wellness-team/'.$id.'/edit')->withErrors($model->errors())->withInput();
+		} else {		
 			
-		$input      = Input::all();
-		$user       = Sentry::findUserById($id);
-		$groups		= Sentry::findAllGroups();
-		$input['permissions'] = Utils::filterArray(Input::get('permissions', null));
-		
-		/* foreach($groups as $group){
-			$user->removeGroup($group);
-		}
-		
-		if($input['permissions']){		
-			foreach($input['permissions'] as $key => $val){
-				$group = Sentry::findGroupById($key);
-				$user->addGroup($group);
+			$groups		= Sentry::findAllGroups();
+			foreach($groups as $group){
+				$user->removeGroup($group);
 			}
-		} */
-		
-		$user->first_name   = $input['first_name'];
-		$user->last_name    = Helpers::keyInput('last_name', $input);
-		
-		if (!$user->save()){
-			return Redirect::route('wellness-team.edit', $id)->withErrors($user->errors())->withInput();
-		} else {
-			// $this->saveOtherDetails($user, $input);
+			
+			$this->saveOtherDetails($model, $input);		
 			return Redirect::to('wellness-team');
 		}
+				
 	}
 
 
@@ -262,7 +232,19 @@ class WellnessTeamController extends \BaseController {
 	
 	protected function saveOtherDetails($user, $input)
 	{	
-		$profile_id = $this->profile->_save($user->id, $input);
+		if ($input['profile_type'] && $input['profile_type'] == '1')
+		{
+			$group = Sentry::findGroupByName('medical_doctor');
+			$user->addGroup($group);
+		} else if ($input['profile_type'] && $input['profile_type'] == '2') {
+			$group = Sentry::findGroupByName('fitness_coach');
+			$user->addGroup($group);
+		} else if ($input['profile_type'] && $input['profile_type'] == '3') {
+			$group = Sentry::findGroupByName('wellness_expert');
+			$user->addGroup($group);
+		}
+		
+		/* $profile_id = $this->profile->_save($user, $input);
 		
 		$this->profile_contact->_save($input['email'], \Config::get('sprim.contact_types.email'),
 				$hcp->profile_id);
@@ -271,7 +253,7 @@ class WellnessTeamController extends \BaseController {
 				$hcp->profile_id);
 		
 		$this->profile_contact->_save($input['mobile_num'], \Config::get('sprim.contact_types.mobile_num'),
-				$hcp->profile_id);
+				$hcp->profile_id); */
 	}
 		
 }

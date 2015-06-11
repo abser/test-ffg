@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 class ClubUser extends Ardent {
 	
-    protected $fillable = array('club_id', 'user_id', 'type', 'status');
+    // protected $fillable = array('club_id', 'user_id', 'type', 'status');
 
 	public static $rules = array(
 		'club_id'	=> 'required|integer',

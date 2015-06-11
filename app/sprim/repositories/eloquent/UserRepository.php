@@ -39,14 +39,13 @@ class UserRepository extends AbstractRepository implements UserInterface {
     ];
 
     public function fields($model, $input) {
-        $model->email = \Helpers::keyInput('email', $input);
-        $model->password = \Helpers::keyInput('password', $input);
-        $model->first_name = \Helpers::keyInput('first_name', $input);
-        $model->last_name = \Helpers::keyInput('last_name', $input);
-        $model->password_confirmation = \Helpers::keyInput('password', $input);
+        $model->email		= \Helpers::keyInput('email', $input);        
+        $model->first_name	= \Helpers::keyInput('first_name', $input);
+        $model->last_name	= \Helpers::keyInput('last_name', $input);        
 
-        if (array_key_exists('title', $input)) {
-            $model->title = \Helpers::keyInput('title', $input);
+    	if (array_key_exists('password', $input)) {
+            $model->password				= \Helpers::keyInput('password', $input);
+            $model->password_confirmation	= \Helpers::keyInput('password', $input);
         }
 
         if (array_key_exists('password_confirmation', $input)) {
