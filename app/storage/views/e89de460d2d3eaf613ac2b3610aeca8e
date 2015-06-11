@@ -5,7 +5,7 @@
         <?php endforeach; ?>
         </div>
 <?php endif; ?> -->
-
+<?php //echo '<pre>'; print_r($data); echo '</pre>';?>
 <div class="form-group">	
     <?php echo Form::label('club_id', 'Club', array('class' => 'col-lg-2 control-label')); ?>
 
