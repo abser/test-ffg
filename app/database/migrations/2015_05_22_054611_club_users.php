@@ -16,7 +16,7 @@ class ClubUsers extends Migration {
 			$table->increments	('id');
 			$table->integer		('club_id')					->unsigned();
 			$table->integer		('user_id')					->unsigned();
-			$table->tinyInteger	('type')					->unsigned();	//1=>Admin, 2=>Member, 3=>PA
+			$table->tinyInteger	('type')					->unsigned()->nullable();	//1=>Admin, 2=>Member, 3=>PA  //Remove later
 			$table->enum		('status', array('0', '1'))->default(0);
 		
 			$table->integer		('created_by')				->unsigned();

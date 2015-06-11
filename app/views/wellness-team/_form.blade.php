@@ -2,8 +2,12 @@
 <div class="form-group">	
 	{{ Form::label('club_id', 'Club', array('class' => 'col-lg-3 control-label')) }}
     <div class="col-lg-9">
-    	{{ Form::select('club_id', $clubs, Input::old('club_id'), array('id' => 'club_id', 'class'=>'form-control', 'required'=>'required')); }}
-    	@if ($errors->has('name')) <p class="alert alert-danger">{{ $errors->first('name') }}</p> @endif
+    	@if($user && $user->club_users)
+    		{{ Form::select('clubs[]', $clubs, $user->club_users->lists('id'), array('id' => 'clubs', 'multiple'=>true, 'size'=>'3', 'class'=>'form-control', 'required'=>'required')); }}
+    	@else
+    		{{ Form::select('clubs[]', $clubs, (Input::old('clubs')), array('id' => 'clubs', 'multiple'=>true, 'size'=>'3', 'class'=>'form-control', 'required'=>'required')); }}
+    	@endif    	
+    	@if ($errors->has('clubs')) <p class="alert alert-danger">{{ $errors->first('clubs') }}</p> @endif
     </div>
 </div>
 <div class="form-group" style="padding-top: 1em;">

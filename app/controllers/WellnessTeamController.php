@@ -51,7 +51,8 @@ class WellnessTeamController extends \BaseController {
 	 */
 	public function create()
 	{
-		$data					= $this->initData();
+		// $data					= $this->initData();
+		$data['user']   		= $this->model->newInstance();
 		$data['clubs']			= $this->club->getSelectList();
 		$data['categories']		= $this->service_category->getSelectList(0);
 		$data['sub_categories']	= $this->service_category->getSelectList(1);
@@ -145,8 +146,8 @@ class WellnessTeamController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$data                           = $this->initData();
-		$data['user']                   = $this->user->getById($id);
+		// $data                           = $this->initData();
+		$data['user']                   = $this->user->getById($id, ['club_users']);
 		$data['sentry']                 = Sentry::findUserById($id);
 		$data['user_groups']    = array();
 		$data['email_opt']      = 'disabled';
@@ -154,6 +155,8 @@ class WellnessTeamController extends \BaseController {
 		foreach ($data['sentry']->groups as $group){
 			$data['user_groups'][] = $group->id;
 		}	
+		
+		// dd($data['user']);
 		
 		$data['clubs']		= $this->club->getSelectList();
 		$data['categories']	= $this->service_category->getSelectList(0);

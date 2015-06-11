@@ -90,4 +90,8 @@ class User extends Ardent implements UserInterface, RemindableInterface {
     {
         return $this->hasOne('Sprim\Model\Profile');
     }
+    
+	public function club_users() {
+    	return $this->hasMany('Sprim\Model\ClubUser');
+    }
 }
