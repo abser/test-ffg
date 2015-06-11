@@ -58,7 +58,7 @@ class UserController extends \BaseController {
                     'password' => $member_password,
                     'first_name' => $_POST['first_name'],
                     'last_name' => $_POST['last_name'],
-        			'created_by' => $logged_user_id
+                    'created_by' => $logged_user_id
         ));
 
         $input = Input::all();
