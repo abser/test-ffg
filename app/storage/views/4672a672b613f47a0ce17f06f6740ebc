@@ -1,0 +1,71 @@
+<!doctype html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link type="image/x-icon" href="<?php echo asset('images/favicon.ico');; ?>" rel="icon">
+        <title><?php echo $__env->yieldContent('title', 'Gravity'); ?></title>
+        <?php echo HTML::style('/assets/css/app.min.css'); ?> 
+        <?php echo $__env->yieldContent('css'); ?>
+        <?php echo HTML::script('/assets/js/header.js'); ?>
+
+
+    </head>
+    <body class="antialiased">
+        <div id="root">
+            <div class="off-canvas-wrap" data-offcanvas>
+                <div class="inner-wrap">
+                   
+                    <section role="main">
+                        <div class="row">
+                            <div class="medium-2 columns">
+                                <?php if(Sentry::check()): ?>
+                                <div class="hide-for-small">
+                                    <div class="sidebar">
+                                        <nav>
+                                            <ul class="side-nav">
+                                                
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                                <?php endif; ?>
+                            </div>
+                            <div class="medium-10 columns" style="padding-top: 1em;">
+
+                                <?php if(Session::has('success')): ?>
+                                <div data-alert class="alert-box success">
+                                    <?php echo Session::get('success'); ?>
+
+                                </div>
+                                <?php endif; ?>
+                                <?php if(Session::has('message')): ?>
+                                <div data-alert class="alert-box success">
+                                    <?php echo Session::get('message'); ?>
+
+                                </div>
+                                <?php endif; ?>
+                                <?php if(Session::has('warning')): ?>
+                                <div data-alert class="alert-box warning">
+                                    <?php echo Session::get('warning'); ?>
+
+                                </div>
+                                <?php endif; ?>
+                                <?php if(Session::has('error')): ?>
+                                <div data-alert class="alert-box alert">
+                                    <?php echo Session::get('error'); ?>
+
+                                </div>
+                                <?php endif; ?>
+
+                                <?php echo $__env->yieldContent("content"); ?>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <?php echo $__env->make("footer", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    </body>
+</html>
