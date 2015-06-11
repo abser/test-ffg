@@ -55,48 +55,57 @@ class MemberController extends \BaseController {
      * @return Response
      */
     public function store() {
-        $user_id = Sentry::getUser();
-        $logged_user_id = $user_id['id'];
+        $input = Input::all();
+        $emailVal = $input['member_email'];
+        $retVal = $this->model->checkExistEmail('users', $emailVal);
+        if ($retVal == 0) {
+            $user_id = Sentry::getUser();
+            $logged_user_id = $user_id['id'];
 
-        $member_password = $this->ranPass();
+            $member_password = $this->ranPass();
 
-        $senData = Sentry::register(array(
-                    'email' => $_POST['member_email'],
-                    'password' => $member_password,
-                    'first_name' => $_POST['first_name'],
-                    'last_name' => $_POST['last_name'],
-                    'created_by' => $logged_user_id
-        ));
+            $senData = Sentry::register(array(
+                        'email' => $_POST['member_email'],
+                        'password' => $member_password,
+                        'first_name' => $_POST['first_name'],
+                        'last_name' => $_POST['last_name'],
+                        'created_by' => $logged_user_id
+            ));
 
-        $member_id = $this->model->createMember(Input::all(), $senData['id'], $logged_user_id);
-        $fileData = explode('+', $member_id);
-        $user_id = $fileData[0];
-        $address_id = $fileData[1];
-        $file = array('image' => Input::file('image'));
-        $rules = array('image' => 'required',);
+            $member_id = $this->model->createMember(Input::all(), $senData['id'], $logged_user_id);
+            $fileData = explode('+', $member_id);
+            $user_id = $fileData[0];
+            $address_id = $fileData[1];
+            $file = array('image' => Input::file('image'));
+            $rules = array('image' => 'required',);
 
-        $validator = Validator::make($file, $rules);
-        if ($validator->fails()) {
-            $model = $this->model->createProfile($user_id, $address_id, Input::all());
-        } else {
-            if (Input::file('image')->isValid()) {
-                $destinationPath = 'uploads_pic'; // upload path
-                $extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
-                $fileName = "member_id_" . $user_id . "_" . rand(11111, 99999) . '.' . $extension; // renameing image
-                Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
-                echo $destinationPath;
-                $model = $this->model->createProfile($user_id, $address_id, Input::all(), $fileName);
+            $validator = Validator::make($file, $rules);
+            if ($validator->fails()) {
+                $model = $this->model->createProfile($user_id, $address_id, Input::all());
+            } else {
+                if (Input::file('image')->isValid()) {
+                    $destinationPath = 'uploads_pic'; // upload path
+                    $extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
+                    $fileName = "member_id_" . $user_id . "_" . rand(11111, 99999) . '.' . $extension; // renameing image
+                    Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
+                    echo $destinationPath;
+                    $model = $this->model->createProfile($user_id, $address_id, Input::all(), $fileName);
+                }
             }
-        }
 
-        $data['logged_user_id'] = $logged_user_id;
-        $data['member_email'] = $_POST['member_email'];
-        $data['member_password'] = $member_password;
-        \Mail::send('emails.auth.member_mail', $data, function($m) use($data) {
-            $m->to($data['member_email'])->subject(\Config::get('sprim.site_name'));
-        });
-        Session::flash('message', 'Member created successfully');
-        return Redirect::route('member.index');
+            $data['logged_user_id'] = $logged_user_id;
+            $data['member_email'] = $_POST['member_email'];
+            $data['member_password'] = $member_password;
+            \Mail::send('emails.auth.member_mail', $data, function($m) use($data) {
+                $m->to($data['member_email'])->subject(\Config::get('sprim.site_name'));
+            });
+            Session::flash('message', 'Member created successfully');
+            return Redirect::route('member.index');
+        } else {
+
+            Session::flash('message', 'email id already exist');
+            return Redirect::to('member/create');
+        }
     }
 
     /**
@@ -123,7 +132,6 @@ class MemberController extends \BaseController {
         if (!$data['member']) {
             return Response::view('errors.404', array(), 404);
         }
-
         return View::make('member.edit', compact('data'));
     }
 
