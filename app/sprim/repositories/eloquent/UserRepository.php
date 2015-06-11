@@ -228,7 +228,7 @@ class UserRepository extends AbstractRepository implements UserInterface {
         $clubUsersId = $this->ClubUsers->create(['user_id' => $memberId, 'club_id' => $input['club_id'], 'type' => 1, 'status' => 1, 'created_by' => $user_id]);
         $groupUsersId = $this->UserGroup->create(['user_id' => $memberId, 'group_id' => 6]);
         if ($memberId != 0) {
-            $addressId = $this->address->create(['address1' => $input['address1'], 'address2' => $input['address2'], 'city' => $input['address']['city'], 'region_id' => $input['address']['region_id'], 'country_code' => $input['address']['country_code'], 'postal_code' => $input['postalCode']]);
+            $addressId = $this->address->create(['address1' => $input['address1'], 'address2' => $input['address2'], 'city' => $input['address']['city'], 'region_id' => $input['address']['region_id'], 'country_code' => $input['address']['country_code'],'created_by' => $user_id, 'postal_code' => $input['postalCode']]);
             $address_id = $addressId['id'];
         }
         return $memberId . "+" . $address_id;
@@ -257,11 +257,11 @@ class UserRepository extends AbstractRepository implements UserInterface {
         $profileId = $this->UserProfile->create(['user_id' => $user_id, 'address_id' => $address_id, 'profile_image' => $pic, 'display_profile_pic' => $display_pic, 'change_default_password' => $change_def_pass, 'gender' => $gender, 'occupation' => $input['occupation'], 'age_group' => $input['age_group']]);
         $profileId = $profileId['id'];
         if (isset($input['member_email'])) {
-            $memberId = $this->ProfileContacts->create(['user_id' => $user_id, 'contact_type' => 1, 'info' => $input['member_email']]);
+            $memberId = $this->ProfileContacts->create(['user_id' => $user_id, 'contact_type' => 1, 'info' => $input['member_email'],'created_by' => $user_id]);
         }if (isset($input['member_phone'])) {
-            $memberId = $this->ProfileContacts->create(['user_id' => $user_id, 'contact_type' => 2, 'info' => $input['member_phone']]);
+            $memberId = $this->ProfileContacts->create(['user_id' => $user_id, 'contact_type' => 2, 'info' => $input['member_phone'],'created_by' => $user_id]);
         }if (isset($input['member_mobile'])) {
-            $memberId = $this->ProfileContacts->create(['user_id' => $user_id, 'contact_type' => 3, 'info' => $input['member_mobile']]);
+            $memberId = $this->ProfileContacts->create(['user_id' => $user_id, 'contact_type' => 3, 'info' => $input['member_mobile'],'created_by' => $user_id]);
         }
     }
 
