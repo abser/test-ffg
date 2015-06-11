@@ -23,12 +23,14 @@ class ServicePriceRepository extends AbstractRepository implements ServicePriceI
     	    	    	    
     	foreach ($input as $row){  		
     		
-    		if ( (isset($row[0]) && !empty($row[0])) ||  (isset($row[1]) && !empty($row[1])) ) {
+    		if ( isset($row[0]) && !empty($row[0]) ) {
     			
     			$model				= $this->model->newInstance();
     			$model->service_id	= $_service_id;
     			$model->duration	= $row[0];
-    			$model->price		= $row[1];
+    			if ( isset($row[1]) && !empty($row[1]) ) {
+    				$model->price		= $row[1];
+    			}
     			$model->created_by	= \Session::get('user.id');
     			    			
     			if (!$model->save()){
