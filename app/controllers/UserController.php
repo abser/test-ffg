@@ -50,33 +50,42 @@ class UserController extends \BaseController {
      * @return Response
      */
     public function store() {
-        $user_id = Sentry::getUser();
-        $logged_user_id = $user_id['id'];
-        $member_password = $this->model->ranPass();
-        $senData = Sentry::register(array(
-                    'email' => $_POST['member_email'],
-                    'password' => $member_password,
-                    'first_name' => $_POST['first_name'],
-                    'last_name' => $_POST['last_name'],
-        			'created_by' => $logged_user_id
-        ));
-
         $input = Input::all();
-        $group = Sentry::findGroupById($input['user_type']);
-        $group->name = $input['name'];
-        $group->permissions = $input['permission'];
-        if (!$group->save()) {
-            return Response::view('errors.404', array(), 404);
+        $emailVal = $input['member_email'];
+        $retVal = $this->model->checkExistEmail('users', $emailVal);
+        if ($retVal == 0) {
+            $user_id = Sentry::getUser();
+            $logged_user_id = $user_id['id'];
+            $member_password = $this->model->ranPass();
+            $senData = Sentry::register(array(
+                        'email' => $_POST['member_email'],
+                        'password' => $member_password,
+                        'first_name' => $_POST['first_name'],
+                        'last_name' => $_POST['last_name'],
+                        'created_by' => $logged_user_id
+            ));
+
+
+            $group = Sentry::findGroupById($input['user_type']);
+            $group->name = $input['name'];
+            $group->permissions = $input['permission'];
+            if (!$group->save()) {
+                return Response::view('errors.404', array(), 404);
+            } else {
+                $member_id = $this->model->createUser(Input::all(), $senData['id'], $logged_user_id);
+                $data['logged_user_id'] = $logged_user_id;
+                $data['member_email'] = $_POST['member_email'];
+                $data['member_password'] = $member_password;
+                \Mail::send('emails.auth.member_mail', $data, function($m) use($data) {
+                    $m->to($data['member_email'])->subject(\Config::get('sprim.site_name'));
+                });
+                Session::flash('message', 'user created successfully');
+                return Redirect::route('user.index');
+            }
         } else {
-            $member_id = $this->model->createUser(Input::all(), $senData['id'], $logged_user_id);
-            $data['logged_user_id'] = $logged_user_id;
-            $data['member_email'] = $_POST['member_email'];
-            $data['member_password'] = $member_password;
-            \Mail::send('emails.auth.member_mail', $data, function($m) use($data) {
-                $m->to($data['member_email'])->subject(\Config::get('sprim.site_name'));
-            });
-            Session::flash('message', 'user created successfully');
-            return Redirect::route('user.index');
+
+            Session::flash('message', 'email id already exist');
+            return Redirect::to('user/create');
         }
     }
 

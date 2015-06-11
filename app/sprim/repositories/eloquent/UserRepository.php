@@ -39,13 +39,13 @@ class UserRepository extends AbstractRepository implements UserInterface {
     ];
 
     public function fields($model, $input) {
-        $model->email		= \Helpers::keyInput('email', $input);        
-        $model->first_name	= \Helpers::keyInput('first_name', $input);
-        $model->last_name	= \Helpers::keyInput('last_name', $input);        
+        $model->email = \Helpers::keyInput('email', $input);
+        $model->first_name = \Helpers::keyInput('first_name', $input);
+        $model->last_name = \Helpers::keyInput('last_name', $input);
 
-    	if (array_key_exists('password', $input)) {
-            $model->password				= \Helpers::keyInput('password', $input);
-            $model->password_confirmation	= \Helpers::keyInput('password', $input);
+        if (array_key_exists('password', $input)) {
+            $model->password = \Helpers::keyInput('password', $input);
+            $model->password_confirmation = \Helpers::keyInput('password', $input);
         }
 
         if (array_key_exists('password_confirmation', $input)) {
@@ -55,39 +55,37 @@ class UserRepository extends AbstractRepository implements UserInterface {
         return $model;
     }
 
-    public function paginate($arr, $groups = null)
-    {
-    	extract($arr);
-    	$result                     = new \StdClass;
-    	$result->page               = $page;
-    	$result->limit              = $limit;
-    	$result->totalItems         = 0;
-    	$result->items              = array();
-    
-    	$query = $this->filteredModel(trim($s_term), $s_field, $groups);
-    	$order = $this->sqlField($sort);
-    
-    	$result->totalItems         = count($query->get());
-    	$result->items              = $query->skip($limit * ($page - 1))->take($limit)->orderBy($order, $dir)->get();
-    
-    	return $result;
+    public function paginate($arr, $groups = null) {
+        extract($arr);
+        $result = new \StdClass;
+        $result->page = $page;
+        $result->limit = $limit;
+        $result->totalItems = 0;
+        $result->items = array();
+
+        $query = $this->filteredModel(trim($s_term), $s_field, $groups);
+        $order = $this->sqlField($sort);
+
+        $result->totalItems = count($query->get());
+        $result->items = $query->skip($limit * ($page - 1))->take($limit)->orderBy($order, $dir)->get();
+
+        return $result;
     }
-    
-    public function filteredModel($s_term = null, $s_field = 'all', $groups = null)
-    {        
+
+    public function filteredModel($s_term = null, $s_field = 'all', $groups = null) {
         $model = \DB::table('users')
-        	->select(\DB::raw('users.id, users.first_name, users.last_name, users.email, 
+                ->select(\DB::raw('users.id, users.first_name, users.last_name, users.email, 
         		profiles.title,
         		sprim_dhs.countries.name AS country
         	'))
         	->leftJoin('profiles', 'users.id', '=', 'profiles.user_id')
         	->leftJoin('addresses', 'profiles.address_id', '=', 'addresses.id')
         	->leftJoin('sprim_dhs.countries', 'sprim_dhs.countries.code', '=', 'addresses.country_code')
-        	->leftJoin('users_groups', 'users.id', '=', 'users_groups.user_id');
-        
+        	->leftJoin('users_groups', 'users.id', '=', 'users_groups.user_id');       
+
         if ($groups) {
             // $model->whereRaw('(users_groups.group_id IN (' . $groups . '))');
-            $model->whereIn('users_groups.group_id', $groups);           
+            $model->whereIn('users_groups.group_id', $groups);
         }
         return $model;
     }
@@ -201,15 +199,22 @@ class UserRepository extends AbstractRepository implements UserInterface {
         $memberId = $this->model->where('id', $memberId['member_id'])->update(array('activated' => $status));
     }
 
+    public function checkExistEmail($tabel, $inputEmail) {
+        $query = \DB::table($tabel)
+                ->select(\DB::raw('users.id, users.email'))
+                ->where('users.email', $inputEmail);
+        return count($query->get());
+    }
+
     public function getPaList() {
         return $usersId = User::lists('email', 'id');
 
         $query = \DB::table('users')
-                ->select(\DB::raw('users.id, users.email, users_groups.group_id'))
+                ->select(\DB::raw('users.id, users.email'))
                 ->join('users_groups', 'users.id', '=', 'users_groups.user_id')
                 ->where('users_groups.group_id', 7);
-
-        return $query->get();
+        //  return $this->array_flatten($query->get());
+        return $arr = $query->get();
     }
 
     public function getServiceList($except = null) {
@@ -228,7 +233,7 @@ class UserRepository extends AbstractRepository implements UserInterface {
         $clubUsersId = $this->ClubUsers->create(['user_id' => $memberId, 'club_id' => $input['club_id'], 'type' => 1, 'status' => 1, 'created_by' => $user_id]);
         $groupUsersId = $this->UserGroup->create(['user_id' => $memberId, 'group_id' => 6]);
         if ($memberId != 0) {
-            $addressId = $this->address->create(['address1' => $input['address1'], 'address2' => $input['address2'], 'city' => $input['address']['city'], 'region_id' => $input['address']['region_id'], 'country_code' => $input['address']['country_code'], 'postal_code' => $input['postalCode']]);
+            $addressId = $this->address->create(['address1' => $input['address1'], 'address2' => $input['address2'], 'city' => $input['address']['city'], 'region_id' => $input['address']['region_id'], 'country_code' => $input['address']['country_code'], 'created_by' => $user_id, 'postal_code' => $input['postalCode']]);
             $address_id = $addressId['id'];
         }
         return $memberId . "+" . $address_id;
@@ -257,11 +262,11 @@ class UserRepository extends AbstractRepository implements UserInterface {
         $profileId = $this->UserProfile->create(['user_id' => $user_id, 'address_id' => $address_id, 'profile_image' => $pic, 'display_profile_pic' => $display_pic, 'change_default_password' => $change_def_pass, 'gender' => $gender, 'occupation' => $input['occupation'], 'age_group' => $input['age_group']]);
         $profileId = $profileId['id'];
         if (isset($input['member_email'])) {
-            $memberId = $this->ProfileContacts->create(['user_id' => $user_id, 'contact_type' => 1, 'info' => $input['member_email']]);
+            $memberId = $this->ProfileContacts->create(['user_id' => $user_id, 'contact_type' => 1, 'info' => $input['member_email'], 'created_by' => $user_id]);
         }if (isset($input['member_phone'])) {
-            $memberId = $this->ProfileContacts->create(['user_id' => $user_id, 'contact_type' => 2, 'info' => $input['member_phone']]);
+            $memberId = $this->ProfileContacts->create(['user_id' => $user_id, 'contact_type' => 2, 'info' => $input['member_phone'], 'created_by' => $user_id]);
         }if (isset($input['member_mobile'])) {
-            $memberId = $this->ProfileContacts->create(['user_id' => $user_id, 'contact_type' => 3, 'info' => $input['member_mobile']]);
+            $memberId = $this->ProfileContacts->create(['user_id' => $user_id, 'contact_type' => 3, 'info' => $input['member_mobile'], 'created_by' => $user_id]);
         }
     }
 
@@ -281,7 +286,7 @@ class UserRepository extends AbstractRepository implements UserInterface {
         $groupUsersId = $this->UserGroup->create(['user_id' => $memberId, 'group_id' => $input['user_type']]);
         $clubUsersId = $this->ClubUsers->create(['user_id' => $memberId, 'club_id' => $input['club_id'], 'type' => $input['user_type'], 'status' => 1, 'created_by' => $user_id]);
         if (isset($input['member_phone'])) {
-            $memberId = $this->ProfileContacts->create(['user_id' => $memberId, 'contact_type' => 2, 'info' => $input['member_phone']]);
+            $memberId = $this->ProfileContacts->create(['user_id' => $memberId, 'contact_type' => 2, 'created_by' => $user_id, 'info' => $input['member_phone']]);
         }
         return $memberId;
     }
