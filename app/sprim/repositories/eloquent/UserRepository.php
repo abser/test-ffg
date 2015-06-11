@@ -202,9 +202,8 @@ class UserRepository extends AbstractRepository implements UserInterface {
     }
 
     public function createMember($input, $memberId, $user_id) {
+        $clubUsersId = $this->ClubUsers->create(['user_id' => $memberId, 'club_id' => $input['club_id'], 'type' => 1, 'status' => 1, 'created_by' => $user_id]);
         $groupUsersId = $this->UserGroup->create(['user_id' => $memberId, 'group_id' => 6]);
-         $clubUsersId = $this->ClubUsers->create(['user_id' => $memberId, 'club_id' => $input['club_id'], 'type' => 4, 'status' => 1, 'created_by' => $user_id]);
-       // $clubUsersId = $this->ClubUsers->create(['user_id' => $memberId, 'club_id' => $input['club_id'], 'type' => 4, 'status' => 1, 'created_by' => $user_id]);
         if ($memberId != 0) {
             $addressId = $this->address->create(['address1' => $input['address1'], 'address2' => $input['address2'], 'city' => $input['address']['city'], 'region_id' => $input['address']['region_id'], 'country_code' => $input['address']['country_code'], 'postal_code' => $input['postalCode']]);
             $address_id = $addressId['id'];
@@ -266,7 +265,21 @@ class UserRepository extends AbstractRepository implements UserInterface {
 
     public function EditmemberList($id) {
         $query = \DB::table('users')
-                ->select(\DB::raw('users.id, users.email, users.first_name,users.last_name, users.activated,users.activated,profile_contacts.info,
+                ->select(\DB::raw('users.id, users.email, users.first_name,users.last_name, users.activated,users.activated,profile_contacts.info,club_users.club_id,
+                  user_profile.address_id, user_profile.gender,user_profile.age_group,user_profile.occupation,user_profile.interest_hobbies,user_profile.display_profile_pic,user_profile.display_profile_pic,user_profile.change_default_password
+    		'))
+                ->join('user_profile', 'users.id', '=', 'user_profile.user_id')
+                ->join('profile_contacts', 'users.id', '=', 'profile_contacts.user_id')
+                ->join('club_users', 'users.id', '=', 'club_users.user_id')
+                // ->whereIn('users.id', array(1, 2, 3))
+                ->where('users.id', $id);
+
+        return $query->get();
+    }
+
+    public function EditAddressList($id) {
+        $query = \DB::table('users')
+                ->select(\DB::raw('users.id,profile_contacts.info,
                     user_profile.gender,user_profile.age_group,user_profile.occupation,user_profile.interest_hobbies,user_profile.display_profile_pic,user_profile.display_profile_pic,user_profile.change_default_password
     		'))
                 ->join('user_profile', 'users.id', '=', 'user_profile.user_id')
@@ -319,7 +332,7 @@ class UserRepository extends AbstractRepository implements UserInterface {
         $query = \DB::table('users')
                 ->select(\DB::raw('users.id, users.email, users.first_name,users.last_name, users.activated,users.activated,profile_contacts.info,club_users.club_id'))
                 ->join('profile_contacts', 'users.id', '=', 'profile_contacts.user_id')
-                 ->join('club_users', 'users.id', '=', 'club_users.user_id')
+                ->join('club_users', 'users.id', '=', 'club_users.user_id')
                 // ->whereIn('users.id', array(1, 2, 3))
                 ->where('users.id', $id);
 
@@ -333,7 +346,7 @@ class UserRepository extends AbstractRepository implements UserInterface {
     }
 
     public function getSelectList() {
-          $init = array();
+        $init = array();
         $obj = $this->Club->where('status', '=', '1')->orderBy('name')->lists('name', 'id');
         $options = array_map(function($name) {
             return ucwords($name);
@@ -356,7 +369,8 @@ class UserRepository extends AbstractRepository implements UserInterface {
 
         return $result;
     }
-       public function sqlFieldUser($field) {
+
+    public function sqlFieldUser($field) {
         return (array_key_exists($field, $this->fields) ? $this->fields[$field] : $field);
     }
 

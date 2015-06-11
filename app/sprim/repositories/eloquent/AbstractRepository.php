@@ -81,7 +81,7 @@ abstract class AbstractRepository {
         return $this->model->firstOrCreate($data);
     }
 
-    public function paginate($arr, $controllertype = '') {
+    public function paginate($arr) {
         extract($arr);
         $result = new \StdClass;
         $result->page = $page;
