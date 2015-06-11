@@ -31,10 +31,10 @@
 </div>
 
 <div class="form-group">	
-	{{ Form::label('title', 'Title', array('class' => 'col-lg-3 control-label')) }}
+	{{ Form::label('profile[title]', 'Title', array('class' => 'col-lg-3 control-label')) }}
     <div class="col-lg-9">
-    	{{ Form::text('title', Input::old('title'), ['class'=>'form-control', 'placeholder'=>'Title']) }}
-    	@if ($errors->has('title')) <p class="alert alert-danger">{{ $errors->first('title') }}</p> @endif
+    	{{ Form::text('profile.title', Input::old('profile.title'), ['class'=>'form-control', 'placeholder'=>'Title']) }}
+    	@if ($errors->has('profile.title')) <p class="alert alert-danger">{{ $errors->first('profile.title') }}</p> @endif
     </div>
 </div>
 <div class="form-group">	

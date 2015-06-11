@@ -34,18 +34,21 @@ $env = $app->detectEnvironment(function()
     
     switch (str_replace('www.', '', $_SERVER['SERVER_NAME']))
     {
-        case 'gravity.dev':
-          $ret = 'local';
-          break;
-      case 'gravity.local':
-          $ret = 'local';
-          break;
-        case 'uat.gravity.sprim-health.com':
-          $ret = 'uat';
-          break;
-        case 'dev.gravity.sprim-health.com':
-          $ret = 'dev';
-          break;
+    	case 'gravity.dev':
+    		$ret = 'local';
+    		break;
+    	case 'gravity.local':
+    		$ret = 'local';
+    		break;
+    	case 'uat.gravity.sprim-health.com':
+    		$ret = 'uat';
+    		break;
+    	case 'dev.gravity.sprim-health.com':
+    		$ret = 'dev';
+    		break;
+    	case 'test.gravity.sprim-health.com':
+    		$ret = 'testing';
+    		break;
     }
     return $ret;
 });
