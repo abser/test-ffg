@@ -12,7 +12,6 @@ class ClubUser extends Ardent {
     public static $rules = array(
         'club_id' => 'required|integer',
         'user_id' => 'required|integer',
-        'type' => 'required|in:1,2,3',
         'status' => 'required|in:0,1'
     );
 
