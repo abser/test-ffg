@@ -5,16 +5,19 @@
         @endforeach
         </div>
 @endif -->
-<?php //echo '<pre>'; print_r($data); echo '</pre>'; 
-
-//echo $data['member'][0]->gender;
+<?php
+//echo '<pre>';
+//print_r($data);
+//echo '</pre>';
+//echo '<pre>'; print_r($data['addressData']); echo '</pre>';
+//echo $data['addressData']['address1'];
 //echo $data['member'][1]->gender;
 //die();
 ?>
 <div class="form-group">	
     {{ Form::label('club_id', 'Club', array('class' => 'col-lg-2 control-label')) }}
     <div class="col-lg-10">
-        {{ Form::select('club_id', $data['clubs'],Input::old('clubs'), array('id' => 'club_id', 'class'=>'form-control', 'required'=>'required')); }}
+        {{ Form::select('club_id', $data['clubs'], $data['member'][0]->club_id, array('id' => 'club_id', 'class'=>'form-control', 'required'=>'required')); }}
         @if ($errors->has('club_id')) <p class="alert alert-danger">{{ $errors->first('club_id') }}</p> @endif
     </div>
 </div>
@@ -63,7 +66,11 @@
 <div class="form-group">	
     <label for="gender" class="col-lg-2 control-label">Gender</label>
     <div class="col-lg-10">
-        <?php if($data['member'][0]->gender == 'Male'){ $gender_Val = 'M';} else if($data['member'][0]->gender == 'Female'){ $gender_Val = 'F';}  ?>
+<?php if ($data['member'][0]->gender == 'Male') {
+    $gender_Val = 'M';
+} else if ($data['member'][0]->gender == 'Female') {
+    $gender_Val = 'F';
+} ?>
         {{  Form::select('gender', array('' => 'Select Gender','M' => 'Male','F' => 'Female'),$gender_Val,array('class'=>'form-control','placeholder' => 'Gender','required' => 'required'))}}
         @if ($errors->has('gender')) <p class="alert alert-danger">{{ $errors->first('gender') }}</p> @endif
     </div>
@@ -73,7 +80,7 @@
 <div class="form-group">
     <label for="age_group" class="col-lg-2 control-label">Age Group</label>
     <div class="col-lg-10">
-          {{  Form::select('age_group', array('' => 'Select Age Group','g1' => '20-30', 'g2' => '30-40','g3' => '30-40', 'g4' => '40-50'),$data['member'][0]->age_group,array('class'=>'form-control','placeholder' => 'age_group','required' => 'required'))}}
+        {{  Form::select('age_group', array('' => 'Select Age Group','g1' => '20-30', 'g2' => '30-40','g3' => '30-40', 'g4' => '40-50'),$data['member'][0]->age_group,array('class'=>'form-control','placeholder' => 'age_group','required' => 'required'))}}
         @if ($errors->has('age_group')) <p class="alert alert-danger">{{ $errors->first('age_group') }}</p> @endif
     </div>
 </div>
@@ -100,7 +107,7 @@
         <div class="row">
             <div class="col-lg-4">@include("common.country", ['name' => 'address[country_code]', 'class'=>'form-control'])</div>    		
             <div class="col-lg-4">{{ Form::select('address[region_id]', array('' => ''), null, array('id' => 'region', 'class'=>'form-control')); }}</div>    		
-            <div class="col-lg-4">{{ Form::text('address[city]', Input::old('address.city'), ['class'=>'form-control', 'placeholder'=>'city']) }}</div> 		
+            <div class="col-lg-4">{{ Form::text('address[city]', $data['addressData']['city'], ['class'=>'form-control', 'placeholder'=>'city']) }}</div> 		
         </div>    	
     </div>
 </div>
@@ -108,21 +115,21 @@
 <div class="form-group">
     <div class="col-lg-2">&nbsp;</div>
     <div class="col-lg-10">
-        {{ Form::text('address1', Input::old('address1'), ['class'=>'form-control', 'placeholder'=>'address line 1']) }}
+        {{ Form::text('address1', $data['addressData']['address1'], ['class'=>'form-control', 'placeholder'=>'address line 1']) }}
         @if ($errors->has('address1')) <p class="alert alert-danger">{{ $errors->first('address1') }}</p> @endif
     </div>
 </div>
 <div class="form-group">
     <div class="col-lg-2">&nbsp;</div>
     <div class="col-lg-10">
-        {{ Form::text('address2', Input::old('address2'), ['class'=>'form-control', 'placeholder'=>'address line 2']) }}
+        {{ Form::text('address2',$data['addressData']['address2'], ['class'=>'form-control', 'placeholder'=>'address line 2']) }}
         @if ($errors->has('address2')) <p class="alert alert-danger">{{ $errors->first('address2') }}</p> @endif
     </div>
 </div>
 <div class="form-group">
     <div class="col-lg-2">&nbsp;</div>
     <div class="col-lg-10">
-        {{ Form::text('postalCode', Input::old('postalCode'), ['class'=>'form-control', 'placeholder'=>'postal code']) }}
+        {{ Form::text('postalCode', $data['addressData']['postal_code'], ['class'=>'form-control', 'placeholder'=>'postal code']) }}
         @if ($errors->has('postalCode')) <p class="alert alert-danger">{{ $errors->first('postalCode') }}</p> @endif
     </div>
 </div>
@@ -133,7 +140,16 @@
 
 
         <div class="small-9 columns">
-            &nbsp;&nbsp;    You can upload JPEG,GIP and PNG images     &nbsp;&nbsp;     {{Form::checkbox('display_pic','1',false,array('class'=>'checkdisplayClass','id'=>'display_pic'))}} Display profile picture
+            &nbsp;&nbsp;    You can upload JPEG,GIP and PNG images     &nbsp;&nbsp;  
+
+<?php if ($data['addressData']['display_profile_pic'] != 0) {
+    ?>
+                {{Form::checkbox('display_pic','1',true,array('class'=>'checkdisplayClass','id'=>'display_pic'))}} Display profile picture
+    <?php } else { ?>
+                {{Form::checkbox('display_pic','1',false,array('class'=>'checkdisplayClass','id'=>'display_pic'))}} Display profile picture
+<?php } ?>
+
+
         </div>
 
 
@@ -142,7 +158,16 @@
 
 <div class="form-group">
     <div class="col-lg-2">&nbsp;</div>
-    <div class="col-lg-10">{{Form::checkbox('change_def_pass','1',true,array('class'=>'change_def_pass_class','id'=>'change_def_pass_id'))}} 
+    <div class="col-lg-10">
+<?php if ($data['addressData']['display_profile_pic'] != 0) {
+    ?>
+            {{Form::checkbox('change_def_pass','1',true,array('class'=>'change_def_pass_class','id'=>'change_def_pass_id'))}} 
+    <?php } else { ?>
+            {{Form::checkbox('change_def_pass','1',false,array('class'=>'change_def_pass_class','id'=>'change_def_pass_id'))}} 
+<?php } ?>
+
+
+
         Change Default Password</div>
 </div>
 
@@ -157,7 +182,7 @@
 <div class="form-group">
     <div class="col-lg-2"></div>
     <div class="col-lg-10">
-       {{ Form::hidden('edit_user_id', $data['member'][0]->id);}}
+        {{ Form::hidden('edit_user_id', $data['member'][0]->id);}}
         <button type="submit" class="btn btn-default">Save Member</button>
         <a href="{{ URL::route('member.index') }}"><button type="button" class="btn">Cancel</button></a>
     </div>
