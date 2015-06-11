@@ -16,8 +16,8 @@ class Rooms extends Migration {
 			$table->increments	('id');
 			$table->integer		('club_id')				->unsigned()->nullable();
 			$table->string		('name', 100);
-			$table->integer		('room_number');
-			$table->integer		('capacity');
+			$table->integer		('room_number')			->unsigned()->nullable();
+			$table->integer		('capacity')			->unsigned()->nullable();
 			$table->enum		('is_conjunct', array('0', '1'))->default(0);
 			$table->enum		('status', array('0', '1'))->default(0);
 			

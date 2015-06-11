@@ -1,7 +1,5 @@
 @extends("layouts.admin")
 @section("content")
-<div class="row-fluid">
-<div class="col-md-6 col-xs-12">
 
 <div class="panel">
     <div class="panel-heading">
@@ -14,8 +12,6 @@
     </div>
 </div>
 
-</div>
-</div>	
 @stop
 
 @section('js')
@@ -24,5 +20,5 @@
     var url_api_regions = "{{ url('api/regions/')}}";    
 </script>
 
-{{ HTML::script('/assets/js/club.form.js') }}
+{{ HTML::script('/assets/js/wellness-team.form.js') }}
 @stop
