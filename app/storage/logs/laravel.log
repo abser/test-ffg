@@ -123,3 +123,7 @@ Stack trace:
 #21 C:\xampp\htdocs\gravity-web\bootstrap\compiled.php(657): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
 #22 C:\xampp\htdocs\gravity-web\public\index.php(49): Illuminate\Foundation\Application->run()
 #23 {main} [] []
+[2015-06-11 10:31:34] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Interface 'Sprim\Model\ClubUsersInterface' not found' in C:\xampp\htdocs\gravity-web\app\models\ClubUser.php:10
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
