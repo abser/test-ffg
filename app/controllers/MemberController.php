@@ -1,6 +1,6 @@
 <?php
 
-//use Sprim\Repositories\Contracts\MemberInterface as Member;
+use Sprim\Repositories\Contracts\AddressInterface as Address;
 use Sprim\Repositories\Contracts\UserInterface as User;
 use Sprim\Repositories\Contracts\ClubInterface as Club;
 use Sprim\Repositories\Contracts\ServiceInterface as Service;
@@ -12,9 +12,10 @@ class MemberController extends \BaseController {
      *
      * @return Response
      */
-    public function __construct(User $user, Club $club, Service $service) {
+    public function __construct(User $user, Club $club, Service $service, Address $address) {
 
         $this->model = $user;
+        $this->address = $address;
         $this->service = $service;
         $this->club = $club;
         parent::__construct();
@@ -54,7 +55,7 @@ class MemberController extends \BaseController {
      * @return Response
      */
     public function store() {
-         $user_id = Sentry::getUser();
+        $user_id = Sentry::getUser();
         $logged_user_id = $user_id['id'];
 
         $member_password = $this->ranPass();
@@ -114,8 +115,8 @@ class MemberController extends \BaseController {
      * @return Response
      */
     public function edit($id) {
-        //$data['member'] = $this->model->getById($id);
         $data['member'] = $this->model->EditmemberList($id);
+        $data['addressData'] = $this->address->getById($data['member'][0]->address_id);
         $data['clubs'] = $this->club->getSelectList();
         $data['paId'] = $this->model->getPaList();
         if (!$data['member']) {
@@ -233,7 +234,7 @@ class MemberController extends \BaseController {
         $data['r_prefix'] = 'member';
         $data['s_fields'] = array('all' => 'All', 'name' => 'Member Name', 'service_category' => 'Service Category');
 
-        $obj = $this->model->paginateUsers($pageParams,'memberUser');
+        $obj = $this->model->paginateUsers($pageParams, 'memberUser');
         $data['model'] = Paginator::make($obj->items, $obj->totalItems, $pageParams['limit']);
 
         $data['controller'] = 'member';
