@@ -97,7 +97,6 @@ class WellnessTeamController extends \BaseController {
 				{
 					$group = Sentry::findGroupByName('medical_doctor');
 					$user->addGroup($group);
-					// ($user->removeGroup($adminGroup))
 				} else if ($input['profile_type'] && $input['profile_type'] == '2') {
 					$group = Sentry::findGroupByName('fitness_coach');
 					$user->addGroup($group);
@@ -236,7 +235,7 @@ class WellnessTeamController extends \BaseController {
 		$data['r_prefix']   = 'wellness-team';
 		$data['s_fields']   = array('all' => 'All', 'name' => 'Service Name', 'service_category' => 'Service Category');
 	
-		$obj                = $this->model->paginate1($pageParams);
+		$obj                = $this->model->paginate($pageParams, array(3,4,5));
 		$data['model']      = Paginator::make($obj->items, $obj->totalItems, $pageParams['limit']);
 	
 		$data['controller']     = 'wellness-team';
