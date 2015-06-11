@@ -65,6 +65,7 @@ class MemberController extends \BaseController {
                     'password' => $member_password,
                     'first_name' => $_POST['first_name'],
                     'last_name' => $_POST['last_name'],
+                    'created_by' => $logged_user_id
         ));
 
         $member_id = $this->model->createMember(Input::all(), $senData['id'], $logged_user_id);
