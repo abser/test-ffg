@@ -56,15 +56,39 @@ class UserRepository extends AbstractRepository implements UserInterface {
         return $model;
     }
 
-    public function filteredMode($to_date = null, $from_date = null, $country = null) {
-        $jc_where_raw = '';
-        $has_from_date = false;
+    public function paginate($arr, $groups = null)
+    {
+    	extract($arr);
+    	$result                     = new \StdClass;
+    	$result->page               = $page;
+    	$result->limit              = $limit;
+    	$result->totalItems         = 0;
+    	$result->items              = array();
+    
+    	$query = $this->filteredModel(trim($s_term), $s_field, $groups);
+    	$order = $this->sqlField($sort);
+    
+    	$result->totalItems         = count($query->get());
+    	$result->items              = $query->skip($limit * ($page - 1))->take($limit)->orderBy($order, $dir)->get();
+    
+    	return $result;
+    }
+    
+    public function filteredModel($s_term = null, $s_field = 'all', $groups = null)
+    {        
         $model = \DB::table('users')
-                ->select(\DB::raw('users.id, users.first_name, users.last_name, users.email'))
-                ->leftJoin('users_groups', 'users.id', '=', 'users_groups.user_id');
+        	->select(\DB::raw('users.id, users.first_name, users.last_name, users.email, 
+        		profiles.title,
+        		sprim_dhs.countries.name AS country
+        	'))
+        	->leftJoin('profiles', 'users.id', '=', 'profiles.user_id')
+        	->leftJoin('addresses', 'profiles.address_id', '=', 'addresses.id')
+        	->leftJoin('sprim_dhs.countries', 'sprim_dhs.countries.code', '=', 'addresses.country_code')
+        	->leftJoin('users_groups', 'users.id', '=', 'users_groups.user_id');
         $model->whereRaw('users_groups.group_id = 3');
-        if ($country) {
-            $model->whereRaw('(addresses.country_code IN (' . $country . '))');
+        if ($groups) {
+            // $model->whereRaw('(users_groups.group_id IN (' . $groups . '))');
+            $model->whereIn('users_groups.group_id', $groups);           
         }
         return $model;
     }
