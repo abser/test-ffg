@@ -14,7 +14,7 @@
 <div class="form-group">	
     {{ Form::label('club_id', 'Club', array('class' => 'col-lg-2 control-label')) }}
     <div class="col-lg-10">
-        {{ Form::select('club_id', $data['clubs'], Input::old('club_id'), array('id' => 'club_id', 'class'=>'form-control', 'required'=>'required')); }}
+        {{ Form::select('club_id', $data['clubs'],Input::old('clubs'), array('id' => 'club_id', 'class'=>'form-control', 'required'=>'required')); }}
         @if ($errors->has('club_id')) <p class="alert alert-danger">{{ $errors->first('club_id') }}</p> @endif
     </div>
 </div>

@@ -118,12 +118,6 @@ class MemberController extends \BaseController {
         $data['member'] = $this->model->EditmemberList($id);
         $data['clubs'] = $this->club->getSelectList();
         $data['paId'] = $this->model->getPaList();
-//        echo '<pre>';
-//        print_r( $data['member']);
-//        echo '</pre>';
-        //  die();
-        // $data['rooms'] = $this->model->getSelectList($data['room']->id);
-
         if (!$data['member']) {
             return Response::view('errors.404', array(), 404);
         }
@@ -239,7 +233,7 @@ class MemberController extends \BaseController {
         $data['r_prefix'] = 'member';
         $data['s_fields'] = array('all' => 'All', 'name' => 'Member Name', 'service_category' => 'Service Category');
 
-        $obj = $this->model->paginate($pageParams,'memberCont');
+        $obj = $this->model->paginateUsers($pageParams,'memberUser');
         $data['model'] = Paginator::make($obj->items, $obj->totalItems, $pageParams['limit']);
 
         $data['controller'] = 'member';

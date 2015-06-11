@@ -25,7 +25,13 @@
 @stop
 
 @section('js')
+{{ HTML::script('/assets/js/club.form.js') }}
 {{ HTML::script('/assets/js/bootstrap-multiselect.js') }}
 {{ HTML::script('/assets/js/directoryTree.js') }}
-{{ HTML::script('/assets/js/room.form.js') }}
+{{ HTML::script('/assets/js/member.form.js') }}
+<script type="text/javascript">
+    var region_id = {{ $data['club']->address->region_id or 0 }};
+    var url_api_regions = "{{ url('api/regions/')}}"; 
+</script>
+
 @stop

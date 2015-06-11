@@ -8,7 +8,7 @@ $(document).ready(function ($) {
         }
         $.ajax({
             type: 'POST',
-            url: 'getAccessDiv',
+            url: '/user/getAccessDiv',
             data: {
                 userDivType: userDivType
             },
