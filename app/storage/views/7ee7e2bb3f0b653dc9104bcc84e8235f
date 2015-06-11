@@ -6,9 +6,9 @@
         </div>
 <?php endif; ?> -->
 <?php
-echo '<pre>';
-print_r($data);
-echo '</pre>';
+//echo '<pre>';
+//print_r($data);
+//echo '</pre>';
 //echo '<pre>'; print_r($data['addressData']); echo '</pre>';
 //echo $data['addressData']['address1'];
 //echo $data['member'][1]->gender;

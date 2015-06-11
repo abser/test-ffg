@@ -5,7 +5,7 @@
         @endforeach
         </div>
 @endif -->
-<?php echo '<pre>'; print_r($data); echo '</pre>';?>
+<?php //echo '<pre>'; print_r($data); echo '</pre>';?>
 <style>
 
     .chekbox_heading{ background:#333; color:#fff; padding:5px; margin-top:0; margin-bottom:5px; }
