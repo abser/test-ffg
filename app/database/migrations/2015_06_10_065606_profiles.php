@@ -26,10 +26,10 @@ class Profiles extends Migration {
 			$table->string		('gender', 10)			->nullable();	// M,F,O
 			$table->string		('age_group', 10)		->nullable();			
 			$table->string		('image', 100)			->nullable();
-			$table->string		('qualification', 255)	->nullable();
-			$table->string		('description', 255)	->nullable();
+			$table->string		('qualification', 255)	->nullable();			
 			$table->string		('occupation', 255)		->nullable();
-			$table->string		('hobbies', 255)		->nullable();	// Interests/Hobbies
+			$table->text		('description')			->nullable();
+			$table->text		('hobbies')				->nullable();	// Interests/Hobbies
 			
 			$table->enum		('accept_appointment', array('0', '1'))		->default(1);	// 0=> Don't Accept, 1=>Accept
 			$table->enum		('change_default_password', array('0', '1'))->default(1);	// 0=> No Change, 1=>Change 

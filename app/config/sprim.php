@@ -18,7 +18,8 @@ return array(
         'club' => '1',
         'service' => '2',
         'room' => '3',
-        'user' => '4'
+        'user' => '4',
+    	'profile' => '5'
     ],
     'file_types' => [
         'avatar' => '1',

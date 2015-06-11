@@ -24,18 +24,39 @@ class SentryUserSeeder extends Seeder {
 			'activated' => 1,
 			'created_by'=> 1
 		));
+		
+		Sentry::getUserProvider()->create(array(
+			'email'		=> 'admin1@sprim.com',
+			'password'	=> 'Admin@sprim123',
+			'activated' => 1,
+			'created_by'=> 1
+		));
 
 		Sentry::getUserProvider()->create(array(
 	        'email'		=> 'ghcp@sprim.com',
-	        'password'	=> 'Admin@sprim123',
+	        'password'	=> 'Ghcp@sprim123',
 	        'activated' => 1,
 			'created_by'=> 1
 	    ));
+		
+		Sentry::getUserProvider()->create(array(
+			'email'		=> 'ghcp1@sprim.com',
+			'password'	=> 'Ghcp@sprim123',
+			'activated' => 1,
+			'created_by'=> 1
+		));
 
 	    Sentry::getUserProvider()->create(array(
 	        'email'		=> 'member@sprim.com',
 	        'password'	=> 'Member@sprim123',
 	        'activated' => 1,
+	    	'created_by'=> 1
+	    ));
+	    
+	    Sentry::getUserProvider()->create(array(
+	    	'email'		=> 'member1@sprim.com',
+	    	'password'	=> 'Member@sprim123',
+	    	'activated' => 1,
 	    	'created_by'=> 1
 	    ));
         

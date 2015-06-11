@@ -14,10 +14,9 @@ class SentryUserGroupSeeder extends Seeder {
         $adminUser = Sentry::getUserProvider()->findByLogin('admin@sprim.com');
         $ghcpUser = Sentry::getUserProvider()->findByLogin('ghcp@sprim.com');
         $memberUser = Sentry::getUserProvider()->findByLogin('member@sprim.com');
-        $paUser = Sentry::getUserProvider()->findByLogin('pa@sprim.com');
+        $paUser = Sentry::getUserProvider()->findByLogin('pa@sprim.com');       
 
         $sprimGroup = Sentry::getGroupProvider()->findByName('sprim');
-
         $adminGroup = Sentry::getGroupProvider()->findByName('admin');
         $wellnessTeamGroup = Sentry::getGroupProvider()->findByName('wellness_expert');
         $wellnessTeamGroup = Sentry::getGroupProvider()->findByName('medical_doctor');
@@ -31,6 +30,15 @@ class SentryUserGroupSeeder extends Seeder {
         $ghcpUser->addGroup($wellnessTeamGroup);
         $memberUser->addGroup($memberGroup);
         $paUser->addGroup($paGroup);
+        
+        //
+        $adminUser1 = Sentry::getUserProvider()->findByLogin('admin1@sprim.com');
+        $ghcpUser1 = Sentry::getUserProvider()->findByLogin('ghcp1@sprim.com');
+        $memberUser1 = Sentry::getUserProvider()->findByLogin('member1@sprim.com');
+        
+        $adminUser1->addGroup($adminGroup);
+        $ghcpUser1->addGroup($wellnessTeamGroup);
+        $memberUser1->addGroup($memberGroup);
     }
 
 }

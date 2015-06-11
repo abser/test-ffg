@@ -7,6 +7,7 @@ use Carbon\Carbon;
 
 class File extends Ardent {
 
+	public $timestamps  = false;
 	// protected $fillable = [];
 
 }
