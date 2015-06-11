@@ -1,0 +1,22 @@
+[2015-06-11 07:56:35] local.ERROR: exception 'ErrorException' with message 'Undefined offset: 0' in C:\xampp\htdocs\gravity-web\app\controllers\MemberController.php:120
+Stack trace:
+#0 C:\xampp\htdocs\gravity-web\app\controllers\MemberController.php(120): Illuminate\Exception\Handler->handleError(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 120, Array)
+#1 [internal function]: MemberController->edit('34')
+#2 C:\xampp\htdocs\gravity-web\vendor\laravel\framework\src\Illuminate\Routing\Controller.php(231): call_user_func_array(Array, Array)
+#3 C:\xampp\htdocs\gravity-web\bootstrap\compiled.php(5847): Illuminate\Routing\Controller->callAction('edit', Array)
+#4 C:\xampp\htdocs\gravity-web\bootstrap\compiled.php(5835): Illuminate\Routing\ControllerDispatcher->call(Object(MemberController), Object(Illuminate\Routing\Route), 'edit')
+#5 C:\xampp\htdocs\gravity-web\bootstrap\compiled.php(5040): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'MemberControlle...', 'edit')
+#6 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}('34')
+#7 C:\xampp\htdocs\gravity-web\bootstrap\compiled.php(5398): call_user_func_array(Object(Closure), Array)
+#8 C:\xampp\htdocs\gravity-web\bootstrap\compiled.php(5065): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#9 C:\xampp\htdocs\gravity-web\bootstrap\compiled.php(5053): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#10 C:\xampp\htdocs\gravity-web\bootstrap\compiled.php(715): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#11 C:\xampp\htdocs\gravity-web\bootstrap\compiled.php(696): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#12 C:\xampp\htdocs\gravity-web\vendor\barryvdh\laravel-debugbar\src\Middleware\Stack.php(34): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#13 C:\xampp\htdocs\gravity-web\bootstrap\compiled.php(7825): Barryvdh\Debugbar\Middleware\Stack->handle(Object(Illuminate\Http\Request), 1, true)
+#14 C:\xampp\htdocs\gravity-web\bootstrap\compiled.php(8432): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#15 C:\xampp\htdocs\gravity-web\bootstrap\compiled.php(8379): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#16 C:\xampp\htdocs\gravity-web\bootstrap\compiled.php(11045): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#17 C:\xampp\htdocs\gravity-web\bootstrap\compiled.php(657): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#18 C:\xampp\htdocs\gravity-web\public\index.php(49): Illuminate\Foundation\Application->run()
+#19 {main} [] []
