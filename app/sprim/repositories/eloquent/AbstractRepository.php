@@ -81,19 +81,20 @@ abstract class AbstractRepository {
         return $this->model->firstOrCreate($data);
     }
 
-    public function paginate($arr, $controllertype = '') {
+	public function paginate($arr)
+    {
         extract($arr);
-        $result = new \StdClass;
-        $result->page = $page;
-        $result->limit = $limit;
-        $result->totalItems = 0;
-        $result->items = array();
-
+        $result                     = new \StdClass;
+        $result->page               = $page;
+        $result->limit              = $limit;
+        $result->totalItems         = 0;
+        $result->items              = array();
+        
         $query = $this->filteredModel(trim($s_term), $s_field);
         $order = $this->sqlField($sort);
-
-        $result->totalItems = count($query->get());
-        $result->items = $query->skip($limit * ($page - 1))->take($limit)->orderBy($order, $dir)->get();
+        
+        $result->totalItems         = count($query->get());
+        $result->items              = $query->skip($limit * ($page - 1))->take($limit)->orderBy($order, $dir)->get();
 
         return $result;
     }
