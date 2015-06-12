@@ -35,74 +35,23 @@
 	</div>
 	
 	<div class="team_member_inner">
-	<div class="row">
+	<div class="row">	
+	@foreach($data['items'] as $row)		
 		<div class="col-sm-6 col-md-4">
 			<div class="thumbnail">
 				<div class="profile_bg"><img src="{{ asset('assets/images/man.jpg') }}" alt="" class="img clip-hex thumb"></div>
 				<div class="caption">
-					<h2>JOSEPHINE SKRIVER</h2>
+					<h2>{{ $row->title.' '.$row->first_name.' '.$row->last_name }} </h2>
 					<h3>Fitness Group exercise instructor</h3>
-					<p>Donec nibh augue, luctus nec urna eget, mollis maximus augue.Donec sagittis quis. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, Donec nibh augue savel velit av... </p>
+					<p>{{ $row->description }}</p>
 					<p><a href="#" class="view_link">View complete profile </a></p>
 					<a href="#" class="btn btn-primary center-block" role="button">REQUEST APPOINTMENT</a>
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-6 col-md-4">
-			<div class="thumbnail">
-				<div class="profile_bg"><img src="{{ asset('assets/images/man.jpg') }}" alt="" class="img clip-hex thumb"></div>
-				<div class="caption">
-					<h2>BRANDON NG</h2>
-					<h3>Fitness Coach</h3>
-					<p>Donec nibh augue, luctus nec urna eget, mollis maximus augue.Donec sagittis quis. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, Donec nibh augue savel velit av... </p>
-					<p><a href="#" class="view_link">View complete profile </a></p>
-					<a href="#" class="btn btn-primary center-block" role="button">REQUEST APPOINTMENT</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6 col-md-4">
-			<div class="thumbnail">
-				<div class="profile_bg"><img src="{{ asset('assets/images/man.jpg') }}" alt="" class="img clip-hex thumb"></div>
-				<div class="caption">
-					<h2>IAN TAN</h2>
-					<h3>Fitness Coach</h3>
-					<p>Donec nibh augue, luctus nec urna eget, mollis maximus augue.Donec sagittis quis. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, Donec nibh augue savel velit av... </p>
-					<p><a href="#" class="view_link">View complete profile </a></p>
-					<a href="#" class="btn btn-primary center-block" role="button">REQUEST APPOINTMENT</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6 col-md-4">
-			<div class="thumbnail">
-				<div class="profile_bg"><img src="{{ asset('assets/images/man.jpg') }}" alt="" class="img clip-hex thumb"></div>
-				<div class="caption">
-					<h2>TONY STARK</h2>
-					<h3>MEDICAL</h3>
-					<p>Donec nibh augue, luctus nec urna eget, mollis maximus augue.Donec sagittis quis. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, Donec nibh augue savel velit av... </p>
-					<p><a href="#" class="view_link">View complete profile </a></p>
-					<a href="#" class="btn btn-primary center-block" role="button">REQUEST APPOINTMENT</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6 col-md-4">
-			<div class="thumbnail">
-				<div class="profile_bg"><img src="{{ asset('assets/images/man.jpg') }}" alt="" class="img clip-hex thumb"></div>
-				<div class="caption">
-					<h2>JESSICA ALBA</h2>
-					<h3>WELLNESS SPA</h3>
-					<p>Donec nibh augue, luctus nec urna eget, mollis maximus augue.Donec sagittis quis. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, Donec nibh augue savel velit av... </p>
-					<p><a href="#" class="view_link">View complete profile </a></p>
-					<a href="#" class="btn btn-primary center-block" role="button">REQUEST APPOINTMENT</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6 col-md-4">
-			<div class="blank_more ">
-				<div class="blank_bg"><a href="#" class="learn_more center-block "><i class="fa fa-plus"></i><br>Learn More</a></div>
-				<div class="caption"></div>
-			</div>
-		</div>		
+	@endforeach
 	</div>
+	
 	</div>
 </div>
 </section><!-- team member section end here -->
