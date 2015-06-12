@@ -6,3 +6,4 @@ composer.lock
 Thumbs.db
 .project
 /nbproject/private/
+/app/storage/
