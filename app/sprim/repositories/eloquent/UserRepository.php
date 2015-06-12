@@ -75,13 +75,23 @@ class UserRepository extends AbstractRepository implements UserInterface {
     public function filteredModel($s_term = null, $s_field = 'all', $groups = null) {
         $model = \DB::table('users')
                 ->select(\DB::raw('users.id, users.first_name, users.last_name, users.email, 
-        		profiles.title,
+        		profiles.title, profiles.birth_date, profiles.gender, profiles.age_group, 
+                profiles.qualification, profiles.occupation, profiles.description, profiles.hobbies,
         		sprim_dhs.countries.name AS country
         	'))
         	->leftJoin('profiles', 'users.id', '=', 'profiles.user_id')
         	->leftJoin('addresses', 'profiles.address_id', '=', 'addresses.id')
         	->leftJoin('sprim_dhs.countries', 'sprim_dhs.countries.code', '=', 'addresses.country_code')
-        	->leftJoin('users_groups', 'users.id', '=', 'users_groups.user_id');       
+        	->leftJoin('users_groups', 'users.id', '=', 'users_groups.user_id')
+
+        	/* ->leftJoin(\DB::raw('(SELECT files.name,files.description, owner_id 
+        			FROM file_owners 
+        			join files on files.id = file_owners.file_id 
+        			WHERE files.file_type = 1 and file_owners.owner_table = 1) file'),
+        	function( $query ){
+        		$query->on( 'users.id', '=', \DB::raw('file.owner_id') );
+        	}) */
+        	;
 
         if ($groups) {
             // $model->whereRaw('(users_groups.group_id IN (' . $groups . '))');
@@ -257,9 +267,9 @@ class UserRepository extends AbstractRepository implements UserInterface {
         }
 
         if (isset($input['PaId']) && !empty($input['PaId'])) {
-            $PaUsersId = $this->PaUsers->create(['user_id' => $user_id, 'pa_user_id' => $input['PaId']]);
+            $PaUsersId = $this->PaUsers->create(['user_id' => $user_id, 'pa_user_id' => $input['PaId'],'created_by' => $user_id]);
         }
-        $profileId = $this->UserProfile->create(['user_id' => $user_id, 'address_id' => $address_id, 'profile_image' => $pic, 'display_profile_pic' => $display_pic, 'change_default_password' => $change_def_pass, 'gender' => $gender, 'occupation' => $input['occupation'], 'age_group' => $input['age_group']]);
+        $profileId = $this->UserProfile->create(['user_id' => $user_id, 'address_id' => $address_id, 'profile_image' => $pic, 'display_profile_pic' => $display_pic, 'change_default_password' => $change_def_pass, 'gender' => $gender, 'occupation' => $input['occupation'], 'age_group' => $input['age_group'],'created_by' => $user_id]);
         $profileId = $profileId['id'];
         if (isset($input['member_email'])) {
             $memberId = $this->ProfileContacts->create(['user_id' => $user_id, 'contact_type' => 1, 'info' => $input['member_email'], 'created_by' => $user_id]);
@@ -358,9 +368,10 @@ class UserRepository extends AbstractRepository implements UserInterface {
 
     public function EditUserList($id) {
         $query = \DB::table('users')
-                ->select(\DB::raw('users.id, users.email, users.first_name,users.last_name, users.activated,users.activated,profile_contacts.info,club_users.club_id'))
+                ->select(\DB::raw('users.id, users.email, users.first_name,users.last_name, users.activated,users.activated,profile_contacts.info,club_users.club_id,users_groups.group_id'))
                 ->join('profile_contacts', 'users.id', '=', 'profile_contacts.user_id')
                 ->join('club_users', 'users.id', '=', 'club_users.user_id')
+                 ->join('users_groups', 'users.id', '=', 'users_groups.user_id')
                 // ->whereIn('users.id', array(1, 2, 3))
                 ->where('users.id', $id);
 

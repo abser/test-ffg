@@ -1,16 +1,24 @@
-$(document).ready(function($) {	
-	
-    $('#is_conjunct').click(function() {
-    	$('#conjunct_box').toggle(false);
-    	$('#room_conjuncts').multiselect();
-    	// return false;
-    });   
-    $('#conjunct_box').toggle(!$('#is_conjunct').is(':checked'));
-       
+$(document).ready(function ($) {
+    $('#is_conjunct').change(function () {
+        $('#room_conjuncts').multiselect();
+        if (this.checked) {
+            $('#conjunct_box').css("display", "block")
+        }
+        else {
+            $('#conjunct_box').css("display", "none")
+        }
+    });
+//    $('#is_conjunct').click(function() {
+//    	$('#conjunct_box').toggle(false);
+//    	$('#room_conjuncts').multiselect();
+//    	// return false;
+//    });   
+    // $('#conjunct_box').toggle(!$('#is_conjunct').is(':checked'));
+
     $('input[type="checkbox"]').change(function (e) {
         var checked = $(this).prop("checked"),
-            container = $(this).parent(),
-            siblings = container.siblings();
+                container = $(this).parent(),
+                siblings = container.siblings();
 
         container.find('input[type="checkbox"]').prop({
             indeterminate: false,
@@ -19,7 +27,7 @@ $(document).ready(function($) {
 
         function checkSiblings(el) {
             var parent = el.parent().parent(),
-                all = true;
+                    all = true;
 
             el.siblings().each(function () {
                 return all = ($(this).children('input[type="checkbox"]').prop("checked") === checked);
@@ -39,10 +47,10 @@ $(document).ready(function($) {
                 el.parents("li").children('input[type="checkbox"]').prop({
                     indeterminate: true,
                     checked: false
-                }); 
-            } 
-        } 
+                });
+            }
+        }
 
-        checkSiblings(container); 
-    }); 
+        checkSiblings(container);
+    });
 });
