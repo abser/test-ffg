@@ -258,9 +258,9 @@ class UserRepository extends AbstractRepository implements UserInterface {
         }
 
         if (isset($input['PaId']) && !empty($input['PaId'])) {
-            $PaUsersId = $this->PaUsers->create(['user_id' => $user_id, 'pa_user_id' => $input['PaId']]);
+            $PaUsersId = $this->PaUsers->create(['user_id' => $user_id, 'pa_user_id' => $input['PaId'],'created_by' => $user_id]);
         }
-        $profileId = $this->UserProfile->create(['user_id' => $user_id, 'address_id' => $address_id, 'profile_image' => $pic, 'display_profile_pic' => $display_pic, 'change_default_password' => $change_def_pass, 'gender' => $gender, 'occupation' => $input['occupation'], 'age_group' => $input['age_group']]);
+        $profileId = $this->UserProfile->create(['user_id' => $user_id, 'address_id' => $address_id, 'profile_image' => $pic, 'display_profile_pic' => $display_pic, 'change_default_password' => $change_def_pass, 'gender' => $gender, 'occupation' => $input['occupation'], 'age_group' => $input['age_group'],'created_by' => $user_id]);
         $profileId = $profileId['id'];
         if (isset($input['member_email'])) {
             $memberId = $this->ProfileContacts->create(['user_id' => $user_id, 'contact_type' => 1, 'info' => $input['member_email'], 'created_by' => $user_id]);
@@ -359,9 +359,10 @@ class UserRepository extends AbstractRepository implements UserInterface {
 
     public function EditUserList($id) {
         $query = \DB::table('users')
-                ->select(\DB::raw('users.id, users.email, users.first_name,users.last_name, users.activated,users.activated,profile_contacts.info,club_users.club_id'))
+                ->select(\DB::raw('users.id, users.email, users.first_name,users.last_name, users.activated,users.activated,profile_contacts.info,club_users.club_id,users_groups.group_id'))
                 ->join('profile_contacts', 'users.id', '=', 'profile_contacts.user_id')
                 ->join('club_users', 'users.id', '=', 'club_users.user_id')
+                 ->join('users_groups', 'users.id', '=', 'users_groups.user_id')
                 // ->whereIn('users.id', array(1, 2, 3))
                 ->where('users.id', $id);
 
