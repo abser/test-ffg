@@ -62,8 +62,8 @@ class Configuration
         'settings' => array(
             'colors' => false,
             'log' => false, // deprecated
-            'strict_xml' => false,
-            'bootstrap' => false
+            'bootstrap' => '_bootstrap.php',
+            'strict_xml' => false
         ),
         'coverage' => []
     );

@@ -13,6 +13,15 @@
 		"cartalyst/sentry": "2.1.*",
 		"way/generators": "3"
 	},
+	"require-dev": {
+            "phpunit/phpunit": "4.7.*",
+            "squizlabs/php_codesniffer": "*",
+            "phploc/phploc": "*",
+            "pdepend/pdepend": "*",
+            "phpmd/phpmd": "*",
+            "sebastian/phpcpd": "*",
+            "theseer/phpdox": "*"
+    },
 	"autoload": {
 		"classmap": [
 			"app/commands",
@@ -38,7 +47,8 @@
 		]
 	},
 	"config": {
-		"preferred-install": "dist"
+		"preferred-install": "dist",
+		"bin-dir": "bin"
 	},
 	"minimum-stability": "stable"
 }

@@ -18,14 +18,7 @@ trait Comment
         return $this->comment('I am going to ' . $argumentation);
     }
 
-    public function am($role)
-    {
-        $role = trim($role);
-
-        if (stripos('aeiou', $role[0]) !== false) {
-            return $this->comment('As an ' . $role);
-        }
-
+    public function am($role) {
         return $this->comment('As a ' . $role);
     }
 

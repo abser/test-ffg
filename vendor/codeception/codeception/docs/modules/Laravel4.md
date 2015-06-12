@@ -36,6 +36,32 @@ Uses 'bootstrap/start.php' to launch.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### amHttpAuthenticated
  
 Authenticates user for HTTP_AUTH
@@ -70,7 +96,10 @@ $I->amOnAction('PostsController@index');
 
 ### amOnPage
  
-Opens the page for the given relative URI.
+Opens the page.
+Requires relative uri as parameter
+
+Example:
 
 ``` php
 <?php
@@ -98,9 +127,35 @@ $I->amOnRoute('posts.create');
  * `param array` $params
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### attachFile
  
-Attaches a file relative to the Codeception data directory to the given file upload field.
+Attaches file from Codeception data directory to upload field.
+
+Example:
 
 ``` php
 <?php
@@ -113,19 +168,12 @@ $I->attachFile('input[@type="file"]', 'prices.xls');
  * `param` $filename
 
 
-### callArtisan
- 
-Calls an Artisan command and returns output as a string
-
- * `param string` $command       The name of the command as displayed in the artisan command list
- * `param array`  $parameters    An associative array of command arguments
-
-@return string
-
-
 ### checkOption
  
-Ticks a checkbox. For radio buttons, use the `selectOption` method instead.
+Ticks a checkbox.
+For radio buttons use `selectOption` method.
+
+Example:
 
 ``` php
 <?php
@@ -138,15 +186,17 @@ $I->checkOption('#agree');
 
 ### click
  
-Perform a click on a link or a button, given by a locator.
-If a fuzzy locator is given, the page will be searched for a button, link, or image matching the locator string.
-For buttons, the "value" attribute, "name" attribute, and inner text are searched.
-For links, the link text is searched.
-For images, the "alt" attribute and inner text of any parent links are searched.
+Perform a click on link or button.
+Link or button are found by their names or CSS selector.
+Submits a form if button is a submit type.
 
-The second parameter is a context (CSS or XPath locator) to narrow the search.
+If link is an image it's found by alt attribute value of image.
+If button is image button is found by it's value
+If link or button can't be found by name they are searched by CSS selector.
 
-Note that if the locator matches a button of type `submit`, the form will be submitted.
+The second parameter is a context: CSS or XPath locator to narrow the search.
+
+Examples:
 
 ``` php
 <?php
@@ -169,10 +219,16 @@ $I->click(['link' => 'Login']);
  * `param` $context
 
 
+
+
+
+
 ### dontSee
  
-Checks that the current page doesn't contain the text specified.
-Give a locator as the second parameter to match a specific region.
+Check if current page doesn't contain the text specified.
+Specify the css selector to match only specific region.
+
+Examples:
 
 ```php
 <?php
@@ -193,7 +249,10 @@ Check that user is not authenticated
 
 ### dontSeeCheckboxIsChecked
  
-Check that the specified checkbox is unchecked.
+Assert if the specified checkbox is unchecked.
+Use css selector or xpath to match.
+
+Example:
 
 ``` php
 <?php
@@ -207,18 +266,16 @@ $I->seeCheckboxIsChecked('#signup_form input[type=checkbox]'); // I suppose user
 
 ### dontSeeCookie
  
-Checks that there isn't a cookie with the given name.
-You can set additional cookie params like `domain`, `path` as array passed in last argument.
+Checks that cookie doesn't exist
 
  * `param` $cookie
 
- * `param array` $params
 
 
 ### dontSeeCurrentUrlEquals
  
-Checks that the current URL doesn't equal the given string.
-Unlike `dontSeeInCurrentUrl`, this only matches the full URL.
+Checks that current url is not equal to value.
+Unlike `dontSeeInCurrentUrl` performs a strict check.
 
 ``` php
 <?php
@@ -232,7 +289,7 @@ $I->dontSeeCurrentUrlEquals('/');
 
 ### dontSeeCurrentUrlMatches
  
-Checks that current url doesn't match the given regular expression.
+Checks that current url does not match a RegEx value
 
 ``` php
 <?php
@@ -246,8 +303,10 @@ $I->dontSeeCurrentUrlMatches('~$/users/(\d+)~');
 
 ### dontSeeElement
  
-Checks that the given element is invisible or not present on the page.
+Checks if element does not exist (or is visible) on a page, matching it by CSS or XPath
 You can also specify expected attributes of this element.
+
+Example:
 
 ``` php
 <?php
@@ -259,12 +318,11 @@ $I->dontSeeElement('input', ['value' => '123456']);
 ```
 
  * `param` $selector
- * `param array` $attributes
 
 
 ### dontSeeInCurrentUrl
  
-Checks that the current URI doesn't contain the given string.
+Checks that current uri does not contain a value
 
 ``` php
 <?php
@@ -277,8 +335,9 @@ $I->dontSeeInCurrentUrl('/users/');
 
 ### dontSeeInField
  
-Checks that an input field or textarea doesn't contain the given value.
-For fuzzy locators, the field is matched by label text, CSS and XPath.
+Checks that an input field or textarea doesn't contain value.
+Field is matched either by label or CSS or Xpath
+Example:
 
 ``` php
 <?php
@@ -287,7 +346,7 @@ $I->dontSeeInField('form textarea[name=body]','Type your comment here');
 $I->dontSeeInField('form input[type=hidden]','hidden_value');
 $I->dontSeeInField('#searchform input','Search');
 $I->dontSeeInField('//form/*[@name=search]','Search');
-$I->dontSeeInField(['name' => 'search'], 'Search');
+$I->seeInField(['name' => 'search'], 'Search');
 ?>
 ```
 
@@ -295,52 +354,9 @@ $I->dontSeeInField(['name' => 'search'], 'Search');
  * `param` $value
 
 
-### dontSeeInFormFields
- 
-Checks if the array of form parameters (name => value) are not set on the form matched with
-the passed selector.
-
-``` php
-<?php
-$I->dontSeeInFormFields('form[name=myform]', [
-     'input1' => 'non-existent value',
-     'input2' => 'other non-existent value',
-]);
-?>
-```
-
-To check that an element hasn't been assigned any one of many values, an array can be passed
-as the value:
-
-``` php
-<?php
-$I->dontSeeInFormFields('.form-class', [
-     'fieldName' => [
-         'This value shouldn\'t be set',
-         'And this value shouldn\'t be set',
-     ],
-]);
-?>
-```
-
-Additionally, checkbox values can be checked with a boolean.
-
-``` php
-<?php
-$I->dontSeeInFormFields('#form-id', [
-     'checkbox1' => true,        // fails if checked
-     'checkbox2' => false,       // fails if unchecked
-]);
-?>
-```
-
- * `param` $formSelector
- * `param` $params
-
-
 ### dontSeeInTitle
  
-Checks that the page title does not contain the given string.
+Checks that page title does not contain text.
 
  * `param` $title
 
@@ -348,23 +364,24 @@ Checks that the page title does not contain the given string.
 
 ### dontSeeLink
  
-Checks that the page doesn't contain a link with the given string.
-If the second parameter is given, only links with a matching "href" attribute will be checked.
+Checks if page doesn't contain the link with text specified.
+Specify url to narrow the results.
+
+Examples:
 
 ``` php
 <?php
 $I->dontSeeLink('Logout'); // I suppose user is not logged in
-$I->dontSeeLink('Checkout now', '/store/cart.php');
 ?>
 ```
 
- * `param` $text
+ * `param`      $text
  * `param null` $url
 
 
 ### dontSeeOptionIsSelected
  
-Checks that the given option is not selected.
+Checks if option is not selected in select field.
 
 ``` php
 <?php
@@ -391,9 +408,13 @@ $I->dontSeeRecord('users', array('name' => 'davert'));
  * `param array` $attributes
 
 
+
+
 ### fillField
  
-Fills a text field or textarea with the given string.
+Fills a text field or textarea with value.
+
+Example:
 
 ``` php
 <?php
@@ -406,9 +427,19 @@ $I->fillField(['name' => 'email'], 'jon@mail.com');
  * `param` $value
 
 
+
+
+
+
+
+
+
+
+
+
 ### grabAttributeFrom
  
-Grabs the value of the given attribute value from the given element.
+Grabs attribute value from an element.
 Fails if element is not found.
 
 ``` php
@@ -426,17 +457,15 @@ $I->grabAttributeFrom('#tooltip', 'title');
 ### grabCookie
  
 Grabs a cookie value.
-You can set additional cookie params like `domain`, `path` in array passed as last argument.
 
  * `param` $cookie
 
- * `param array` $params
 
 
 ### grabFromCurrentUrl
  
-Executes the given regular expression against the current URI and returns the first match.
-If no parameters are provided, the full URI is returned.
+Takes a parameters from current URI by RegEx.
+If no url provided returns full URI.
 
 ``` php
 <?php
@@ -490,14 +519,16 @@ $service = $I->grabService('foo');
 
 ### grabTextFrom
  
-Finds and returns the text contents of the given element.
-If a fuzzy locator is used, the element is found using CSS, XPath, and by matching the full page source by regular expression.
+Finds and returns text contents of element.
+Element is searched by CSS selector, XPath or matcher by regex.
+
+Example:
 
 ``` php
 <?php
 $heading = $I->grabTextFrom('h1');
 $heading = $I->grabTextFrom('descendant-or-self::h1');
-$value = $I->grabTextFrom('~<input value=(.*?)]~sgi'); // match with a regex
+$value = $I->grabTextFrom('~<input value=(.*?)]~sgi');
 ?>
 ```
 
@@ -510,6 +541,7 @@ $value = $I->grabTextFrom('~<input value=(.*?)]~sgi'); // match with a regex
  * `param` $field
 
 @return array|mixed|null|string
+
 
 
 ### haveDisabledFilters
@@ -541,20 +573,27 @@ $user_id = $I->haveRecord('users', array('name' => 'Davert'));
 Logs user out
 
 
+
+
+
+
+
 ### resetCookie
  
-Unsets cookie with the given name.
-You can set additional cookie params like `domain`, `path` in array passed as last argument.
+Unsets cookie
 
  * `param` $cookie
 
- * `param array` $params
+
+
 
 
 ### see
  
-Checks that the current page contains the given string.
-Specify a locator as the second parameter to match a specific region.
+Check if current page contains the text specified.
+Specify the css selector to match only specific region.
+
+Examples:
 
 ``` php
 <?php
@@ -575,7 +614,10 @@ Checks that user is authenticated
 
 ### seeCheckboxIsChecked
  
-Checks that the specified checkbox is checked.
+Assert if the specified checkbox is checked.
+Use css selector or xpath to match.
+
+Example:
 
 ``` php
 <?php
@@ -590,17 +632,10 @@ $I->seeCheckboxIsChecked('//form/input[@type=checkbox and @name=agree]');
 
 ### seeCookie
  
-Checks that a cookie with the given name is set.
-You can set additional cookie params like `domain`, `path` as array passed in last argument.
-
-``` php
-<?php
-$I->seeCookie('PHPSESSID');
-?>
-```
+Checks that cookie is set.
 
  * `param` $cookie
- * `param array` $params
+
 
 
 ### seeCurrentActionIs
@@ -632,8 +667,8 @@ $I->seeCurrentRouteIs('posts.index');
 
 ### seeCurrentUrlEquals
  
-Checks that the current URL is equal to the given string.
-Unlike `seeInCurrentUrl`, this only matches the full URL.
+Checks that current url is equal to value.
+Unlike `seeInCurrentUrl` performs a strict check.
 
 ``` php
 <?php
@@ -647,7 +682,7 @@ $I->seeCurrentUrlEquals('/');
 
 ### seeCurrentUrlMatches
  
-Checks that the current URL matches the given regular expression.
+Checks that current url is matches a RegEx value
 
 ``` php
 <?php
@@ -661,7 +696,7 @@ $I->seeCurrentUrlMatches('~$/users/(\d+)~');
 
 ### seeElement
  
-Checks that the given element exists on the page and is visible.
+Checks if element exists on a page, matching it by CSS or XPath.
 You can also specify expected attributes of this element.
 
 ``` php
@@ -683,7 +718,7 @@ $I->seeElement(['css' => 'form input'], ['name' => 'login']);
 
 ### seeInCurrentUrl
  
-Checks that current URI contains the given string.
+Checks that current uri contains a value
 
 ``` php
 <?php
@@ -699,8 +734,10 @@ $I->seeInCurrentUrl('/users/');
 
 ### seeInField
  
-Checks that the given input field or textarea contains the given value. 
-For fuzzy locators, fields are matched by label text, the "name" attribute, CSS, and XPath.
+Checks that an input field or textarea contains value.
+Field is matched either by label or CSS or Xpath
+
+Example:
 
 ``` php
 <?php
@@ -717,69 +754,6 @@ $I->seeInField(['name' => 'search'], 'Search');
  * `param` $value
 
 
-### seeInFormFields
- 
-Checks if the array of form parameters (name => value) are set on the form matched with the
-passed selector.
-
-``` php
-<?php
-$I->seeInFormFields('form[name=myform]', [
-     'input1' => 'value',
-     'input2' => 'other value',
-]);
-?>
-```
-
-For multi-select elements, or to check values of multiple elements with the same name, an
-array may be passed:
-
-``` php
-<?php
-$I->seeInFormFields('.form-class', [
-     'multiselect' => [
-         'value1',
-         'value2',
-     ],
-     'checkbox[]' => [
-         'a checked value',
-         'another checked value',
-     ],
-]);
-?>
-```
-
-Additionally, checkbox values can be checked with a boolean.
-
-``` php
-<?php
-$I->seeInFormFields('#form-id', [
-     'checkbox1' => true,        // passes if checked
-     'checkbox2' => false,       // passes if unchecked
-]);
-?>
-```
-
-Pair this with submitForm for quick testing magic.
-
-``` php
-<?php
-$form = [
-     'field1' => 'value',
-     'field2' => 'another value',
-     'checkbox1' => true,
-     // ...
-];
-$I->submitForm('//form[@id=my-form]', $form, 'submitButton');
-// $I->amOnPage('/path/to/form-page') may be needed
-$I->seeInFormFields('//form[@id=my-form]', $form);
-?>
-```
-
- * `param` $formSelector
- * `param` $params
-
-
 ### seeInSession
  
 Assert that the session has a given list of values.
@@ -791,7 +765,7 @@ Assert that the session has a given list of values.
 
 ### seeInTitle
  
-Checks that the page title contains the given string.
+Checks that page title contains text.
 
 ``` php
 <?php
@@ -805,8 +779,10 @@ $I->seeInTitle('Blog - Post #1');
 
 ### seeLink
  
-Checks that there's a link with the specified text.
-Give a full URL as the second parameter to match links with that exact URL.
+Checks if there is a link with text specified.
+Specify url to match link with exact this url.
+
+Examples:
 
 ``` php
 <?php
@@ -821,7 +797,7 @@ $I->seeLink('Logout','/logout'); // matches <a href="/logout">Logout</a>
 
 ### seeNumberOfElements
  
-Checks that there are a certain number of elements matched by the given locator on the page.
+Tests number of $elements on page
 
 ``` php
 <?php
@@ -837,7 +813,7 @@ $I->seeNumberOfElements('tr', [0,10]); //between 0 and 10 elements
 
 ### seeOptionIsSelected
  
-Checks that the given option is selected.
+Checks if option is selected in select field.
 
 ``` php
 <?php
@@ -911,7 +887,9 @@ Assert that the session has a given list of values.
 
 ### selectOption
  
-Selects an option in a select tag or in radio button group.
+Selects an option in select tag or in radio button group.
+
+Example:
 
 ``` php
 <?php
@@ -921,7 +899,7 @@ $I->selectOption('//form/select[@name=account]', 'Monthly');
 ?>
 ```
 
-Provide an array for the second argument to select multiple options:
+Can select multiple options if second argument is array:
 
 ``` php
 <?php
@@ -977,7 +955,7 @@ You need to perform an ajax request specifying the HTTP method.
 
 ``` php
 <?php
-$I->sendAjaxRequest('PUT', '/posts/7', array('title' => 'new title'));
+$I->sendAjaxRequest('PUT', /posts/7', array('title' => 'new title');
 
 ```
 
@@ -988,48 +966,39 @@ $I->sendAjaxRequest('PUT', '/posts/7', array('title' => 'new title'));
 
 ### setCookie
  
-Sets a cookie with the given name and value.
-You can set additional cookie params like `domain`, `path`, `expire`, `secure` in array passed as last argument.
+Sets a cookie.
 
-``` php
-<?php
-$I->setCookie('PHPSESSID', 'el4ukv0kqbvoirg7nkp4dncpk3');
-?>
-```
+ * `param` $cookie
+ * `param` $value
 
- * `param` $name
- * `param` $val
- * `param array` $params
- * `internal param` $cookie
- * `internal param` $value
 
 
 
 ### submitForm
  
-Submits the given form on the page, optionally with the given form values.
-Give the form fields values as an array.
+Submits a form located on page.
+Specify the form by it's css or xpath selector.
+Fill the form fields values as array.
 
-Skipped fields will be filled by their values from the page.
+Skipped fields will be filled by their values from page.
 You don't need to click the 'Submit' button afterwards.
 This command itself triggers the request to form's action.
 
-You can optionally specify what button's value to include
+You can optionally specify what button or buttons to include
 in the request with the last parameter as an alternative to
 explicitly setting its value in the second parameter, as
-button values are not otherwise included in the request.
+button values are not included otherwise included in the
+request.
 
 Examples:
 
 ``` php
 <?php
-$I->submitForm('#login', array('login' => 'davert', 'password' => '123456'));
-// or
-$I->submitForm('#login', array('login' => 'davert', 'password' => '123456'), 'submitButtonName');
+$I->submitForm('#login', array('login' => 'davert', 'password' => '123456'), array('clickedButtonName', 'submitButtonName'));
 
 ```
 
-For example, given this sample "Sign Up" form:
+For sample Sign Up form:
 
 ``` html
 <form action="/sign_up">
@@ -1040,15 +1009,17 @@ For example, given this sample "Sign Up" form:
     <input type="submit" name="submitButton" value="Submit" />
 </form>
 ```
-
-You could write the following to submit it:
+I can write this:
 
 ``` php
 <?php
 $I->submitForm('#userForm', array('user' => array('login' => 'Davert', 'password' => '123456', 'agree' => true)), 'submitButton');
 
 ```
-Note that "2" will be the submitted value for the "plan" field, as it is the selected option.
+Note, that pricing plan will be set to Paid, as it's selected on page.
+
+ * `param` $selector
+ * `param` $params
 
 You can also emulate a JavaScript submission by not specifying any buttons in the third parameter to submitForm.
 
@@ -1058,59 +1029,13 @@ $I->submitForm('#userForm', array('user' => array('login' => 'Davert', 'password
 
 ```
 
-Pair this with seeInFormFields for quick testing magic.
-
-``` php
-<?php
-$form = [
-     'field1' => 'value',
-     'field2' => 'another value',
-     'checkbox1' => true,
-     // ...
-];
-$I->submitForm('//form[@id=my-form]', $form, 'submitButton');
-// $I->amOnPage('/path/to/form-page') may be needed
-$I->seeInFormFields('//form[@id=my-form]', $form);
-?>
-```
-
-Parameter values can be set to arrays for multiple input fields
-of the same name, or multi-select combo boxes.  For checkboxes,
-either the string value can be used, or boolean values which will
-be replaced by the checkbox's value in the DOM.
-
-``` php
-<?php
-$I->submitForm('#my-form', [
-     'field1' => 'value',
-     'checkbox' => [
-         'value of first checkbox',
-         'value of second checkbox,
-     ],
-     'otherCheckboxes' => [
-         true,
-         false,
-         false
-     ],
-     'multiselect' => [
-         'first option value',
-         'second option value'
-     ]
-]);
-?>
-```
-
-Mixing string and boolean values for a checkbox's value is not
-supported and may produce unexpected results.
-
- * `param` $selector
- * `param` $params
- * `param` $button
 
 
 ### uncheckOption
  
 Unticks a checkbox.
+
+Example:
 
 ``` php
 <?php

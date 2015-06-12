@@ -5,3 +5,10 @@ composer.lock
 .DS_Store
 Thumbs.db
 .project
+vendor
+build
+!build/phpcs.xml
+!build/phpdox.xml
+!build/phpmd.xml
+!build/phpunit.xml
+node_modules

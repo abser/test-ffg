@@ -49,34 +49,9 @@ class Guzzle extends Client
         $this->client = $client;
     }
 
-    /**
-     * Sets the request header to the passed value.  The header will be
-     * sent along with the next request.
-     *
-     * Passing an empty value clears the header, which is the equivelant
-     * of calling deleteHeader.
-     *
-     * @param string $name the name of the header
-     * @param string $value the value of the header
-     */
-    public function setHeader($name, $value)
+    public function setHeader($header, $value)
     {
-        if (empty($value)) {
-            $this->deleteHeader($name);
-        } else {
-            $this->requestOptions['headers'][$name] = $value;
-        }
-    }
-
-    /**
-     * Deletes the header with the passed name from the list of headers
-     * that will be sent with the request.
-     *
-     * @param string $name the name of the header to delete.
-     */
-    public function deleteHeader($name)
-    {
-        unset($this->requestOptions['headers'][$name]);
+        $this->requestOptions['headers'][$header] = $value;
     }
 
     public function setAuth($username, $password)

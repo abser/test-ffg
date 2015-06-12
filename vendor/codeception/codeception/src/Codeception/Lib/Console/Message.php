@@ -36,6 +36,8 @@ class Message
         if ($message_length < $length) {
             $this->message .= str_repeat($char, $length - $message_length);
         }
+
+        // todo: cut?
         return $this;
     }
 
@@ -99,28 +101,6 @@ class Message
         $this->message = $this->output->formatHelper->formatBlock($this->message, $style, true);
 
         return $this;
-    }
-
-    public function getLength()
-    {
-        if (function_exists('mb_strlen')) {
-            return mb_strlen($this->message);
-        }
-        return strlen($this->message);
-    }
-
-    public function widthWithTerminalCorrection($width, $char = ' ')
-    {
-        $cols = 0;
-        if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
-            $cols = intval(`command -v tput >> /dev/null && tput cols`);
-        }
-        if ($cols > 0) {
-            $const = ($char == ' ') ? 6 : 1;
-            $width = ($cols <= $width) ? $cols - $const : $width;
-            $width = ($width < $const) ? $const : $width;
-        }
-        return $this->width($width, $char);
     }
 
     public function __toString()

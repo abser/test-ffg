@@ -59,7 +59,6 @@ namespace Codeception\Module;
  *              timeout: 120
  *              user: 'root'
  *              password: 'root'
- *              key: ~/.ssh/id_rsa
  *              tmp: 'tests/_data/ftp'
  *              passive: true
  *              cleanup: false
@@ -76,7 +75,6 @@ namespace Codeception\Module;
  *              timeout: 120
  *              user: 'root'
  *              password: 'root'
- *              key: ''
  *              tmp: 'tests/_data/ftp'
  *              cleanup: false
  *
@@ -555,12 +553,6 @@ class FTP extends \Codeception\Module\Filesystem
                     \PHPUnit_Framework_Assert::fail('failed to connect to ftp server');
                 }
 
-                if(isset($this->config['key'])) {
-                    $keyFile = file_get_contents($this->config['key']);
-                    $password = new \Crypt_RSA();
-                    $password->loadKey($keyFile);
-                }
-
                 if (!$this->ftp->login($user, $password)) {
                     \PHPUnit_Framework_Assert::fail('failed to authenticate user');
                 }
@@ -572,16 +564,16 @@ class FTP extends \Codeception\Module\Filesystem
                     \PHPUnit_Framework_Assert::fail('failed to connect to ftp server');
                 }
 
+                // Set passive mode option (ftp only option)
+                if (isset($this->config['passive']))
+                {
+                    ftp_pasv($this->ftp, strtolower($this->config['passive']) == 'enabled');
+                }
+
                 // Login using given access details
                 if (!@ftp_login($this->ftp, $user, $password))
                 {
                     \PHPUnit_Framework_Assert::fail('failed to authenticate user');
-                }
-                
-                // Set passive mode option (ftp only option)
-                if (isset($this->config['passive']))
-                {
-                    ftp_pasv($this->ftp, $this->config['passive']);
                 }
         }
         $pwd = $this->grabDirectory();

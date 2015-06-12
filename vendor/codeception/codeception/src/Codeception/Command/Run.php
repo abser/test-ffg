@@ -103,7 +103,6 @@ class Run extends Command
                  new InputOption('skip-group', 'sg', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Skip selected groups'),
                  new InputOption('env', '', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Run tests in selected environments.'),
                  new InputOption('fail-fast', 'f', InputOption::VALUE_NONE, 'Stop after first failure'),
-                 new InputOption('no-rebuild', '', InputOption::VALUE_NONE, 'Do not rebuild actor classes on start'),
              )
         );
 
@@ -143,7 +142,6 @@ class Run extends Command
         $userOptions = array_intersect_key($this->options, array_flip($this->passedOptionKeys($input)));
         $userOptions = array_merge($userOptions, $this->booleanOptions($input, ['xml','html', 'json', 'tap', 'coverage','coverage-xml','coverage-html']));
         $userOptions['verbosity'] = $this->output->getVerbosity();
-        $userOptions['interactive'] = !$input->hasParameterOption(array('--no-interaction', '-n'));
 
         if ($this->options['no-colors']) {
             $userOptions['colors'] = false;

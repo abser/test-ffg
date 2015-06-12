@@ -10,7 +10,6 @@ use Codeception\Lib\Connector\Laravel4 as LaravelConnector;
 use Illuminate\Http\Request;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Support\MessageBag;
-use Symfony\Component\Console\Output\BufferedOutput;
 
 /**
  *
@@ -120,11 +119,6 @@ class Laravel4 extends Framework implements ActiveRecord
 
         if ($this->kernel['session']) {
             $this->kernel['session']->flush();
-        }
-
-        // disconnect from DB to prevent "Too many connections" issue
-        if ($this->kernel['db']) {
-            $this->kernel['db']->disconnect();
         }
     }
 
@@ -376,15 +370,15 @@ class Laravel4 extends Framework implements ActiveRecord
      * ?>
      * ```
      *
-     * @param $tableName
+     * @param $model
      * @param array $attributes
      * @return mixed
      */
-    public function haveRecord($tableName, $attributes = array())
+    public function haveRecord($model, $attributes = array())
     {
-        $id = $this->kernel['db']->table($tableName)->insertGetId($attributes);
+        $id = $this->kernel['db']->table($model)->insertGetId($attributes);
         if (!$id) {
-            $this->fail("Couldn't insert record into table $tableName");
+            $this->fail("Couldnt insert record into table $model");
         }
         return $id;
     }
@@ -396,16 +390,16 @@ class Laravel4 extends Framework implements ActiveRecord
      * $I->seeRecord('users', array('name' => 'davert'));
      * ```
      *
-     * @param $tableName
+     * @param $model
      * @param array $attributes
      */
-    public function seeRecord($tableName, $attributes = array())
+    public function seeRecord($model, $attributes = array())
     {
-        $record = $this->findRecord($tableName, $attributes);
+        $record = $this->findRecord($model, $attributes);
         if (!$record) {
-            $this->fail("Couldn't find $tableName with " . json_encode($attributes));
+            $this->fail("Couldn't find $model with " . json_encode($attributes));
         }
-        $this->debugSection($tableName, json_encode($record));
+        $this->debugSection($model, json_encode($record));
     }
 
     /**
@@ -417,15 +411,15 @@ class Laravel4 extends Framework implements ActiveRecord
      * ?>
      * ```
      *
-     * @param $tableName
+     * @param $model
      * @param array $attributes
      */
-    public function dontSeeRecord($tableName, $attributes = array())
+    public function dontSeeRecord($model, $attributes = array())
     {
-        $record = $this->findRecord($tableName, $attributes);
-        $this->debugSection($tableName, json_encode($record));
+        $record = $this->findRecord($model, $attributes);
+        $this->debugSection($model, json_encode($record));
         if ($record) {
-            $this->fail("Unexpectedly managed to find $tableName with " . json_encode($attributes));
+            $this->fail("Unexpectedly managed to find $model with " . json_encode($attributes));
         }
     }
 
@@ -438,46 +432,22 @@ class Laravel4 extends Framework implements ActiveRecord
      * ?>
      * ```
      *
-     * @param $tableName
+     * @param $model
      * @param array $attributes
      * @return mixed
      */
-    public function grabRecord($tableName, $attributes = array())
+    public function grabRecord($model, $attributes = array())
     {
-        return $this->findRecord($tableName, $attributes);
+        return $this->findRecord($model, $attributes);
     }
 
-    /**
-     * @param $tableName
-     * @param array $attributes
-     * @return mixed
-     */
-    protected function findRecord($tableName, $attributes = array())
+    protected function findRecord($model, $attributes = array())
     {
-        $query = $this->kernel['db']->table($tableName);
+        $query = $this->kernel['db']->table($model);
         foreach ($attributes as $key => $value) {
             $query->where($key, $value);
         }
         return $query->first();
-    }
-
-    /**
-     * Calls an Artisan command and returns output as a string
-     *
-     * @param string $command       The name of the command as displayed in the artisan command list
-     * @param array  $parameters    An associative array of command arguments
-     *
-     * @return string
-     */
-    public function callArtisan($command, array $parameters = array())
-    {
-        $output = new BufferedOutput();
-
-        /** @var \Illuminate\Console\Application $artisan */
-        $artisan = $this->kernel['artisan'];
-        $artisan->call($command, $parameters, $output);
-
-        return $output->fetch();
     }
 
     /**

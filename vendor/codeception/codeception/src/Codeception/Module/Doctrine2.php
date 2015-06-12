@@ -92,10 +92,7 @@ class Doctrine2 extends \Codeception\Module
             '\Codeception\Module\Doctrine2::$em = $em');
 
         if ($this->config['cleanup'] && self::$em->getConnection()->isTransactionActive()) {
-            try {
-                self::$em->getConnection()->rollback();
-            } catch (\PDOException $e) {
-            }
+            self::$em->getConnection()->rollback();
         }
         $this->clean();
     }
