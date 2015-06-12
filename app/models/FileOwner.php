@@ -7,7 +7,13 @@ use Carbon\Carbon;
 
 class FileOwner extends Ardent {
 
-	public $timestamps  = false;
-	// protected $fillable = [];
+	protected $table        = 'file_owners';
+    protected $softDelete   = false;
+    public $timestamps      = false;
+    
+    public function file() 
+    {
+        return $this->belongsTo('Sprim\Model\File', 'file_id');
+    }
 
 }
