@@ -3,31 +3,37 @@
 use Sprim\Repositories\Contracts\UserInterface as User;
 use Sprim\Repositories\Contracts\ServiceInterface as Service;
 use Sprim\Repositories\Contracts\ClubInterface as Club;
+use Sprim\Repositories\Contracts\ClubUserInterface as ClubUser;
 use Sprim\Repositories\Contracts\ServiceCategoryInterface as ServiceCategory;
 use Sprim\Repositories\Contracts\ProfileInterface as Profile;
 use Sprim\Repositories\Contracts\ProfileContactInterface as ProfileContact;
+use Sprim\Repositories\Contracts\FileInterface as File;
+use Sprim\Repositories\Contracts\FileOwnerInterface as FileOwner;
 
 class WellnessTeamController extends \BaseController {
 
-	public function __construct(User $user, Service $service, ServiceCategory $service_category, Club $club, UserProfile $user_profile, 
-			Profile $profile, ProfileContact $profile_contact)
+	public function __construct(User $user, Service $service, ServiceCategory $service_category, Club $club, ClubUser $club_user, 
+		UserProfile $user_profile, Profile $profile, ProfileContact $profile_contact, File $file, FileOwner $file_owner)
 	{
 		$this->model	= $user;
 		$this->user		= $user;
 		$this->service	= $service;
 		$this->club		= $club;
+		$this->club_user		= $club_user;
 		$this->service_category = $service_category;
 		$this->user_profile		= $user_profile;
 		
-		$this->profile	= $profile;
+		$this->profile			= $profile;
 		$this->profile_contact	= $profile_contact;
+		$this->file				= $file;
+		$this->file_owner		= $file_owner;
 	
 		parent::__construct();
-		$this->owner_table = Config::get('sprim.tables.service');
+		$this->owner_table = Config::get('sprim.tables.profile');
 		$this->sort      = 'first_name';
 		$this->dir       = 'asc';
 	
-		$this->route_prefix = 'wellness-team';
+		$this->route_prefix = 'wellness-team';	
 	}
 	
 	/**
@@ -135,7 +141,7 @@ class WellnessTeamController extends \BaseController {
 	public function edit($id)
 	{
 		// $data				= $this->initData();
-		$data['user']           = $this->user->getById($id, ['club_users']);
+		$data['user']           = $this->user->getById($id, ['profile', 'profile.address', 'club_users']);
 		$data['sentry']         = Sentry::findUserById($id);
 		$data['user_groups']    = array();
 		$data['email_opt']      = 'disabled';
@@ -150,6 +156,9 @@ class WellnessTeamController extends \BaseController {
 		$data['categories']	= $this->service_category->getSelectList(0);
 		$data['sub_categories']	= $this->service_category->getSelectList(1);
 		
+		$owner_table      = \Config::get('sprim.tables.user');
+		$data['profile_pic']    = $this->file_owner->getFile($id, $owner_table, $this->file_type['avatar']);
+				
 		if(!$data['user']){
 			return Response::view('errors.404', array(), 404);
 		}
@@ -174,12 +183,13 @@ class WellnessTeamController extends \BaseController {
 			return Redirect::to('wellness-team/'.$id.'/edit')->withErrors($model->errors())->withInput();
 		} else {		
 			
+			$user		= Sentry::findUserById($id);
 			$groups		= Sentry::findAllGroups();
 			foreach($groups as $group){
 				$user->removeGroup($group);
 			}
 			
-			$this->saveOtherDetails($model, $input);		
+			$this->saveOtherDetails($user, $input);		
 			return Redirect::to('wellness-team');
 		}
 				
@@ -230,7 +240,7 @@ class WellnessTeamController extends \BaseController {
 		return $data;
 	}
 	
-	protected function saveOtherDetails($user, $input)
+	protected function saveOtherDetails($user, $input, $file_check = false)
 	{	
 		if ($input['profile_type'] && $input['profile_type'] == '1')
 		{
@@ -244,9 +254,24 @@ class WellnessTeamController extends \BaseController {
 			$user->addGroup($group);
 		}
 		
-		/* $profile_id = $this->profile->_save($user, $input);
+		if (array_key_exists('clubs', $input)) {
+			$club_users = $this->club_user->_save($user->id, $input['clubs']);
+		}
 		
-		$this->profile_contact->_save($input['email'], \Config::get('sprim.contact_types.email'),
+		$profile_id = $this->profile->_save($user->id, $input);
+		
+		if (\Input::hasFile('profile_pic')) {					
+			
+			if ($file_check) {			
+				$this->file_owner->checkDelete($user->id, $this->owner_table, $this->file_type['avatar']);
+			}
+		
+			$file_id = $this->file->_save(\Utils::uploadFile('profile_pic', 'img'), $this->file_type['avatar']);
+		
+			$this->file_owner->_save($file_id, $user->id, $this->owner_table);
+		}
+		
+		/* $this->profile_contact->_save($input['email'], \Config::get('sprim.contact_types.email'),
 				$hcp->profile_id);
 		
 		$this->profile_contact->_save($input['office_num'], \Config::get('sprim.contact_types.office_num'),

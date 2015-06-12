@@ -16,7 +16,7 @@ class ProfileRepository extends AbstractRepository implements ProfileInterface {
         $this->address  = $address;
     }
     
-    public function _save($related_model, $input, $no_duplicate = false)
+    public function _save($_user_id, $input)
     {
         if (!array_filter($input)){
             return false;
@@ -25,49 +25,50 @@ class ProfileRepository extends AbstractRepository implements ProfileInterface {
         $profile_id = null;
         $address_id = null;
         
-        if($no_duplicate && $has_duplicate = $this->hasDuplicate($input)){
-            
-            if (array_key_exists('address', $input)){
-                $profile    = $this->find($has_duplicate);
-
-                if ($profile->address_id){
-                    $address_id = $profile->address_id;
-                } 
-                
-                $this->address->allow_null = $this->allow_null;
-                $input['address_id'] = $this->address->_save($input['address'], $address_id);
-            }
-            
-            return $has_duplicate;
+        $profile    = $this->model->where('user_id', '=', $_user_id)->first();
+        
+        if (!$profile) {
+        	$profile = $this->newInstance();
+        	$profile->created_by 	= \Session::get('user.id');
         }
-
-        if ($related_model->profile_id){
-            $profile    = $this->find($related_model->profile_id);
-            $profile_id = $profile->id;
-
-            if ($profile->address_id){
-                $address_id = $profile->address_id;
-            } 
-        } else {
-            $profile = $this->newInstance();
+               
+        if (array_key_exists('address', $input)) {
+        	
+        	if ($profile && $profile->address_id) {
+        		$address_id = $profile->address_id;
+        	}
+        	
+        	$input['address_id'] = $this->address->_save($input['address'], $address_id);
         }
         
-        if (array_key_exists('address', $input)){
-        	$this->address->allow_null = $this->allow_null;
-            $input['address_id'] = $this->address->_save($input['address'], $address_id);
-        }
+        // ["phone"]=> string(0) "" ["mobile"]=> string(0) "" 
+        // ["picture"]=> string(7) "man.jpg" ["qualifications"]=> string(0) "" ["personal_philosophy"]=> string(0) "" ["accept_appointment"]=> string(1) "1"
+        //  ["address_id"]=> string(1) "7" }
         
-        $profile->first_name            = $input['first_name'];
-        $profile->last_name             = $input['last_name'];
+        
+                      
+        if (array_key_exists('profile', $input)) {
+        	$profile->title		    = \Helpers::keyInput('title', $input['profile']);
+        }
+        $profile->first_name    = \Helpers::keyInput('first_name', $input);
+        $profile->last_name     = \Helpers::keyInput('last_name', $input);
         
         $profile->address_id    = \Helpers::keyInput('address_id', $input);
-        $profile->birth_date    = \Helpers::keyInput('birth_date', $input);
-        $profile->user_id       = \Helpers::keyInput('user_id', $input);
-        
-        if(!$this->allow_null){
-        	$profile = $this->keepOldData($profile);
+        // $profile->birth_date    = \Helpers::keyInput('birth_date', $input);
+        $profile->user_id       = $_user_id;
+                
+        if (array_key_exists('profile', $input)) {
+        	$profile->qualification		= \Helpers::keyInput('qualification', $input['profile']);
+        	$profile->description		= \Helpers::keyInput('description', $input['profile']);
         }
-
+        
+        $profile->accept_appointment	= 0;        
+        if (array_key_exists('accept_appointment', $input)){
+        	$profile->accept_appointment	= \Helpers::keyInput('accept_appointment', $input);
+        }
+        
+        // dd($profile);
+              
         if($profile->save()){
             
             return $profile->id;

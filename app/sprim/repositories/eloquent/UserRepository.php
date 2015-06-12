@@ -75,14 +75,15 @@ class UserRepository extends AbstractRepository implements UserInterface {
     public function filteredModel($s_term = null, $s_field = 'all', $groups = null) {
         $model = \DB::table('users')
                 ->select(\DB::raw('users.id, users.first_name, users.last_name, users.email, 
-        		profiles.title,
+        		profiles.title, profiles.birth_date, profiles.gender, profiles.age_group, 
+                profiles.qualification, profiles.occupation, profiles.description, profiles.hobbies,
         		sprim_dhs.countries.name AS country
         	'))
-                ->leftJoin('profiles', 'users.id', '=', 'profiles.user_id')
-                ->leftJoin('addresses', 'profiles.address_id', '=', 'addresses.id')
-                ->leftJoin('sprim_dhs.countries', 'sprim_dhs.countries.code', '=', 'addresses.country_code')
-                ->leftJoin('users_groups', 'users.id', '=', 'users_groups.user_id');
-        $model->whereRaw('users_groups.group_id = 3');
+        	->leftJoin('profiles', 'users.id', '=', 'profiles.user_id')
+        	->leftJoin('addresses', 'profiles.address_id', '=', 'addresses.id')
+        	->leftJoin('sprim_dhs.countries', 'sprim_dhs.countries.code', '=', 'addresses.country_code')
+        	->leftJoin('users_groups', 'users.id', '=', 'users_groups.user_id');       
+
         if ($groups) {
             // $model->whereRaw('(users_groups.group_id IN (' . $groups . '))');
             $model->whereIn('users_groups.group_id', $groups);

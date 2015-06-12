@@ -7,7 +7,7 @@
     </div>
     <div class="panel-body">
     	{{ Form::open(array('url' => 'wellness-team', 'files'=> true, 'data-abide', 'class'=>'form-horizontal', 'id' => 'wellnessTeamForm')) }}
-        	@include('wellness-team._form', $data)
+        	@include('wellness-team._form', array('form'=>$data))
         {{ Form::close() }}
     </div>
 </div>
@@ -19,6 +19,7 @@
     var region_id = {{ $data['user']->address->region_id or 0 }};
     var url_api_regions = "{{ url('api/regions/')}}";    
 </script>
-
+{{ HTML::script('/assets/js/bootstrap-multiselect.js') }}
+{{ HTML::script('/assets/js/directoryTree.js') }}
 {{ HTML::script('/assets/js/wellness-team.form.js') }}
 @stop

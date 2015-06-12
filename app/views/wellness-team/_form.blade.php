@@ -2,10 +2,10 @@
 <div class="form-group">	
 	{{ Form::label('club_id', 'Club', array('class' => 'col-lg-3 control-label')) }}
     <div class="col-lg-9">
-    	@if($user && $user->club_users)
-    		{{ Form::select('clubs[]', $clubs, $user->club_users->lists('id'), array('id' => 'clubs', 'multiple'=>true, 'size'=>'3', 'class'=>'form-control', 'required'=>'required')); }}
+    	@if($form['user'] && $form['user']->club_users)
+    		{{ Form::select('clubs[]', $form['clubs'], $form['user']->club_users->lists('club_id'), array('id' => 'clubs', 'multiple'=>true, 'size'=>'3', 'class'=>'form-control', 'required'=>'required')); }}
     	@else
-    		{{ Form::select('clubs[]', $clubs, (Input::old('clubs')), array('id' => 'clubs', 'multiple'=>true, 'size'=>'3', 'class'=>'form-control', 'required'=>'required')); }}
+    		{{ Form::select('clubs[]', $form['clubs'], (Input::old('clubs')), array('id' => 'clubs', 'multiple'=>true, 'size'=>'3', 'class'=>'form-control', 'required'=>'required')); }}
     	@endif    	
     	@if ($errors->has('clubs')) <p class="alert alert-danger">{{ $errors->first('clubs') }}</p> @endif
     </div>
@@ -33,8 +33,12 @@
 <div class="form-group">	
 	{{ Form::label('profile[title]', 'Title', array('class' => 'col-lg-3 control-label')) }}
     <div class="col-lg-9">
-    	{{ Form::text('profile.title', Input::old('profile.title'), ['class'=>'form-control', 'placeholder'=>'Title']) }}
-    	@if ($errors->has('profile.title')) <p class="alert alert-danger">{{ $errors->first('profile.title') }}</p> @endif
+    	@if($form['user'] && $form['user']->profile)
+    		{{ Form::text('profile[title]', $form['user']->profile->title, ['class'=>'form-control', 'placeholder'=>'Title']) }}
+    	@else
+    		{{ Form::text('profile[title]', Input::old('profile.title'), ['class'=>'form-control', 'placeholder'=>'Title']) }}
+    	@endif    	
+    	@if ($errors->has('title')) <p class="alert alert-danger">{{ $errors->first('title') }}</p> @endif
     </div>
 </div>
 <div class="form-group">	
@@ -86,58 +90,78 @@
     	<div class="row">
     		<div class="col-lg-4">@include("common.country", ['name' => 'address[country_code]', 'class'=>'form-control'])</div>    		
     		<div class="col-lg-4">{{ Form::select('address[region_id]', array('' => ''), null, array('id' => 'region', 'class'=>'form-control')); }}</div>    		
-    		<div class="col-lg-4">{{ Form::text('address[city]', Input::old('address.city'), ['class'=>'form-control', 'placeholder'=>'city']) }}</div> 		
+    		<div class="col-lg-4">
+    			@if($form['user'] && $form['user']->profile && $form['user']->profile->address)
+    				{{ Form::text('address[city]', $form['user']->profile->address->city, ['class'=>'form-control', 'placeholder'=>'city']) }}
+    			@else
+    				{{ Form::text('address[city]', Input::old('address.city'), ['class'=>'form-control', 'placeholder'=>'city']) }}
+    			@endif    		
+    		</div> 		
     	</div>    	
     </div>
 </div>
 <div class="form-group">
 	<div class="col-lg-3">&nbsp;</div>
     <div class="col-lg-9">
-    	{{ Form::text('address[address1]', Input::old('address.address1'), ['class'=>'form-control', 'placeholder'=>'address line 1']) }}
+    	@if($form['user'] && $form['user']->profile && $form['user']->profile->address)
+    		{{ Form::text('address[address1]', $form['user']->profile->address->address1, ['class'=>'form-control', 'placeholder'=>'address line 1']) }}
+    	@else
+    		{{ Form::text('address[address1]', Input::old('address.address1'), ['class'=>'form-control', 'placeholder'=>'address line 1']) }}
+    	@endif
     	@if ($errors->has('address[address1]')) <p class="alert alert-danger">{{ $errors->first('address[address1]') }}</p> @endif
     </div>
 </div>
 <div class="form-group">
 	<div class="col-lg-3">&nbsp;</div>
     <div class="col-lg-9">
-    	{{ Form::text('address[address2]', Input::old('address.address2'), ['class'=>'form-control', 'placeholder'=>'address line 2']) }}
+    	@if($form['user'] && $form['user']->profile && $form['user']->profile->address)
+    		{{ Form::text('address[address2]', $form['user']->profile->address->address2, ['class'=>'form-control', 'placeholder'=>'address line 2']) }}
+    	@else
+    		{{ Form::text('address[address2]', Input::old('address.address2'), ['class'=>'form-control', 'placeholder'=>'address line 2']) }}
+    	@endif
     	@if ($errors->has('address[address2]')) <p class="alert alert-danger">{{ $errors->first('address[address2]') }}</p> @endif
     </div>
 </div>
 <div class="form-group">
 	<div class="col-lg-3">&nbsp;</div>
     <div class="col-lg-9">
-    	{{ Form::text('address[postal_code]', Input::old('address.postal_code'), ['class'=>'form-control', 'placeholder'=>'postal code']) }}
+    	@if($form['user'] && $form['user']->profile && $form['user']->profile->address)
+    		{{ Form::text('address[postal_code]', $form['user']->profile->address->postal_code, ['class'=>'form-control', 'placeholder'=>'postal code']) }}
+    	@else
+    		{{ Form::text('address[postal_code]', Input::old('address.postal_code'), ['class'=>'form-control', 'placeholder'=>'postal code']) }}
+    	@endif
     	@if ($errors->has('address[postal_code]')) <p class="alert alert-danger">{{ $errors->first('address[postal_code]') }}</p> @endif
     </div>
 </div>
 
-<div class="form-group">
-	{{ Form::label('picture', 'Picture', array('class' => 'col-lg-3 control-label')) }}
-    <div class="col-lg-9">
-    	{{ Form::file('picture', array('class' => 'form-control', 'id' => 'picture', 'data-abide-validator' => 'filesize')); }}
-    	@if ($errors->has('picture')) <p class="alert alert-danger">{{ $errors->first('picture') }}</p> @endif
-    </div>
-</div>
+@include('common.file_form', array('file' => 'profile_pic', 'label' => 'Profile Picture'))
 
 <div class="form-group">
-	{{ Form::label('qualifications', 'Qualifications', array('class' => 'col-lg-3 control-label')) }}
+	{{ Form::label('profile[qualification]', 'Qualifications', array('class' => 'col-lg-3 control-label')) }}
     <div class="col-lg-9">
-    	{{ Form::text('qualifications', Input::old('qualifications'), ['class'=>'form-control', 'placeholder'=>'qualifications']) }}
-    	@if ($errors->has('qualifications')) <p class="alert alert-danger">{{ $errors->first('qualifications') }}</p> @endif
+    	@if($form['user'] && $form['user']->profile)
+    		{{ Form::text('profile[qualification]', $form['user']->profile->qualification, ['class'=>'form-control', 'placeholder'=>'qualifications']) }}
+    	@else
+    		{{ Form::text('profile[qualification]', Input::old('profile.qualification'), ['class'=>'form-control', 'placeholder'=>'qualifications']) }}
+    	@endif  
+    	@if ($errors->has('profile[qualification]')) <p class="alert alert-danger">{{ $errors->first('profile[qualification]') }}</p> @endif
     </div>
 </div>
 <div class="form-group">
-	<label for="personal_philosophy" class="col-lg-3 control-label">Personal Philosophy</label>
+	<label for="profile[description]" class="col-lg-3 control-label">Personal Philosophy</label>
     <div class="col-lg-9">
-    	{{ Form::textarea('personal_philosophy', Input::old('personal_philosophy'), ['class'=>'form-control', 'placeholder'=>'personal philosophy', 'rows'=>'3']) }}
-    	@if ($errors->has('personal_philosophy')) <p class="alert alert-danger">{{ $errors->first('personal_philosophy') }}</p> @endif
+    	@if($form['user'] && $form['user']->profile)
+    		{{ Form::textarea('profile[description]', $form['user']->profile->description, ['class'=>'form-control', 'placeholder'=>'personal philosophy']) }}
+    	@else
+    		{{ Form::textarea('profile[description]', Input::old('profile.description'), ['class'=>'form-control', 'placeholder'=>'personal philosophy']) }}
+    	@endif 
+    	@if ($errors->has('personal philosophy')) <p class="alert alert-danger">{{ $errors->first('personal philosophy') }}</p> @endif
     </div>
 </div>
 <div class="form-group" style="padding-top: 1em;">
 	<div class="col-lg-3">&nbsp;</div>
     <div class="col-lg-9">
-    	{{ Form::radio('accept_appointment', '1', true); }}
+    	{{ Form::radio('accept_appointment', '1', false); }}
     	{{ Form::label('accept_appointment', 'This profile don\'t accept appointment') }}    	
     </div>
 </div>

@@ -1,0 +1,35 @@
+<?php $__env->startSection('css'); ?>
+<?php echo HTML::style('/assets/css/bootstrap-multiselect.css'); ?>
+
+<?php echo HTML::style('/assets/css/directoryTree.css'); ?>
+
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection("content"); ?>
+
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Update Room</h3>
+    </div>
+    <div class="panel-body">
+    	<?php echo Form::model($data['room'], array('route' => array('room.update', $data['room']->id), 'method' => 'PUT', 'data-abide', 'class'=>'form-horizontal', 'id' => 'serviceForm')); ?>
+
+			<?php echo $__env->make('room._form', $data, array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		<?php echo Form::close(); ?>
+
+    </div>
+</div>
+
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('js'); ?>
+<?php echo HTML::script('/assets/js/bootstrap-multiselect.js'); ?>
+
+<?php echo HTML::script('/assets/js/directoryTree.js'); ?>
+
+<?php echo HTML::script('/assets/js/room.form.js'); ?>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make("layouts.admin", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -22,11 +22,11 @@ class UserProfile extends Migration {
 
             $table->string('profile_image');
             $table->string('profile_qualifications');
-            $table->string('profile_description');          
+            $table->text('profile_description');          
             $table->string('gender');
             $table->string('occupation');
             $table->string('age_group');
-            $table->string('interest_hobbies');
+            $table->text('interest_hobbies');
             
             $table->enum		('accept_appointment', array('0', '1'))		->default(1);	// 0=> Don't Accept, 1=>Accept
             $table->enum		('change_default_password', array('0', '1'))->default(1);	// 0=> No Change, 1=>Change

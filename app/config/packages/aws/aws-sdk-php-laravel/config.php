@@ -30,8 +30,8 @@ return array(
     | http://docs.aws.amazon.com/aws-sdk-php-2/guide/latest/configuration.html
     |
     */
-    'key'    => 'AKIAIS7APBNO3Z6JWHRA',
-    'secret' => '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',
+    'key'    => 'AKIAI76GZ7R56657GXOA',
+    'secret' => '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',
 
     /*
     |--------------------------------------------------------------------------
@@ -46,7 +46,7 @@ return array(
     | eu-west-1, sa-east-1, ap-northeast-1, ap-southeast-1, ap-southeast-2
     |
     */
-    'region' => 'us-east-1',
+    'region' => 'ap-southeast-1',
 
     /*
     |--------------------------------------------------------------------------

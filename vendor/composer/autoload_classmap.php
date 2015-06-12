@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Addresses' => $baseDir . '/app/database/migrations/2015_05_22_054243_addresses.php',
+    'AlterUsers' => $baseDir . '/app/database/migrations/2015_06_11_050856_alter_users.php',
     'AuthController' => $baseDir . '/app/controllers/AuthController.php',
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
     'Cartalyst\\Sentry\\Groups\\GroupExistsException' => $vendorDir . '/cartalyst/sentry/src/Cartalyst/Sentry/Groups/Exceptions.php',
@@ -686,6 +687,7 @@ return array(
     'Sprim\\Model\\UserProfile' => $baseDir . '/app/models/UserProfile.php',
     'Sprim\\Repositories\\Contracts\\AddressInterface' => $baseDir . '/app/sprim/repositories/contracts/AddressInterface.php',
     'Sprim\\Repositories\\Contracts\\ClubInterface' => $baseDir . '/app/sprim/repositories/contracts/ClubInterface.php',
+    'Sprim\\Repositories\\Contracts\\ClubUserInterface' => $baseDir . '/app/sprim/repositories/contracts/ClubUserInterface.php',
     'Sprim\\Repositories\\Contracts\\ClubUsersInterface' => $baseDir . '/app/sprim/repositories/contracts/ClubUsersInterface.php',
     'Sprim\\Repositories\\Contracts\\CountryInterface' => $baseDir . '/app/sprim/repositories/contracts/CountryInterface.php',
     'Sprim\\Repositories\\Contracts\\FileInterface' => $baseDir . '/app/sprim/repositories/contracts/FileInterface.php',
@@ -712,6 +714,7 @@ return array(
     'Sprim\\Repositories\\Eloquent\\AbstractRepository' => $baseDir . '/app/sprim/repositories/eloquent/AbstractRepository.php',
     'Sprim\\Repositories\\Eloquent\\AddressRepository' => $baseDir . '/app/sprim/repositories/eloquent/AddressRepository.php',
     'Sprim\\Repositories\\Eloquent\\ClubRepository' => $baseDir . '/app/sprim/repositories/eloquent/ClubRepository.php',
+    'Sprim\\Repositories\\Eloquent\\ClubUserRepository' => $baseDir . '/app/sprim/repositories/eloquent/ClubUserRepository.php',
     'Sprim\\Repositories\\Eloquent\\ClubUsersRepository' => $baseDir . '/app/sprim/repositories/eloquent/ClubUsersRepository.php',
     'Sprim\\Repositories\\Eloquent\\CountryRepository' => $baseDir . '/app/sprim/repositories/eloquent/CountryRepository.php',
     'Sprim\\Repositories\\Eloquent\\FileOwnerRepository' => $baseDir . '/app/sprim/repositories/eloquent/FileOwnerRepository.php',
