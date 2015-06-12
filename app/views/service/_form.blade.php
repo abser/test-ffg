@@ -101,7 +101,7 @@
 <div class="form-group">
 	<div class="col-lg-3"></div>
     <div class="col-lg-9">
-    	{{ Form::checkbox('ghcp_appointment', '1', Input::old('ghcp_appointment')) }}
+    	{{ Form::checkbox('ghcp_appointment', '1', true) }}
     	<label for="ghcp_appointment" class="control-label">Service needs an GHCP appointment</label>
     </div>
 </div>

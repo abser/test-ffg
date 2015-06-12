@@ -88,8 +88,11 @@ class WellnessTeamController extends \BaseController {
 				$user = Sentry::register(array('email' => $user->email,
 						'password'      => $user->password,
 						'first_name'    => $user->first_name,
-						'last_name'     => $user->last_name));
+						'last_name'     => $user->last_name,
+						'created_by'	=> \Session::get('user.id')
+				));
 	
+				// $model->created_by  = \Session::get('user.id');				
 				/* $data['activationCode']     = $user->GetActivationCode();
 				$data['email']              = $inputUser['email'];
 				$data['userId']             = $user->getId();
@@ -155,9 +158,8 @@ class WellnessTeamController extends \BaseController {
 		$data['clubs']		= $this->club->getSelectList();
 		$data['categories']	= $this->service_category->getSelectList(0);
 		$data['sub_categories']	= $this->service_category->getSelectList(1);
-		
-		$owner_table      = \Config::get('sprim.tables.user');
-		$data['profile_pic']    = $this->file_owner->getFile($id, $owner_table, $this->file_type['avatar']);
+				
+		$data['profile_pic']    = $this->file_owner->getFile($id, $this->owner_table, $this->file_type['avatar']);
 				
 		if(!$data['user']){
 			return Response::view('errors.404', array(), 404);
@@ -189,7 +191,7 @@ class WellnessTeamController extends \BaseController {
 				$user->removeGroup($group);
 			}
 			
-			$this->saveOtherDetails($user, $input);		
+			$this->saveOtherDetails($user, $input, true);		
 			return Redirect::to('wellness-team');
 		}
 				
@@ -217,7 +219,7 @@ class WellnessTeamController extends \BaseController {
 	
 		$obj                = $this->model->paginate($pageParams, array(3,4,5));
 		$data['model']      = Paginator::make($obj->items, $obj->totalItems, $pageParams['limit']);
-	
+				
 		$data['controller']     = 'wellness-team';
 		return $data;
 	}

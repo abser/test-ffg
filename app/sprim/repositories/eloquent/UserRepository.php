@@ -82,7 +82,16 @@ class UserRepository extends AbstractRepository implements UserInterface {
         	->leftJoin('profiles', 'users.id', '=', 'profiles.user_id')
         	->leftJoin('addresses', 'profiles.address_id', '=', 'addresses.id')
         	->leftJoin('sprim_dhs.countries', 'sprim_dhs.countries.code', '=', 'addresses.country_code')
-        	->leftJoin('users_groups', 'users.id', '=', 'users_groups.user_id');       
+        	->leftJoin('users_groups', 'users.id', '=', 'users_groups.user_id')
+
+        	/* ->leftJoin(\DB::raw('(SELECT files.name,files.description, owner_id 
+        			FROM file_owners 
+        			join files on files.id = file_owners.file_id 
+        			WHERE files.file_type = 1 and file_owners.owner_table = 1) file'),
+        	function( $query ){
+        		$query->on( 'users.id', '=', \DB::raw('file.owner_id') );
+        	}) */
+        	;
 
         if ($groups) {
             // $model->whereRaw('(users_groups.group_id IN (' . $groups . '))');
