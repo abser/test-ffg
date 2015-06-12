@@ -29,6 +29,7 @@ class ProfileRepository extends AbstractRepository implements ProfileInterface {
         
         if (!$profile) {
         	$profile = $this->newInstance();
+        	$profile->created_by 	= \Session::get('user.id');
         }
                
         if (array_key_exists('address', $input)) {
