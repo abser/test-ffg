@@ -36,7 +36,7 @@
                 <!-- The user image in the navbar-->
                 <img src="{{ asset('assets/images/man.jpg') }}" class="user-image" alt="User Image" />
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                <span class="hidden-xs">User Name Here {{ \Session::get('user.id'); }}</span>
+                <span class="hidden-xs">{{ \Session::get('user.full_name'); }} {{ \Session::get('user.id'); }}</span>
                 </a>
                 <ul class="dropdown-menu">
 
