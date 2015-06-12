@@ -5,7 +5,27 @@
         <?php endforeach; ?>
         </div>
 <?php endif; ?> -->
-<?php //echo '<pre>'; print_r($data); echo '</pre>';?>
+<?php //echo '<pre>'; print_r($data); echo '</pre>';
+echo '<pre>'; print_r($data['paId']); echo '</pre>';;
+$arryVal = $data['paId'];
+$arrEmail1 ='';
+foreach($arryVal as $arr) {
+
+  $arrEmail1[] = $arr['email'];
+
+}
+
+
+
+$arrEmail ='';
+foreach($arrEmail1 as $arr) {
+
+  $arrEmail[] = $arr['email'];
+
+}
+echo '<pre>'; print_r($arrEmail); echo '</pre>';
+die();
+?>
 <div class="form-group">	
     <?php echo Form::label('club_id', 'Club', array('class' => 'col-lg-2 control-label')); ?>
 

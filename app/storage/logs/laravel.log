@@ -1108,3 +1108,15 @@ Stack trace:
 #18 C:\xampp\htdocs\gravity-web\bootstrap\compiled.php(657): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
 #19 C:\xampp\htdocs\gravity-web\public\index.php(49): Illuminate\Foundation\Application->run()
 #20 {main} [] []
+[2015-06-11 13:53:05] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Cannot use object of type stdClass as array' in C:\xampp\htdocs\gravity-web\app\storage\views\e89de460d2d3eaf613ac2b3610aeca8e:13
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2015-06-11 13:54:09] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Cannot use object of type stdClass as array' in C:\xampp\htdocs\gravity-web\app\storage\views\e89de460d2d3eaf613ac2b3610aeca8e:13
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2015-06-11 13:57:20] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Cannot use object of type stdClass as array' in C:\xampp\htdocs\gravity-web\app\storage\views\e89de460d2d3eaf613ac2b3610aeca8e:14
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []

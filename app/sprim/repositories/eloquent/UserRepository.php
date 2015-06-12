@@ -207,7 +207,7 @@ class UserRepository extends AbstractRepository implements UserInterface {
     }
 
     public function getPaList() {
-        return $usersId = User::lists('email', 'id');
+        //return $usersId = User::lists('email', 'id');
 
         $query = \DB::table('users')
                 ->select(\DB::raw('users.id, users.email'))
