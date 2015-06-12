@@ -24,8 +24,8 @@ return array(
             'database' => 'gravity_local',
             'username' => 'root',
             'password' => 'mysql',
-            'charset' => 'utf8',
-            'collation' => 'utf8_unicode_ci',
+            'charset'   => 'utf8',
+			'collation' => 'utf8_general_ci',
             'prefix' => '',
         ),
         'mysql_sprim_dhs' => array(

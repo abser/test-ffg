@@ -1,0 +1,4 @@
+Setup
+1. php artisan migrate --package=cartalyst/sentry --env=local/dev/prod
+2. php artisan migrate --env=local/dev/prod
+3. php artisan db:seed --env=local/dev/prod

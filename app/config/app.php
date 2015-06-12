@@ -125,9 +125,12 @@ return array(
 		'Sprim\Repositories\StorageServiceProvider',
 		'Sprim\Composers\ComposerServiceProvider',
 			
+		'Intervention\Image\ImageServiceProvider',
+		'Barryvdh\Debugbar\ServiceProvider',
 		'Aws\Laravel\AwsServiceProvider',
 		'Cartalyst\Sentry\SentryServiceProvider',
-		'Way\Generators\GeneratorsServiceProvider'
+		'Way\Generators\GeneratorsServiceProvider',
+		'BCA\LaravelInspect\LaravelInspectServiceProvider'
 	),
 
 	/*
@@ -194,9 +197,10 @@ return array(
 		'URL'               => 'Illuminate\Support\Facades\URL',
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
-			
-		'AWS'             => 'Aws\Laravel\AwsFacade',
-		'Sentry'          => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+
+		'Image'				=> 'Intervention\Image\Facades\Image',
+		'AWS'				=> 'Aws\Laravel\AwsFacade',
+		'Sentry'			=> 'Cartalyst\Sentry\Facades\Laravel\Sentry',
 	),
 
 );

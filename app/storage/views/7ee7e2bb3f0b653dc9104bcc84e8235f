@@ -1,0 +1,217 @@
+<!-- <?php if($errors->has()): ?>
+        <div class="alert alert-danger">
+        <?php foreach($errors->all() as $error): ?>
+                <?php echo $error; ?><br>
+        <?php endforeach; ?>
+        </div>
+<?php endif; ?> -->
+<?php
+//echo '<pre>';
+//print_r($data);
+//echo '</pre>';
+//echo '<pre>'; print_r($data['addressData']); echo '</pre>';
+//echo $data['addressData']['address1'];
+//echo $data['member'][1]->gender;
+//die();
+?>
+<div class="form-group">	
+    <?php echo Form::label('club_id', 'Club', array('class' => 'col-lg-2 control-label')); ?>
+
+    <div class="col-lg-10">
+        <?php echo Form::select('club_id', $data['clubs'], $data['member'][0]->club_id, array('id' => 'club_id', 'class'=>'form-control', 'required'=>'required'));; ?>
+
+        <?php if($errors->has('club_id')): ?> <p class="alert alert-danger"><?php echo $errors->first('club_id'); ?></p> <?php endif; ?>
+    </div>
+</div>
+
+<div class="form-group">	
+    <?php echo Form::label('first_name', 'First Name', array('class' => 'col-lg-2 control-label')); ?>
+
+    <div class="col-lg-10">
+        <?php echo Form::text('first_name',$data['member'][0]->first_name,  array('class'=>'form-control','placeholder' => 'First name','required' => 'required')); ?>
+
+        <?php if($errors->has('first_name')): ?> <p class="alert alert-danger"><?php echo $errors->first('first_name'); ?></p> <?php endif; ?>
+    </div>
+</div>
+
+<div class="form-group">	
+    <?php echo Form::label('last_name', 'Last Name', array('class' => 'col-lg-2 control-label')); ?>
+
+    <div class="col-lg-10">
+        <?php echo Form::text('last_name', $data['member'][0]->last_name,  array('class'=>'form-control','placeholder' => 'Last name','required' => 'required')); ?>
+
+        <?php if($errors->has('last_name')): ?> <p class="alert alert-danger"><?php echo $errors->first('last_name'); ?></p> <?php endif; ?>
+    </div>
+</div>
+
+<div class="form-group">	
+    <?php echo Form::label('member_email', 'Email', array('class' => 'col-lg-2 control-label')); ?>
+
+    <div class="col-lg-10">
+        <?php echo Form::email('member_email', $data['member'][0]->email,  array('class'=>'form-control','placeholder' => 'Email','required' => 'required')); ?>
+
+        <?php if($errors->has('member_email')): ?> <p class="alert alert-danger"><?php echo $errors->first('member_email'); ?></p> <?php endif; ?>
+    </div>
+</div>
+
+<div class="form-group">	
+    <?php echo Form::label('member_phone', 'Phone', array('class' => 'col-lg-2 control-label')); ?>
+
+    <div class="col-lg-10">
+        <?php echo Form::number('member_phone',$data['member'][1]->info,  array('class'=>'form-control','placeholder' => 'Phone','required' => 'required')); ?>
+
+        <?php if($errors->has('member_phone')): ?> <p class="alert alert-danger"><?php echo $errors->first('member_phone'); ?></p> <?php endif; ?>
+    </div>
+</div>  
+
+
+<div class="form-group">	
+    <?php echo Form::label('member_mobile', 'Mobile', array('class' => 'col-lg-2 control-label')); ?>
+
+    <div class="col-lg-10">
+        <?php echo Form::number('member_mobile', $data['member'][2]->info,  array('class'=>'form-control','placeholder' => 'Mobile','required' => 'required')); ?>
+
+        <?php if($errors->has('member_mobile')): ?> <p class="alert alert-danger"><?php echo $errors->first('member_mobile'); ?></p> <?php endif; ?>
+    </div>
+</div>  
+
+<div class="form-group">	
+    <label for="gender" class="col-lg-2 control-label">Gender</label>
+    <div class="col-lg-10">
+<?php if ($data['member'][0]->gender == 'Male') {
+    $gender_Val = 'M';
+} else if ($data['member'][0]->gender == 'Female') {
+    $gender_Val = 'F';
+} ?>
+        <?php echo Form::select('gender', array('' => 'Select Gender','M' => 'Male','F' => 'Female'),$gender_Val,array('class'=>'form-control','placeholder' => 'Gender','required' => 'required')); ?>
+
+        <?php if($errors->has('gender')): ?> <p class="alert alert-danger"><?php echo $errors->first('gender'); ?></p> <?php endif; ?>
+    </div>
+</div> 
+
+
+<div class="form-group">
+    <label for="age_group" class="col-lg-2 control-label">Age Group</label>
+    <div class="col-lg-10">
+        <?php echo Form::select('age_group', array('' => 'Select Age Group','g1' => '20-30', 'g2' => '30-40','g3' => '30-40', 'g4' => '40-50'),$data['member'][0]->age_group,array('class'=>'form-control','placeholder' => 'age_group','required' => 'required')); ?>
+
+        <?php if($errors->has('age_group')): ?> <p class="alert alert-danger"><?php echo $errors->first('age_group'); ?></p> <?php endif; ?>
+    </div>
+</div>
+<div class="form-group">	
+    <?php echo Form::label('occupation', 'Occupation', array('class' => 'col-lg-2 control-label')); ?>
+
+    <div class="col-lg-10">
+        <?php echo Form::text('occupation', $data['member'][0]->occupation,  array('class'=>'form-control','placeholder' => 'Occupation','required' => 'required')); ?>
+
+        <?php if($errors->has('occupation')): ?> <p class="alert alert-danger"><?php echo $errors->first('occupation'); ?></p> <?php endif; ?>
+    </div>
+</div>
+
+
+<div class="form-group">	
+    <?php echo Form::label('member_hobbies', 'Interest / Hobbies', array('class' => 'col-lg-2 control-label')); ?>
+
+    <div class="col-lg-10">
+        <?php echo Form::text('member_hobbies', $data['member'][1]->interest_hobbies,  array('class'=>'form-control','placeholder' => 'Interest / Hobbies')); ?>
+
+
+    </div>
+</div>
+
+<div class="form-group" style="padding-top: 1em;">
+    <?php echo Form::label('address', 'Address', array('class' => 'col-lg-2 control-label')); ?>
+
+    <div class="col-lg-10">
+        <div class="row">
+            <div class="col-lg-4"><?php echo $__env->make("common.country", ['name' => 'address[country_code]', 'class'=>'form-control'], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?></div>    		
+            <div class="col-lg-4"><?php echo Form::select('address[region_id]', array('' => ''), null, array('id' => 'region', 'class'=>'form-control'));; ?></div>    		
+            <div class="col-lg-4"><?php echo Form::text('address[city]', $data['addressData']['city'], ['class'=>'form-control', 'placeholder'=>'city']); ?></div> 		
+        </div>    	
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-lg-2">&nbsp;</div>
+    <div class="col-lg-10">
+        <?php echo Form::text('address1', $data['addressData']['address1'], ['class'=>'form-control', 'placeholder'=>'address line 1']); ?>
+
+        <?php if($errors->has('address1')): ?> <p class="alert alert-danger"><?php echo $errors->first('address1'); ?></p> <?php endif; ?>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-lg-2">&nbsp;</div>
+    <div class="col-lg-10">
+        <?php echo Form::text('address2',$data['addressData']['address2'], ['class'=>'form-control', 'placeholder'=>'address line 2']); ?>
+
+        <?php if($errors->has('address2')): ?> <p class="alert alert-danger"><?php echo $errors->first('address2'); ?></p> <?php endif; ?>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-lg-2">&nbsp;</div>
+    <div class="col-lg-10">
+        <?php echo Form::text('postalCode', $data['addressData']['postal_code'], ['class'=>'form-control', 'placeholder'=>'postal code']); ?>
+
+        <?php if($errors->has('postalCode')): ?> <p class="alert alert-danger"><?php echo $errors->first('postalCode'); ?></p> <?php endif; ?>
+    </div>
+</div>
+<div class="form-group">
+    <label for="image" class="col-lg-2 control-label">Picture</label>
+    <div class="col-lg-10">
+        <?php echo Form::file('image', ['id'=>'','class' => 'field']); ?>
+
+
+
+        <div class="small-9 columns">
+            &nbsp;&nbsp;    You can upload JPEG,GIP and PNG images     &nbsp;&nbsp;  
+
+<?php if ($data['addressData']['display_profile_pic'] != 0) {
+    ?>
+                <?php echo Form::checkbox('display_pic','1',true,array('class'=>'checkdisplayClass','id'=>'display_pic')); ?> Display profile picture
+    <?php } else { ?>
+                <?php echo Form::checkbox('display_pic','1',false,array('class'=>'checkdisplayClass','id'=>'display_pic')); ?> Display profile picture
+<?php } ?>
+
+
+        </div>
+
+
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-lg-2">&nbsp;</div>
+    <div class="col-lg-10">
+<?php if ($data['addressData']['display_profile_pic'] != 0) {
+    ?>
+            <?php echo Form::checkbox('change_def_pass','1',true,array('class'=>'change_def_pass_class','id'=>'change_def_pass_id')); ?> 
+    <?php } else { ?>
+            <?php echo Form::checkbox('change_def_pass','1',false,array('class'=>'change_def_pass_class','id'=>'change_def_pass_id')); ?> 
+<?php } ?>
+
+
+
+        Change Default Password</div>
+</div>
+
+
+
+<div class="form-group">
+    <label for="pa_id" class="col-lg-2 control-label">Personal Assisstant</label>
+    <div class="col-lg-10">
+        <?php echo Form::select('PaId',  array('' => 'Select PA') + $data['paId'],'default',array('id'=>'pa_id')); ?>
+
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-10">
+        <?php echo Form::hidden('edit_user_id', $data['member'][0]->id);; ?>
+
+        <button type="submit" class="btn btn-default">Save Member</button>
+        <a href="<?php echo URL::route('member.index'); ?>"><button type="button" class="btn">Cancel</button></a>
+    </div>
+</div>
+
+
+

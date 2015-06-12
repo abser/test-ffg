@@ -1,0 +1,27 @@
+<?php $__env->startSection("content"); ?>
+
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Add New Expert</h3>
+    </div>
+    <div class="panel-body">
+    	<?php echo Form::open(array('url' => 'wellness-team', 'files'=> true, 'data-abide', 'class'=>'form-horizontal', 'id' => 'wellnessTeamForm')); ?>
+
+        	<?php echo $__env->make('wellness-team._form', array('form'=>$data), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        <?php echo Form::close(); ?>
+
+    </div>
+</div>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('js'); ?>
+<script type="text/javascript">
+    var region_id = <?php echo isset($data['user']->address->region_id) ? $data['user']->address->region_id : 0; ?>;
+    var url_api_regions = "<?php echo url('api/regions/'); ?>";    
+</script>
+
+<?php echo HTML::script('/assets/js/wellness-team.form.js'); ?>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make("layouts.admin", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

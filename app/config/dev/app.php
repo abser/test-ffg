@@ -14,7 +14,7 @@ return array(
 	*/
 
 	'debug'     => true,
-    'url'       => 'http://gravity-dev.sprim-health.com',
-    'domain'    => 'gravity-dev.sprim-health.com'
+    'url'       => 'http://dev.gravity.sprim-health.com',
+    'domain'    => 'dev.gravity.sprim-health.com'
 
 );

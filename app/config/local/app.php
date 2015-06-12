@@ -13,6 +13,8 @@ return array(
 	|
 	*/
 
-	'debug' => true,
+	'debug'     => true,
+    'url'       => 'http://gravity.local',
+    'domain'    => 'gravity.local'
 
 );

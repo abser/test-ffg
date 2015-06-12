@@ -57,17 +57,25 @@ class AuthController extends Controller
             return true;
         }
         
-        $admin      = Sentry::findGroupByName('sprim');
-        $regional   = Sentry::findGroupByName('regional manager');
+        $admin				= Sentry::findGroupByName('admin');
+        $medical_doctor		= Sentry::findGroupByName('medical_doctor');
+        $fitness_coach		= Sentry::findGroupByName('fitness_coach');
+        $wellness_expert	= Sentry::findGroupByName('wellness_expert');
+        $member				= Sentry::findGroupByName('member');
+        $pa					= Sentry::findGroupByName('pa');
         $user       = Sentry::getUser();
         
         $user_model = $this->user->find($user->id);
         
         Session::put('user.id', $user->id);
         Session::put('user.is_admin', $user->inGroup($admin));
-        Session::put('user.is_regional_manager', $user->inGroup($regional));
+        Session::put('user.is_medical_doctor', $user->inGroup($medical_doctor));
+        Session::put('user.is_fitness_coach', $user->inGroup($fitness_coach));
+        Session::put('user.is_wellness_expert', $user->inGroup($wellness_expert));
+        Session::put('user.is_member', $user->inGroup($member));
+        Session::put('user.is_pa', $user->inGroup($pa));
         
-        if (count($user_model->profile)){
+        /* if (count($user_model->profile)){
             
             if(count($user_model->profile->address) && count($user_model->profile->address->country)){
                 $countries  = [$user_model->profile->address->country->code];
@@ -77,13 +85,9 @@ class AuthController extends Controller
                             getAllowedCountries($user_model->profile->address->country->code), $countries);
                 }
                 Session::put('user.countries', array_unique($countries));
-            }
-            
-            if(count($user_model->profile->agent)){
-                Session::put('user.agent.id', $user_model->profile->agent->id);
-            }
-            
-        }
+            }            
+        } */
+        // Session::save();
         
         return true;
     }

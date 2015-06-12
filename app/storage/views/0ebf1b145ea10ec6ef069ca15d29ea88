@@ -1,0 +1,67 @@
+<?php $__env->startSection("content"); ?>
+
+<div class="row">
+    <div class="medium-8 medium-centered columns end">
+        <div class="panel">
+            <h1>Reset password</h1>
+            <div class="row">
+                <div class="large-12 columns">
+                    <?php echo Form::open(array(
+                    "url"          => URL::to("reset"),
+                    "autocomplete" => "off"
+                    )); ?>
+
+
+                    <?php echo Form::label("code", "Code"); ?>
+
+                    <?php echo Form::text("code", Input::get("code")); ?>
+
+                    <?php if($error = $errors->first("code")): ?>
+                    <div class="error">
+                        <?php echo $error; ?>
+
+                    </div>
+                    <?php endif; ?>
+
+                    <?php echo Form::label("password", "New Password"); ?>
+
+                    <?php echo Form::password("password", array(
+                    "placeholder" => "••••••••••"
+                    )); ?>
+
+                    <?php if($error = $errors->first("password")): ?>
+                    <div class="error">
+                        <?php echo $error; ?>
+
+                    </div>
+                    <?php endif; ?>
+                    <?php echo Form::label("password_confirmation", "Confirm new password"); ?>
+
+                    <?php echo Form::password("password_confirmation", array(
+                    "placeholder" => "••••••••••"
+                    )); ?>
+
+                    <?php if($error = $errors->first("password_confirmation")): ?>
+                    <div class="error">
+                        <?php echo $error; ?>
+
+                    </div>
+                    <?php endif; ?>
+                    <?php echo Form::submit("RESET", array('class' => 'button tiny')); ?>
+
+                    <?php echo Form::close(); ?>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection("footer"); ?>
+@parent
+<script src="//polyfill.io"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make("layout", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

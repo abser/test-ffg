@@ -1,0 +1,26 @@
+<?php $__env->startSection("content"); ?>
+<div class="row-fluid">
+<div class="col-md-6 col-xs-12">
+
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Update Service</h3>
+    </div>
+    <div class="panel-body">
+    	<?php echo Form::model($data['service'], array('route' => array('service.update', $data['service']->id), 'method' => 'PUT', 'data-abide', 'class'=>'form-horizontal', 'id' => 'serviceForm')); ?>
+
+			<?php echo $__env->make('service._form', $data, array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		<?php echo Form::close(); ?>
+
+    </div>
+</div>
+
+</div>
+</div>	
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('js'); ?>
+<?php echo HTML::script('/assets/js/service.form.js'); ?>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make("layouts.admin", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -12,14 +12,18 @@ class HomeController extends BaseController {
 	{
         $data['role']   = 'user';
         
-		return View::make('site.landing', compact('data'));
+        if (Session::get('user.is_member')) {
+			return View::make('site.member.index', compact('data'));
+        } else {
+        	return View::make('admin.dashboard', compact('data'));
+        }
 	}
     
     public function admin()
 	{
         $data['role']   = 'admin';
         
-		return View::make('site.landing', compact('data'));
+		return View::make('admin.dashboard', compact('data'));
 	}
 	    
 }
