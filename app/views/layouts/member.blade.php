@@ -33,7 +33,7 @@
     	<div class="row">
     		<div class="col-md-12 right_top_menu ">
     		<ul class="list-inline pull-right">
-    		<li class="menu_rght"><a href="#" >Patrick Johnson</a>
+    		<li class="menu_rght"><a href="#" >{{ \Session::get('user.full_name'); }}</a>
     			<ul class="sub-menu">
     				<li><a href="#">Profile</a></li>
     				<li><a href="#">Settings</a></li>

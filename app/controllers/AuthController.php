@@ -75,6 +75,13 @@ class AuthController extends Controller
         Session::put('user.is_member', $user->inGroup($member));
         Session::put('user.is_pa', $user->inGroup($pa));
         
+        Session::put('user.email', $user->email);
+        if (!$user->first_name && !$user->last_name) {
+        	Session::put('user.full_name', $user->email);
+        } else {
+        	Session::put('user.full_name', $user->first_name.' '.$user->last_name);
+        }
+        
         /* if (count($user_model->profile)){
             
             if(count($user_model->profile->address) && count($user_model->profile->address->country)){
