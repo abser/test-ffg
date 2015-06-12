@@ -54,7 +54,9 @@
 <div class="form-group">	
     {{ Form::label('user_type', 'Choose User Type', array('class' => 'col-lg-2 control-label')) }}
     <div class="col-lg-10 radio-inline-inline">&nbsp;&nbsp;
-        Admin User	 {{Form::radio('user_type', '2', false, array('class' => 'name'))}} &nbsp;&nbsp;&nbsp;&nbsp;
+              Admin User	
+                <?php //if($data['user'][0]->group_id == 2){} else if($data['user'][0]->group_id == 2){}  ?>
+              {{Form::radio('user_type', '2', false, array('class' => 'name'))}} &nbsp;&nbsp;&nbsp;&nbsp;
         PA	 {{Form::radio('user_type', '7', false, array('class' => 'name'))}}&nbsp;&nbsp;&nbsp;&nbsp;
         <!--        Medical Doctor	 {{Form::radio('user_type', '3', false, array('class' => 'name'))}}&nbsp;&nbsp;&nbsp;&nbsp;
                 Fitness Coach	 {{Form::radio('user_type', '4', false, array('class' => 'name'))}}&nbsp;&nbsp;&nbsp;&nbsp;
@@ -63,6 +65,9 @@
     </div>
 </div>
 <div id="accessShowDiv"></div>
+
+
+
 
 
 

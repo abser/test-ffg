@@ -82,7 +82,7 @@ if($data['userDivType'] == 'adminUser')  {  ?>
              Delete Member
             </label>
         </div>
-
+  {{ Form::label('', '', array('class' => 'col-lg-2 control-label')) }}
         <div class="col-lg-10 radio-inline-inline">
             <label class="checkbox-inline">
                   {{ Form::checkbox('permission[adm_message_to_member]', '1',true,array('id' => 'adm_message_to_member'))}}
@@ -102,8 +102,8 @@ if($data['userDivType'] == 'adminUser')  {  ?>
                 Sleep Indexes
             </label>
         </div>
-
-        <div class="col-lg-10 radio-inline-inline">&nbsp;&nbsp;
+  {{ Form::label('', '', array('class' => 'col-lg-2 control-label')) }}
+        <div class="col-lg-10 radio-inline-inline">
             <label class="checkbox-inline">
                   {{ Form::checkbox('permission[adm_medial_indexes]', '1',true,array('id' => 'adm_medial_indexes'))}}
                Medical Indexes
@@ -151,8 +151,8 @@ if($data['userDivType'] == 'adminUser')  {  ?>
                Delete Profiles
             </label>
         </div>
-
-        <div class="col-lg-10 radio-inline-inline">&nbsp;&nbsp;
+        {{ Form::label('', '', array('class' => 'col-lg-2 control-label')) }} 
+        <div class="col-lg-10 radio-inline-inline">
             <label class="checkbox-inline">
                    {{ Form::checkbox('permission[adm_profile_Calender_setup]', '1',true,array('id' => 'adm_profile_Calender_setup'))}}
               Profile Calender Setup
@@ -269,8 +269,8 @@ if($data['userDivType'] == 'adminUser')  {  ?>
             </label>
 
         </div>
-
-        <div class="col-lg-10 radio-inline-inline">&nbsp;&nbsp;
+  {{ Form::label('', '', array('class' => 'col-lg-2 control-label')) }}
+        <div class="col-lg-10 radio-inline-inline">
             <label class="checkbox-inline">
                  {{ Form::checkbox('permission[adm_change_appointment_status]', '1',true,array('id' => 'adm_change_appointment_status'))}}
                Change Appointment Status(Confirm or Cancel)
@@ -287,7 +287,7 @@ if($data['userDivType'] == 'adminUser')  {  ?>
     <div class="form-group">
         <div class="col-lg-2"></div>
         <div class="col-lg-10">
-            <button type="submit" class="btn btn-default">Save Member</button>
+            <button type="submit" class="btn btn-default">Save User</button>
             <a href="{{ URL::route('member.index') }}"><button type="button" class="btn">Cancel</button></a>
         </div>
     </div>
@@ -397,7 +397,7 @@ if($data['userDivType'] == 'adminUser')  {  ?>
     <div class="form-group">
         <div class="col-lg-2"></div>
         <div class="col-lg-10">
-            <button type="submit" class="btn btn-default">Save Member</button>
+            <button type="submit" class="btn btn-default">Save User</button>
             <a href="{{ URL::route('member.index') }}"><button type="button" class="btn">Cancel</button></a>
         </div>
     </div>
